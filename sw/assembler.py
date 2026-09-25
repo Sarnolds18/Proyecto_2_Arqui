@@ -80,6 +80,10 @@ INSTRUCTIONS = {
     "jalr":  ("JALR", 0x67, 0b000, None),   # rd, imm(rs1)
 }
 
+# How many operands each format takes in the source.
+OPERAND_COUNT = {"R": 3, "I": 3, "SHIFT": 3, "LOAD": 2, "S": 2,
+                 "B": 3, "U": 2, "J": 2, "JALR": 2}
+
 def read_file(file_path: str) -> str:
     """Return the contents of a text file, or "" if it can't be read."""
     try:
@@ -305,6 +309,72 @@ def encode_j(opcode: int, rd: int, offset: int) -> int:
     bits_19_12 = (imm >> 12) & 0xFF
     return ((bit_20 << 31) | (bits_10_1 << 21) | (bit_11 << 20)
             | (bits_19_12 << 12) | (rd << 7) | opcode)
+
+def label_offset(label: str, address: int, labels: dict) -> int:
+    """Return the distance in bytes from address to label. Raises ValueError if it's undefined."""
+    if label not in labels:
+        raise ValueError(f"undefined label '{label}'")
+    return labels[label] - address
+
+def assemble_instruction(line: str, address: int, labels: dict) -> int:
+    """
+    Encode one instruction line into its 32-bit word.
+
+    address is where the instruction lives (for branch/jump offsets).
+    Raises ValueError on an unknown instruction, a wrong number of
+    operands, or any invalid operand.
+    """
+    mnemonic, operands = tokenize(line)
+    if mnemonic not in INSTRUCTIONS:
+        raise ValueError(f"unknown instruction '{mnemonic}'")
+    fmt, opcode, funct3, funct7 = INSTRUCTIONS[mnemonic]
+
+    expected = OPERAND_COUNT[fmt]
+    if len(operands) != expected:
+        raise ValueError(f"'{mnemonic}' expects {expected} operands, got {len(operands)}")
+
+    if fmt == "R":                                   # add rd, rs1, rs2
+        rd, rs1, rs2 = (parse_register(op) for op in operands)
+        return encode_r(opcode, rd, funct3, rs1, rs2, funct7)
+
+    if fmt == "I":                                   # addi rd, rs1, imm
+        rd, rs1 = parse_register(operands[0]), parse_register(operands[1])
+        imm = parse_immediate(operands[2])
+        return encode_i(opcode, rd, funct3, rs1, imm)
+
+    if fmt == "SHIFT":                               # slli rd, rs1, shamt
+        rd, rs1 = parse_register(operands[0]), parse_register(operands[1])
+        shamt = parse_immediate(operands[2])
+        if not 0 <= shamt <= 31:
+            raise ValueError(f"shift amount {shamt} is out of range (must be between 0 and 31)")
+        return encode_i(opcode, rd, funct3, rs1, (funct7 << 5) | shamt)
+
+    if fmt in ("LOAD", "JALR"):                      # lw rd, imm(rs1)
+        rd = parse_register(operands[0])
+        imm, rs1 = parse_mem_operand(operands[1])
+        return encode_i(opcode, rd, funct3, rs1, imm)
+
+    if fmt == "S":                                   # sw rs2, imm(rs1)
+        rs2 = parse_register(operands[0])
+        imm, rs1 = parse_mem_operand(operands[1])
+        return encode_s(opcode, funct3, rs1, rs2, imm)
+
+    if fmt == "B":                                   # bne rs1, rs2, label
+        rs1, rs2 = parse_register(operands[0]), parse_register(operands[1])
+        offset = label_offset(operands[2], address, labels)
+        return encode_b(opcode, funct3, rs1, rs2, offset)
+
+    if fmt == "U":                                   # lui rd, imm20
+        rd = parse_register(operands[0])
+        imm20 = parse_immediate(operands[1])
+        return encode_u(opcode, rd, imm20)
+
+    if fmt == "J":                                   # jal rd, label
+        rd = parse_register(operands[0])
+        offset = label_offset(operands[1], address, labels)
+        return encode_j(opcode, rd, offset)
+
+    raise ValueError(f"format '{fmt}' of '{mnemonic}' is not supported")
 
 def is_empty(string: str) -> bool:
     """Return True if string is empty or only whitespace."""
