@@ -1,3 +1,62 @@
+# Every supported instruction: mnemonic -> (format, opcode, funct3, funct7).
+# Fields a format doesn't use are None. funct3 values match the comments in
+# rtl/espino_core/espino_decoder.v; funct7 0b0100000 is what the decoder
+# reads as funct7[5] to tell sub/sra/srai apart from add/srl/srli.
+INSTRUCTIONS = {
+    # R-type: rd, rs1, rs2
+    "add":   ("R", 0x33, 0b000, 0b0000000),
+    "sub":   ("R", 0x33, 0b000, 0b0100000),
+    "sll":   ("R", 0x33, 0b001, 0b0000000),
+    "slt":   ("R", 0x33, 0b010, 0b0000000),
+    "sltu":  ("R", 0x33, 0b011, 0b0000000),
+    "xor":   ("R", 0x33, 0b100, 0b0000000),
+    "srl":   ("R", 0x33, 0b101, 0b0000000),
+    "sra":   ("R", 0x33, 0b101, 0b0100000),
+    "or":    ("R", 0x33, 0b110, 0b0000000),
+    "and":   ("R", 0x33, 0b111, 0b0000000),
+
+    # I-type arithmetic: rd, rs1, imm
+    "addi":  ("I", 0x13, 0b000, None),
+    "slti":  ("I", 0x13, 0b010, None),
+    "sltiu": ("I", 0x13, 0b011, None),
+    "xori":  ("I", 0x13, 0b100, None),
+    "ori":   ("I", 0x13, 0b110, None),
+    "andi":  ("I", 0x13, 0b111, None),
+
+    # Shifts by immediate: rd, rs1, shamt (execute as ADD on this core!)
+    "slli":  ("SHIFT", 0x13, 0b001, 0b0000000),
+    "srli":  ("SHIFT", 0x13, 0b101, 0b0000000),
+    "srai":  ("SHIFT", 0x13, 0b101, 0b0100000),
+
+    # Loads: rd, imm(rs1)
+    "lb":    ("LOAD", 0x03, 0b000, None),
+    "lh":    ("LOAD", 0x03, 0b001, None),
+    "lw":    ("LOAD", 0x03, 0b010, None),
+    "lbu":   ("LOAD", 0x03, 0b100, None),
+    "lhu":   ("LOAD", 0x03, 0b101, None),
+
+    # Stores: rs2, imm(rs1)
+    "sb":    ("S", 0x23, 0b000, None),
+    "sh":    ("S", 0x23, 0b001, None),
+    "sw":    ("S", 0x23, 0b010, None),
+
+    # Branches: rs1, rs2, label
+    "beq":   ("B", 0x63, 0b000, None),
+    "bne":   ("B", 0x63, 0b001, None),
+    "blt":   ("B", 0x63, 0b100, None),
+    "bge":   ("B", 0x63, 0b101, None),
+    "bltu":  ("B", 0x63, 0b110, None),
+    "bgeu":  ("B", 0x63, 0b111, None),
+
+    # Upper immediate: rd, imm20
+    "lui":   ("U", 0x37, None, None),
+    "auipc": ("U", 0x17, None, None),
+
+    # Jumps
+    "jal":   ("J", 0x6f, None, None),       # rd, label
+    "jalr":  ("JALR", 0x67, 0b000, None),   # rd, imm(rs1)
+}
+
 def read_file(file_path: str) -> str:
     """Return the contents of a text file, or "" if it can't be read."""
     try:
@@ -151,64 +210,58 @@ def to_bits(value: int, bits: int, signed: bool = True) -> int:
     mask = (1 << bits) - 1
     return value & mask
 
-# Every supported instruction: mnemonic -> (format, opcode, funct3, funct7).
-# Fields a format doesn't use are None. funct3 values match the comments in
-# rtl/espino_core/espino_decoder.v; funct7 0b0100000 is what the decoder
-# reads as funct7[5] to tell sub/sra/srai apart from add/srl/srli.
-INSTRUCTIONS = {
-    # R-type: rd, rs1, rs2
-    "add":   ("R", 0x33, 0b000, 0b0000000),
-    "sub":   ("R", 0x33, 0b000, 0b0100000),
-    "sll":   ("R", 0x33, 0b001, 0b0000000),
-    "slt":   ("R", 0x33, 0b010, 0b0000000),
-    "sltu":  ("R", 0x33, 0b011, 0b0000000),
-    "xor":   ("R", 0x33, 0b100, 0b0000000),
-    "srl":   ("R", 0x33, 0b101, 0b0000000),
-    "sra":   ("R", 0x33, 0b101, 0b0100000),
-    "or":    ("R", 0x33, 0b110, 0b0000000),
-    "and":   ("R", 0x33, 0b111, 0b0000000),
+def encode_r(opcode: int, rd: int, funct3: int, rs1: int, rs2: int, funct7: int) -> int:
+    """Pack an R-type instruction: funct7 | rs2 | rs1 | funct3 | rd | opcode."""
+    return (funct7 << 25) | (rs2 << 20) | (rs1 << 15) | (funct3 << 12) | (rd << 7) | opcode
 
-    # I-type arithmetic: rd, rs1, imm
-    "addi":  ("I", 0x13, 0b000, None),
-    "slti":  ("I", 0x13, 0b010, None),
-    "sltiu": ("I", 0x13, 0b011, None),
-    "xori":  ("I", 0x13, 0b100, None),
-    "ori":   ("I", 0x13, 0b110, None),
-    "andi":  ("I", 0x13, 0b111, None),
+def encode_i(opcode: int, rd: int, funct3: int, rs1: int, imm: int) -> int:
+    """Pack an I-type instruction: imm[11:0] | rs1 | funct3 | rd | opcode."""
+    imm = to_bits(imm, 12)
+    return (imm << 20) | (rs1 << 15) | (funct3 << 12) | (rd << 7) | opcode
 
-    # Shifts by immediate: rd, rs1, shamt (execute as ADD on this core!)
-    "slli":  ("SHIFT", 0x13, 0b001, 0b0000000),
-    "srli":  ("SHIFT", 0x13, 0b101, 0b0000000),
-    "srai":  ("SHIFT", 0x13, 0b101, 0b0100000),
+def encode_s(opcode: int, funct3: int, rs1: int, rs2: int, imm: int) -> int:
+    """Pack an S-type instruction: imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode."""
+    imm = to_bits(imm, 12)
+    imm_hi = imm >> 5          # imm[11:5]
+    imm_lo = imm & 0x1F        # imm[4:0]
+    return (imm_hi << 25) | (rs2 << 20) | (rs1 << 15) | (funct3 << 12) | (imm_lo << 7) | opcode
 
-    # Loads: rd, imm(rs1)
-    "lb":    ("LOAD", 0x03, 0b000, None),
-    "lh":    ("LOAD", 0x03, 0b001, None),
-    "lw":    ("LOAD", 0x03, 0b010, None),
-    "lbu":   ("LOAD", 0x03, 0b100, None),
-    "lhu":   ("LOAD", 0x03, 0b101, None),
+def encode_b(opcode: int, funct3: int, rs1: int, rs2: int, offset: int) -> int:
+    """
+    Pack a B-type instruction; offset is target - this address, in bytes.
 
-    # Stores: rs2, imm(rs1)
-    "sb":    ("S", 0x23, 0b000, None),
-    "sh":    ("S", 0x23, 0b001, None),
-    "sw":    ("S", 0x23, 0b010, None),
+    Offset must be even and fit in 13 signed bits (±4 KiB). Raises ValueError otherwise.
+    """
+    if offset % 2 != 0:
+        raise ValueError(f"branch offset {offset} is odd")
+    imm = to_bits(offset, 13)
+    bit_12    = (imm >> 12) & 0x1
+    bits_10_5 = (imm >> 5) & 0x3F
+    bits_4_1  = (imm >> 1) & 0xF
+    bit_11    = (imm >> 11) & 0x1
+    return ((bit_12 << 31) | (bits_10_5 << 25) | (rs2 << 20) | (rs1 << 15)
+            | (funct3 << 12) | (bits_4_1 << 8) | (bit_11 << 7) | opcode)
 
-    # Branches: rs1, rs2, label
-    "beq":   ("B", 0x63, 0b000, None),
-    "bne":   ("B", 0x63, 0b001, None),
-    "blt":   ("B", 0x63, 0b100, None),
-    "bge":   ("B", 0x63, 0b101, None),
-    "bltu":  ("B", 0x63, 0b110, None),
-    "bgeu":  ("B", 0x63, 0b111, None),
+def encode_u(opcode: int, rd: int, imm20: int) -> int:
+    """Pack a U-type instruction: imm20 goes straight into bits [31:12]."""
+    imm20 = to_bits(imm20, 20, signed=False)
+    return (imm20 << 12) | (rd << 7) | opcode
 
-    # Upper immediate: rd, imm20
-    "lui":   ("U", 0x37, None, None),
-    "auipc": ("U", 0x17, None, None),
+def encode_j(opcode: int, rd: int, offset: int) -> int:
+    """
+    Pack a J-type instruction; offset is target - this address, in bytes.
 
-    # Jumps
-    "jal":   ("J", 0x6f, None, None),       # rd, label
-    "jalr":  ("JALR", 0x67, 0b000, None),   # rd, imm(rs1)
-}
+    Offset must be even and fit in 21 signed bits (±1 MiB). Raises ValueError otherwise.
+    """
+    if offset % 2 != 0:
+        raise ValueError(f"jump offset {offset} is odd")
+    imm = to_bits(offset, 21)
+    bit_20     = (imm >> 20) & 0x1
+    bits_10_1  = (imm >> 1) & 0x3FF
+    bit_11     = (imm >> 11) & 0x1
+    bits_19_12 = (imm >> 12) & 0xFF
+    return ((bit_20 << 31) | (bits_10_1 << 21) | (bit_11 << 20)
+            | (bits_19_12 << 12) | (rd << 7) | opcode)
 
 def is_empty(string: str) -> bool:
     """Return True if string is empty or only whitespace."""
