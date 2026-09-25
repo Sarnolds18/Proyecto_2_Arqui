@@ -4,6 +4,8 @@ import sys
 class AssemblerError(ValueError):
     """An error in the assembly source, printed like a compiler diagnostic."""
 
+    severity = "error"
+
     def __init__(self, message: str, line_no: int, source: str, filename: str = "<input>"):
         super().__init__(message)
         self.message = message
@@ -16,9 +18,15 @@ class AssemblerError(ValueError):
         column = len(code) - len(code.lstrip()) + 1
         underline = "^" + "~" * (len(code.strip()) - 1)
         gutter = " " * len(str(self.line_no))
-        return (f"{self.filename}:{self.line_no}:{column}: error: {self.message}\n"
+        return (f"{self.filename}:{self.line_no}:{column}: {self.severity}: {self.message}\n"
                 f" {self.line_no} | {code}\n"
                 f" {gutter} | {' ' * (column - 1)}{underline}")
+
+
+class AssemblerWarning(AssemblerError):
+    """A problem worth reporting that doesn't stop assembly. Collected, never raised."""
+
+    severity = "warning"
 
 
 # Every supported instruction: mnemonic -> (format, opcode, funct3, funct7).
@@ -80,21 +88,28 @@ INSTRUCTIONS = {
     "jalr":  ("JALR", 0x67, 0b000, None),   # rd, imm(rs1)
 }
 
+# ABI register names -> register number. Names above x15 exist on RV32I
+# but not on RV32E; they're listed so the error can say which x they are.
+ABI_NAMES = {
+    "zero": 0, "ra": 1, "sp": 2, "gp": 3, "tp": 4,
+    "t0": 5, "t1": 6, "t2": 7, "s0": 8, "fp": 8, "s1": 9,
+    "a0": 10, "a1": 11, "a2": 12, "a3": 13, "a4": 14, "a5": 15,
+    "a6": 16, "a7": 17, "s2": 18, "s3": 19, "s4": 20, "s5": 21, "s6": 22,
+    "s7": 23, "s8": 24, "s9": 25, "s10": 26, "s11": 27,
+    "t3": 28, "t4": 29, "t5": 30, "t6": 31,
+}
+
+# Shifts decode fine but the ALU runs them as ADD (see README).
+SHIFT_MNEMONICS = {"sll", "srl", "sra", "slli", "srli", "srai"}
+
 # How many operands each format takes in the source.
 OPERAND_COUNT = {"R": 3, "I": 3, "SHIFT": 3, "LOAD": 2, "S": 2,
                  "B": 3, "U": 2, "J": 2, "JALR": 2}
 
 def read_file(file_path: str) -> str:
-    """Return the contents of a text file, or "" if it can't be read."""
-    try:
-        with open(file_path, 'r') as file:
-            return file.read()
-    except FileNotFoundError:
-        print(f"File not found: {file_path}")
-        return ""
-    except Exception as e:
-        print(f"Error reading file {file_path}: {e}")
-        return ""
+    """Return the contents of a text file. Raises OSError if it can't be read."""
+    with open(file_path, 'r') as file:
+        return file.read()
 
 def code_to_list(code: str) -> list:
     """Split source text into a list of lines."""
@@ -195,10 +210,19 @@ def tokenize(line: str) -> tuple:
     return (op, directions)
 
 def parse_register(tok: str) -> int:
-    """Return the number of register "x0".."x15". Raises ValueError otherwise."""
-    name = tok.strip()
+    """
+    Return the number of a register, written "x0".."x15" or by ABI name ("a0", "sp").
+
+    Raises ValueError for anything else, including RV32I registers above x15.
+    """
+    name = tok.strip().lower()
+    if name in ABI_NAMES:
+        reg = ABI_NAMES[name]
+        if reg > 15:
+            raise ValueError(f"register '{name}' (x{reg}) doesn't exist on RV32E, which only has x0 to x15")
+        return reg
     if len(name) < 2 or name[0] != "x" or not name[1:].isdigit():
-        raise ValueError(f"'{name}' is not a register (expected x0 to x15)")
+        raise ValueError(f"'{name}' is not a register (expected x0 to x15 or an ABI name like a0 or sp)")
     reg = int(name[1:])
     if not 0 <= reg <= 15:
         raise ValueError(f"register '{name}' doesn't exist on RV32E, which only has x0 to x15")
@@ -376,24 +400,69 @@ def assemble_instruction(line: str, address: int, labels: dict) -> int:
 
     raise ValueError(f"format '{fmt}' of '{mnemonic}' is not supported")
 
+def assemble(code: list, warnings: list = None) -> list:
+    """
+    Assemble a program (the output of drop_comments) into 32-bit words.
+
+    Two passes: find_labels, then encode every instruction. Errors are
+    raised as AssemblerError pointing at the source line they came from.
+    If a warnings list is given, AssemblerWarnings (e.g. shifts, which run
+    as ADD on this core) are appended to it.
+    """
+    labels = find_labels(code)
+    words = []
+    for address, line, line_no in get_instructions(code):
+        try:
+            words.append(assemble_instruction(line, address, labels))
+        except ValueError as err:
+            raise AssemblerError(str(err), line_no, code[line_no - 1]) from None
+        mnemonic = tokenize(line)[0]
+        if warnings is not None and mnemonic in SHIFT_MNEMONICS:
+            warnings.append(AssemblerWarning(
+                f"'{mnemonic}' executes as ADD on this core (shifts are disabled in the ALU)",
+                line_no, code[line_no - 1]))
+    return words
+
+def to_hex(words: list) -> str:
+    """Format words for $readmemh: 8 lowercase hex digits per line."""
+    return "".join(f"{word:08x}\n" for word in words)
+
 def is_empty(string: str) -> bool:
     """Return True if string is empty or only whitespace."""
     return not string.strip()
 
-if __name__ == "__main__":
-    path = "sw/blink.s"
+def report(diagnostics: list, filename: str) -> None:
+    """Print errors and warnings to stderr, tagged with the source file name."""
+    for diagnostic in diagnostics:
+        diagnostic.filename = filename
+        print(diagnostic, file=sys.stderr)
+
+def main(argv: list) -> int:
+    """Command line entry point: assembler.py <input.s> <output.hex>. Returns the exit code."""
+    if len(argv) != 3:
+        print(f"usage: python3 {argv[0]} <input.s> <output.hex>", file=sys.stderr)
+        return 1
+    source_path, output_path = argv[1], argv[2]
+
+    warnings = []
     try:
-        code = code_to_list(read_file(path))
-        codeNoComments = drop_comments(code)
-        print_code(codeNoComments)
-        codeLabels = find_labels(codeNoComments)
-        print(codeLabels)
-        instructions = get_instructions(codeNoComments)
-        print(instructions)
-        for i in instructions:
-            print(tokenize(i[1]))
-        print(instructions)
-    except AssemblerError as e:
-        e.filename = path
-        print(e, file=sys.stderr)
-        sys.exit(1)
+        code = drop_comments(code_to_list(read_file(source_path)))
+        words = assemble(code, warnings)
+    except OSError as err:
+        print(f"{source_path}: error: cannot read file: {err.strerror}", file=sys.stderr)
+        return 1
+    except AssemblerError as err:
+        report(warnings + [err], source_path)
+        return 1
+    report(warnings, source_path)
+
+    try:
+        with open(output_path, "w") as file:
+            file.write(to_hex(words))
+    except OSError as err:
+        print(f"{output_path}: error: cannot write file: {err.strerror}", file=sys.stderr)
+        return 1
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))
