@@ -30,9 +30,9 @@ def code_to_list(code: str) -> list:
     """
     return code.split("\n")
 
-def drop_comments(code: str) -> list:
+def drop_comments(code: list) -> list:
     """
-    Removes '#' comments from the given code string.
+    Removes '#' comments from the given list of lines.
 
     Everything from a '#' to the end of its line is dropped, along with
     trailing whitespace. Lines left empty are removed.
@@ -95,19 +95,6 @@ def print_code(code: list) -> None:
     width = len(str(len(code)))
     for i, line in enumerate(code, start=1):
         print(f"{i:>{width}} | {line}")
-
-def two_sum(n1: int, n2: int) -> int:
-    """
-    Returns the sum of two integers.
-
-    Parameters:
-    n1 (int): The first integer.
-    n2 (int): The second integer.
-
-    Returns:
-    int: The sum of n1 and n2.
-    """
-    return n1 + n2
 
 
 code = code_to_list(read_file("sw/blink.s"))
