@@ -96,9 +96,78 @@ def print_code(code: list) -> None:
     for i, line in enumerate(code, start=1):
         print(f"{i:>{width}} | {line}")
 
+def get_instructions(code: list) -> list:
+    """
+    Returns a list of all instructions in the given code.
 
-code = code_to_list(read_file("sw/blink.s"))
-codeNoComments = drop_comments(code)
-print_code(codeNoComments)
-codeLabels = find_labels(codeNoComments)
-print(codeLabels)
+    Parameters:
+    code (list): A list of lines from the code string.
+
+    Returns:
+    list: A list of instructions from the code string.
+    """
+    instructions = []
+    adress = 0
+    for line in code:
+        lineInstructions = []
+        if line.startswith("."):
+            continue
+        if ":" in line:
+            line = line.split(":", 1)[1]
+            if line=="" or line.isspace():
+                continue
+            lineInstructions.append(line)
+        else:
+            count = 0
+            for char in line:
+                if char!=" ":
+                    break
+                count+=1
+            lineInstructions.append(line[count:])
+        for inst in lineInstructions:
+            instructions.append((adress, inst))
+            adress += 4
+
+    return instructions
+
+def tokenize(line: str) -> tuple:
+    parts = line.strip().split(maxsplit=1)
+
+    if not parts:
+        return ("", [])
+        
+    op = parts[0].lower()
+
+    if len(parts) < 2:
+        return (op, [])
+        
+    directions = [arg.strip() for arg in parts[1].split(",") if arg.strip()]
+    
+    return (op, directions)
+
+def parse_register(tok: str) -> int:
+    try:
+        if tok[0]!="x":
+            raise ValueError
+        reg = int(tok.strip("x"))
+        if not 0<=reg<=15:
+            raise ValueError
+        return reg
+    except ValueError:
+        print(f"direction: '{tok}' doesn't exist on RV32E")
+
+
+def is_empty(string: str) -> bool:
+    return string in ("", " ")
+
+if __name__ == "__main__":
+    code = code_to_list(read_file("sw/blink.s"))
+    codeNoComments = drop_comments(code)
+    print_code(codeNoComments)
+    codeLabels = find_labels(codeNoComments)
+    print(codeLabels)
+    instructions = get_instructions(codeNoComments)
+    print(instructions)
+    for i in instructions:
+        print(tokenize(i[1]))
+    print(instructions)
