@@ -1,16 +1,3 @@
-def two_sum(n1: int, n2: int) -> int:
-    """
-    Returns the sum of two integers.
-
-    Parameters:
-    n1 (int): The first integer.
-    n2 (int): The second integer.
-
-    Returns:
-    int: The sum of n1 and n2.
-    """
-    return n1 + n2
-
 def read_file(file_path: str) -> str:
     """
     Reads the content of a file and returns it as a string.
@@ -30,6 +17,18 @@ def read_file(file_path: str) -> str:
     except Exception as e:
         print(f"Error reading file {file_path}: {e}")
         return ""
+
+def code_to_list(code: str) -> list:
+    """
+    Converts the given code string into a list of lines.
+
+    Parameters:
+    code (str): The code string to convert.
+
+    Returns:
+    list: A list of lines from the code string.
+    """
+    return code.split("\n")
 
 def drop_comments(code: str) -> list:
     """
@@ -97,17 +96,18 @@ def print_code(code: list) -> None:
     for i, line in enumerate(code, start=1):
         print(f"{i:>{width}} | {line}")
 
-def code_to_list(code: str) -> list:
+def two_sum(n1: int, n2: int) -> int:
     """
-    Converts the given code string into a list of lines.
+    Returns the sum of two integers.
 
     Parameters:
-    code (str): The code string to convert.
+    n1 (int): The first integer.
+    n2 (int): The second integer.
 
     Returns:
-    list: A list of lines from the code string.
+    int: The sum of n1 and n2.
     """
-    return code.split("\n")
+    return n1 + n2
 
 
 code = code_to_list(read_file("sw/blink.s"))
