@@ -156,6 +156,23 @@ def parse_register(tok: str) -> int:
     except ValueError:
         print(f"direction: '{tok}' doesn't exist on RV32E")
 
+def parse_immediate(tok:str) -> int:
+    try: 
+        number = int(tok, 0)
+        return number
+    except ValueError:
+        print(f"value: '{tok}' is not decimal, hex or binary")
+
+def parse_mem_operand(tok: str) -> tuple:
+    try:
+        offset, registerNumber = tok.split("(")
+        offset = parse_immediate(offset)
+        registerNumber = parse_register(registerNumber.strip(")"))
+        if offset == None or registerNumber == None:
+            raise ValueError
+        return (offset, registerNumber)
+    except ValueError:
+        print(f"mem operand: {tok} does not exist in RV32E")
 
 def is_empty(string: str) -> bool:
     return string in ("", " ")
