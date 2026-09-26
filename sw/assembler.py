@@ -1,3 +1,4 @@
+import re
 import sys
 
 
@@ -102,6 +103,17 @@ ABI_NAMES = {
 # Shifts decode fine but the ALU runs them as ADD (see README).
 SHIFT_MNEMONICS = {"sll", "srl", "sra", "slli", "srli", "srai"}
 
+# Directives the assembler understands. They only mark the code as text and
+# its entry point, so they take no space. Anything else (.word, .align, ...)
+# would change the output, so it's rejected instead of silently skipped.
+SUPPORTED_DIRECTIVES = {".text", ".section", ".global", ".globl"}
+
+# A label: letter, '_', '.' or '$' first, then also digits; followed by ':'.
+LABEL_PATTERN = re.compile(r"([A-Za-z_.$][A-Za-z0-9_.$]*)\s*:")
+
+# Numbers as the GNU assembler writes them: hex, binary, octal (leading 0) or decimal.
+NUMBER_PATTERN = re.compile(r"[+-]?(0[xX][0-9a-fA-F]+|0[bB][01]+|0[0-7]*|[1-9][0-9]*)")
+
 # How many operands each format takes in the source.
 OPERAND_COUNT = {"R": 3, "I": 3, "SHIFT": 3, "LOAD": 2, "S": 2,
                  "B": 3, "U": 2, "J": 2, "JALR": 2}
@@ -129,35 +141,66 @@ def drop_comments(code: list) -> list:
         lines.append(line.rstrip())
     return lines
 
+def split_line(line: str) -> tuple:
+    """
+    Split a source line into (labels, directive, instruction); unused parts are empty.
+
+    "a: b: addi x1, x0, 1" -> (["a", "b"], "", "addi x1, x0, 1")
+    Raises ValueError on an invalid label name.
+    """
+    labels = []
+    rest = line.strip()
+    match = LABEL_PATTERN.match(rest)
+    while match:
+        labels.append(match.group(1))
+        rest = rest[match.end():].strip()
+        match = LABEL_PATTERN.match(rest)
+    if ":" in rest:
+        name = rest.split(":", 1)[0].strip()
+        if not name:
+            raise ValueError("label name is empty")
+        raise ValueError(f"'{name}' is not a valid label name "
+                         f"(use letters, digits, '_', '.' or '$', not starting with a digit)")
+    if rest.startswith("."):
+        return labels, rest, ""
+    return labels, "", rest
+
+def check_directive(directive: str) -> None:
+    """Raise ValueError unless directive is one the assembler supports."""
+    name, _, argument = directive.partition(" ")
+    if name not in SUPPORTED_DIRECTIVES:
+        raise ValueError(f"directive '{name}' is not supported "
+                         f"(only {', '.join(sorted(SUPPORTED_DIRECTIVES))})")
+    if name == ".section" and argument.strip() != ".text":
+        raise ValueError(f"section '{argument.strip()}' is not supported (only .text)")
+
 def find_labels(code: list) -> dict:
     """
     Map each label to the address of the instruction that follows it.
 
     Addresses start at 0 and advance 4 per instruction; labels and
-    directives take no space. Raises AssemblerError on a duplicate label.
+    directives take no space. This first pass also validates labels and
+    directives, raising AssemblerError on the first bad line.
     """
     labels = {}
     label_lines = {}
     address = 0
     for line_no, source in enumerate(code, start=1):
-        line = source.strip()
-        if not line:
-            continue
-        if line[0] == ".":
-            continue
-        if ":" in line:
-            label, line = line.split(":", 1)
-            label = label.strip()
+        try:
+            line_labels, directive, instruction = split_line(source)
+            if directive:
+                check_directive(directive)
+        except ValueError as err:
+            raise AssemblerError(str(err), line_no, source) from None
+        for label in line_labels:
             if label in labels:
                 raise AssemblerError(
                     f"label '{label}' is already defined on line {label_lines[label]}",
                     line_no, source)
             labels[label] = address
             label_lines[label] = line_no
-            line = line.strip()
-            if not line:
-                continue
-        address += 4
+        if instruction:
+            address += 4
     return labels
 
 def print_code(code: list) -> None:
@@ -178,15 +221,10 @@ def get_instructions(code: list) -> list:
     instructions = []
     address = 0
     for line_no, source in enumerate(code, start=1):
-        line = source.strip()
-        if is_empty(line) or line.startswith("."):
-            continue
-        if ":" in line:
-            line = line.split(":", 1)[1].strip()
-            if is_empty(line):
-                continue
-        instructions.append((address, line, line_no))
-        address += 4
+        instruction = split_line(source)[2]
+        if instruction:
+            instructions.append((address, instruction, line_no))
+            address += 4
     return instructions
 
 def tokenize(line: str) -> tuple:
@@ -205,7 +243,7 @@ def tokenize(line: str) -> tuple:
     if len(parts) < 2:
         return (op, [])
         
-    directions = [arg.strip() for arg in parts[1].split(",") if arg.strip()]
+    directions = [arg.strip() for arg in parts[1].split(",")]
     
     return (op, directions)
 
@@ -221,7 +259,7 @@ def parse_register(tok: str) -> int:
         if reg > 15:
             raise ValueError(f"register '{name}' (x{reg}) doesn't exist on RV32E, which only has x0 to x15")
         return reg
-    if len(name) < 2 or name[0] != "x" or not name[1:].isdigit():
+    if len(name) < 2 or name[0] != "x" or not name[1:].isdigit() or name[1:] != str(int(name[1:])):
         raise ValueError(f"'{name}' is not a register (expected x0 to x15 or an ABI name like a0 or sp)")
     reg = int(name[1:])
     if not 0 <= reg <= 15:
@@ -230,15 +268,19 @@ def parse_register(tok: str) -> int:
 
 def parse_immediate(tok: str) -> int:
     """
-    Parse a decimal, 0x hex or 0b binary number (may be negative).
+    Parse a decimal, 0x hex, 0b binary or 0-prefixed octal number (may be signed).
 
-    Raises ValueError if tok isn't a number.
+    Raises ValueError if tok isn't a number in one of those forms.
     """
-    try:
-        return int(tok.strip(), 0)
-    except ValueError:
-        raise ValueError(f"'{tok.strip()}' is not a valid number "
-                         f"(expected decimal like 12, hex like 0x1F or binary like 0b101)") from None
+    text = tok.strip()
+    if not NUMBER_PATTERN.fullmatch(text):
+        raise ValueError(f"'{text}' is not a valid number "
+                         f"(expected decimal like 12, hex like 0x1F or binary like 0b101)")
+    sign = -1 if text[0] == "-" else 1
+    digits = text.lstrip("+-")
+    if len(digits) > 1 and digits[0] == "0" and digits[1].isdigit():
+        return sign * int(digits, 8)
+    return sign * int(digits, 0)
 
 def parse_mem_operand(tok: str) -> tuple:
     """
@@ -351,6 +393,8 @@ def assemble_instruction(line: str, address: int, labels: dict) -> int:
     mnemonic, operands = tokenize(line)
     if mnemonic not in INSTRUCTIONS:
         raise ValueError(f"unknown instruction '{mnemonic}'")
+    if "" in operands:
+        raise ValueError("empty operand (check for an extra or missing comma)")
     fmt, opcode, funct3, funct7 = INSTRUCTIONS[mnemonic]
 
     expected = OPERAND_COUNT[fmt]
