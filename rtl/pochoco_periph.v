@@ -29,7 +29,7 @@ module pochoco_periph (
   // LEDs and raw digit registers
   reg [3:0]  led_q;
   reg [7:0]  digit_q;
-  
+
   always @(posedge clk_i or negedge rst_ni) begin
     if (!rst_ni) begin
       led_q   <= 4'b0;
@@ -44,6 +44,18 @@ module pochoco_periph (
   end
 
   assign leds_o = led_q;
+
+  // Free-running cycle counter, offset 0x0C. Increments every clock cycle
+  // from reset; a write to this offset loads wdata_i instead (writing 0
+  // zeroes it), so software can restart the count at the start of a round
+  // instead of always subtracting two reads.
+  reg [31:0] cyc_q;
+
+  always @(posedge clk_i or negedge rst_ni) begin
+    if (!rst_ni) cyc_q <= 32'b0;
+    else if (access & we_i & (off == 6'd3)) cyc_q <= wdata_i;
+    else cyc_q <= cyc_q + 32'd1;
+  end
 
   // Hex to 7-segment decoder function
   function [6:0] hex2seg;
@@ -80,6 +92,7 @@ module pochoco_periph (
     else if (access & ~we_i) begin
       case (off)
         6'd2: rdata_o <= {28'b0, btn_i}; // Buttons
+        6'd3: rdata_o <= cyc_q;          // Cycle counter
         default: rdata_o <= 32'b0;
       endcase
     end

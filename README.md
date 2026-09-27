@@ -24,7 +24,11 @@ The SoC routes memory and data requests using a hardcoded address decoding schem
 * **`0x8000_0000` - Board Peripherals**: Memory-mapped I/O for the physical board.
   * `Offset 0x00`: 7-Segment Displays
   * `Offset 0x04`: LEDs
-  * `Offset 0x08`: Button Inputs
+  * `Offset 0x08`: Button Inputs (read-only)
+  * `Offset 0x0C`: Cycle Counter — free-running 32-bit counter, increments every
+    clock cycle from reset. Reading it returns the current count; writing any
+    value to it reloads the counter to that value (write 0 to restart it from a
+    known point, e.g. at the start of a timing window).
 * **`0x8001_0000` - SPI Slave**: Custom SPI interface routing.
   * `Offset 0x00`: SPI Status (Chip Select state, New Data flag)
   * `Offset 0x04`: Received "Price" byte (from external master)
