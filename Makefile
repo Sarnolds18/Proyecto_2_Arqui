@@ -9,7 +9,10 @@
 # - Nicolás Villegas <navillegas@miuandes.cl>
 
 # Configuration
-TOP  := pochoco_soc
+# TOP defaults to game_top (the FPGA top-level for the reflex game, see
+# rtl/game_top.v). Override on the command line to build a different module,
+# e.g. `make TOP=pochoco_soc` to build the bare SoC instead.
+TOP  ?= game_top
 PCF  := goboard.pcf
 
 # RTL Sources

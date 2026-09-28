@@ -1,7 +1,10 @@
 // Self-checking testbench for pochoco_periph, focused on the new cycle
 // counter at offset 0x0C (off==3): free-running from reset, and
 // resettable to any value with a write. Also re-checks LEDs/digit/buttons
-// so the counter addition didn't break the existing offsets.
+// (including the debounce path, with a bounce simulated) so the counter
+// and debouncer additions didn't break the existing offsets.
+// DEBOUNCE_TICK_BITS is overridden small here purely to simulate fast; real
+// hardware uses the default 18 (~10ms at 25MHz, see rtl/debouncer.v).
 //
 // Run: iverilog -o /tmp/tb_periph.vvp sim/tb_pochoco_periph.v rtl/pochoco_periph.v
 //      vvp /tmp/tb_periph.vvp
@@ -24,7 +27,7 @@ module tb_pochoco_periph;
 
   integer errors = 0;
 
-  pochoco_periph dut (
+  pochoco_periph #(.DEBOUNCE_TICK_BITS(4)) dut (
     .clk_i   (clk_i),
     .rst_ni  (rst_ni),
     .sel_i   (sel_i),
@@ -121,9 +124,25 @@ module tb_pochoco_periph;
     check32("seg1_o decodes high nibble (0xA)", {25'b0, seg1_o}, {25'b0, 7'b1110111});
     check32("seg2_o decodes low nibble (0x5)",  {25'b0, seg2_o}, {25'b0, 7'b1101101});
 
-    btn_i = 4'b1010;
+    // Buttons now go through debounce_bank (DEBOUNCE_TICK_BITS=4 here for
+    // speed -> samples every 2^4=16 cycles; 18 on real hardware -> ~10ms at
+    // 25MHz). It only accepts a value once two consecutive slow samples
+    // agree, so simulate a bouncy press, then hold the final value across
+    // more than 2 sample periods before checking it settled.
+    btn_i = 4'b0000;
+    btn_i = 4'b1010; @(negedge clk_i);
+    btn_i = 4'b0010; @(negedge clk_i);
+    btn_i = 4'b1010; @(negedge clk_i);
+    btn_i = 4'b0010; @(negedge clk_i);
+    btn_i = 4'b1010; // settles here
+    repeat (40) @(negedge clk_i); // > 2 sample periods, let it settle
     read_off(6'd2, cyc_a);
-    check32("buttons readback", cyc_a, 32'b1010);
+    check32("buttons readback settles after simulated bounce", cyc_a, 32'b1010);
+
+    btn_i = 4'b0000;
+    repeat (40) @(negedge clk_i);
+    read_off(6'd2, cyc_a);
+    check32("buttons readback follows release after debounce", cyc_a, 32'b0000);
 
     if (errors == 0) $display("ALL TESTS PASSED");
     else $display("%0d TEST(S) FAILED", errors);

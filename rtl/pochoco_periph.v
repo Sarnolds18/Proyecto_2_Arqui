@@ -8,7 +8,9 @@
 // Authors:
 // - Nicolás Villegas <navillegas@miuandes.cl>
 
-module pochoco_periph (
+module pochoco_periph #(
+  parameter DEBOUNCE_TICK_BITS = 18 // ~10 ms at 25 MHz; override for fast sim
+) (
   input  wire        clk_i,
   input  wire        rst_ni,
   input  wire        sel_i,
@@ -44,6 +46,16 @@ module pochoco_periph (
   end
 
   assign leds_o = led_q;
+
+  // Debounce the 4 physical buttons/switches before the CPU ever sees them.
+  // See rtl/debouncer.v for why this uses one shared slow-tick bank instead
+  // of 4 independent per-button counter+comparator debouncers (LUT budget).
+  wire [3:0] btn_estable;
+  debounce_bank #(.TICK_BITS(DEBOUNCE_TICK_BITS)) u_debounce (
+    .clk         (clk_i),
+    .btn_i       (btn_i),
+    .btn_estable (btn_estable)
+  );
 
   // Free-running cycle counter, offset 0x0C. Increments every clock cycle
   // from reset; a write to this offset loads wdata_i instead (writing 0
@@ -91,7 +103,7 @@ module pochoco_periph (
     if (!rst_ni) rdata_o <= 32'b0;
     else if (access & ~we_i) begin
       case (off)
-        6'd2: rdata_o <= {28'b0, btn_i}; // Buttons
+        6'd2: rdata_o <= {28'b0, btn_estable}; // Buttons (debounced)
         6'd3: rdata_o <= cyc_q;          // Cycle counter
         default: rdata_o <= 32'b0;
       endcase
