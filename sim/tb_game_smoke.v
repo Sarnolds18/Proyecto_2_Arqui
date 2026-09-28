@@ -14,9 +14,7 @@
 // exercises is control flow through the full SoC + game.hex: round
 // sequencing, the wrong-button retry (and that it preserves
 // correct_count/sum_decimas), the 10-round loop, and the average/display
-// packing. A `defparam` (see below) speeds up the debounce just for this
-// simulation; pochoco_soc/game_top are otherwise instantiated exactly as
-// they are for real hardware.
+// packing.
 //
 // Run:
 //   iverilog -g2012 -o /tmp/tb_game_smoke.vvp sim/tb_game_smoke.v \
@@ -42,13 +40,10 @@ module tb_game_smoke;
   // Instantiated exactly as game_top.v instantiates it for real hardware --
   // NumWords/MemFile are the only parameters pochoco_soc exposes, on
   // purpose, so production RTL doesn't need a testing-only knob threaded
-  // through it. The real hardware debounce is ~10ms (2^18 cycles), which
-  // would make every simulated button press take ~525,000 cycles to
-  // settle (~50+ minutes wall-clock for a full 10-round game in iverilog --
-  // measured, not estimated). Instead, `defparam` below reaches straight
+  // through it. The real ~10ms debounce would make a full 10-round game
+  // impractically slow to simulate, so `defparam` below reaches straight
   // into the u_periph instance buried inside dut and overrides its
-  // DEBOUNCE_TICK_BITS just for this simulation, with zero changes to any
-  // production .v file.
+  // DEBOUNCE_TICK_BITS just for this simulation.
   pochoco_soc #(
     .NumWords (512),
     .MemFile  ("sw/game_smoke_test.hex")

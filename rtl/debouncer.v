@@ -6,24 +6,17 @@
 // Course: Arquitectura de Computadores (2026)
 // Proyecto 2 - Juego de reflejos
 //
-// Debounce for the 4 buttons/switches, sharing a single slow "tick"
-// generator instead of one magnitude-comparator counter per button (like
-// proyecto1/src/debouncer.v). That per-button design was tried first and
-// ported straight from Proyecto 1 (already proven on this same Go Board),
-// but 4 instances pushed synthesis from 1225/1280 (95%) to 1444/1280 (112%)
-// ICESTORM_LC on the iCE40 HX1K -- the espino_core + SoC already leave very
-// little headroom, unlike Proyecto 1's small 4-bit calculator. This design
-// keeps the same ~10 ms settle time but costs a fraction of the LUTs: one
-// free-running TICK_BITS-wide counter's own MSB toggling is used directly
-// as the slow sample enable (no comparator at all), and the 4 buttons are
-// accepted together with a single 4-bit equality check between two
-// consecutive slow samples instead of 4 independent per-bit comparators.
+// Debounce for the 4 buttons/switches. Uses one shared slow "tick" instead
+// of a per-button counter+comparator (like proyecto1/src/debouncer.v):
+// the SoC leaves very little LUT headroom on the iCE40 HX1K, so 4
+// independent debouncers don't fit. A free-running TICK_BITS-wide
+// counter's own MSB toggling serves directly as the sample enable (no
+// comparator needed), and the 4 buttons are accepted together with one
+// 4-bit equality check between two consecutive samples.
 //
-// At 25 MHz, TICK_BITS=18 samples roughly every 2^18 cycles = ~10.5 ms,
-// matching Proyecto 1's proven 250,000-cycle (~10 ms) debounce window.
-// Physical switch bounce settles in well under that (typically <5 ms), so
-// two consecutive 10 ms-spaced samples agreeing is a reliable stability
-// check, even though it samples periodically instead of continuously.
+// At 25 MHz, TICK_BITS=18 samples every ~10.5 ms, matching Proyecto 1's
+// proven ~10 ms debounce window. Switch bounce settles well under that, so
+// two agreeing samples 10 ms apart is enough for stability.
 
 module debounce_bank #(
     parameter TICK_BITS = 18
