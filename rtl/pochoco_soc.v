@@ -31,13 +31,16 @@ module pochoco_soc #(
   wire clk;
   assign clk = i_Clk;
 
-  // Power-on reset
-  reg  [3:0] por_cnt = 4'b0;
-  wire       rst_ni;
+  // Power-on reset. Held for 2^12 cycles (~164 us at 25 MHz) instead of
+  // just 15: right after configuration the iCE40 BRAMs (program RAM and
+  // register file) need some time before reads are reliable. Only the MSB
+  // is checked (no full-width compare) to save LUTs.
+  reg  [12:0] por_cnt = 13'b0;
+  wire        rst_ni;
   always @(posedge clk) begin
-    if (por_cnt != 4'hF) por_cnt <= por_cnt + 4'd1;
+    if (!por_cnt[12]) por_cnt <= por_cnt + 13'd1;
   end
-  assign rst_ni = (por_cnt == 4'hF);
+  assign rst_ni = por_cnt[12];
 
   // Core-memory wiring
   wire        instr_req;

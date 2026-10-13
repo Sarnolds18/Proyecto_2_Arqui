@@ -60,6 +60,43 @@ make TOP=pochoco_soc all   # build the bare SoC instead (e.g. to run blink.s/7se
 
 `make all` (and `make prog`) always program **whatever is currently in `game_top.bin`** — if you changed `sw/game.s`, regenerate `sw/game.hex` first (see below) and then rerun `make clean && make all`, since `sw/game.hex` is baked into the bitstream via `$readmemh` at synthesis time and a stale bitstream will not pick up a newer `.hex` on its own.
 
+### Flashing from WSL
+
+Under WSL2 the Go Board's USB has to be passed through from Windows first (admin PowerShell, [usbipd-win](https://github.com/dorssel/usbipd-win)):
+
+```powershell
+usbipd list                        # find the FTDI device (VID 0403)
+usbipd bind --busid <X-Y>          # first time only
+usbipd attach --wsl --busid <X-Y>  # again after every unplug
+```
+
+If `iceprog` then reports `Can't find iCE FTDI USB device` even though `lsusb` lists `0403:6010`, your user lacks write access to the USB device. Either flash with `sudo ~/oss-cad-suite/bin/iceprog game_top.bin`, or add a udev rule once:
+
+```bash
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE="0666"' | sudo tee /etc/udev/rules.d/53-goboard.rules
+sudo service udev restart          # then replug + usbipd attach again
+```
+
+`iceprog` may print `flash ID: 0xFF 0xFF 0xFF 0xFF` under usbipd; as long as it ends with `VERIFY OK`, the board was programmed correctly.
+
+## Playing the Game
+
+The board boots straight into the game after programming (and on every power-up, since the bitstream lives in the board's flash).
+
+1. All 4 LEDs light up for 3 seconds.
+2. Then only one LED (chosen pseudo-randomly) stays on. **The reaction timer starts at this moment**, when the 4 LEDs go off; the 3-second wait is not counted.
+3. Press the button that matches that LED (switch SW*i* ↔ LED D*i*, as printed on the board).
+   * **Correct:** your reaction time is shown for 2 seconds on the 7-segment displays, in tenths of a second (`04` = 0.4 s, truncated), and the next round starts.
+   * **Wrong button:** the displays show `EE` for about 0.5 s and the same round restarts; rounds already won are kept.
+4. After 10 correct rounds the average reaction time (same unit) stays on the displays.
+5. Press any button to start a new game. Unplugging and replugging the board also restarts it.
+
+A button still held down from the previous round is ignored until it is released. Times above 9.9 s are clipped to `99`.
+
+### Power-on reset
+
+`pochoco_soc.v` holds the CPU in reset for 2^12 clock cycles (~164 µs) after configuration. The original 15-cycle reset let the core start before the iCE40 block RAMs (program memory and register file) returned valid data. On the board this showed up as `00` on the displays and no LEDs, while simulation, which models ideal RAM, worked fine. The counter is 13 bits wide, and its MSB is used directly as `rst_ni`, so no comparator is needed. That matters because the design uses ~98% of the HX1K's logic cells.
+
 ## Software
 
 The `sw/` folder holds RV32E assembly programs for the Espino Core. There are two separate toolchains in play here, used for two different purposes — do not mix them up:

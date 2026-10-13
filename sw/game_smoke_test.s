@@ -17,8 +17,8 @@
 # Secuencia por ronda (enunciado):
 #   1. Prender los 4 LEDs durante >= 3 segundos.
 #   2. Elegir un LED objetivo pseudoaleatorio y encender solo ese.
-#   3. La medicion de tiempo arranca en el mismo instante logico en que
-#      arranca la ronda (antes del paso 1, no cuando se prende el objetivo).
+#   3. La medicion de tiempo arranca cuando se apagan los 4 LEDs y se
+#      prende el objetivo (los 3 s del paso 1 no cuentan en el tiempo).
 #   4. Esperar un boton; si coincide con el objetivo, termina la ronda.
 #   5. Mostrar el tiempo de respuesta en decimas de segundo (decimal real).
 #   6. Repetir hasta completar diez respuestas correctas.
@@ -56,7 +56,7 @@
 #   s1 = estado persistente del generador pseudoaleatorio
 #   a0 = correct_count (0..10)
 #   a1 = sum_decimas (acumulador para el promedio)
-#   a2 = cyc_start de la ronda actual
+#   a2 = inicio de la ronda (espera de 3s) y luego cyc_start de la reaccion
 #   a3 = target_led (indice 0..3)
 #   a4 = mascara one-hot del LED objetivo
 #   a5, t0, t1, t2, ra = scratch de uso libre entre fases
@@ -74,9 +74,8 @@ _start:
 round_start:
     sw   x0, 0(s0)          # limpia el display al empezar/reiniciar la ronda
 
-    # Paso 3: la medicion de tiempo arranca AQUI (mismo instante logico en
-    # que arranca la ronda), antes de prender los 4 LEDs.
-    lw   a2, 12(s0)         # a2 = cyc_start
+    # Marca el inicio de la ronda para medir la espera de 3s.
+    lw   a2, 12(s0)         # a2 = inicio de la ronda
 
     # Paso 1: los 4 LEDs encendidos durante >= 3 segundos.
     addi t0, x0, 15
@@ -86,7 +85,7 @@ round_start:
 
 wait_3s:
     lw   t2, 12(s0)
-    sub  t2, t2, a2         # t2 = ciclos transcurridos desde cyc_start
+    sub  t2, t2, a2         # t2 = ciclos transcurridos desde el inicio de la ronda
     blt  t2, t1, wait_3s
 
     # Paso 2: elegir el LED objetivo pseudoaleatorio.
@@ -106,6 +105,10 @@ wait_3s:
     addi a4, x0, 8          # unico caso restante (target 3) -> mascara 1000
 target_ready:
     sw   a4, 4(s0)          # enciende SOLO el LED objetivo
+
+    # Paso 3: la medicion del tiempo de reaccion arranca AQUI, en el
+    # instante en que se apagan los 4 LEDs y queda solo el objetivo.
+    lw   a2, 12(s0)         # a2 = cyc_start
 
     # El jugador debe soltar cualquier boton que haya quedado apretado de
     # la ronda anterior antes de que una pulsacion nueva cuente.
@@ -136,6 +139,15 @@ response_div_done:
     addi a0, a0, 1           # correct_count += 1
 
     jal  ra, show_decimal    # muestra a5 (decimas) en decimal
+
+    # Mantiene el tiempo de la ronda visible ~2s antes de seguir (si no,
+    # round_start lo borra al instante y nunca se alcanza a leer).
+    lw   a2, 12(s0)
+    addi t1, x0, 20          # [TEST] valor chico en vez de 50,000,000 para simular rapido
+hold_result:
+    lw   t2, 12(s0)
+    sub  t2, t2, a2
+    blt  t2, t1, hold_result
 
     addi t0, x0, 10
     beq  a0, t0, all_rounds_done
@@ -173,8 +185,16 @@ average_div:
 average_div_done:
     jal  ra, show_decimal     # muestra el promedio en decimal
 
+    # El promedio queda en pantalla hasta que se apriete cualquier boton,
+    # que reinicia el juego completo (primero se espera a que se suelte el
+    # boton de la ultima ronda para no reiniciar sin querer).
 halt:
-    jal  x0, halt              # la demo termina aqui (promedio queda en pantalla)
+    lw   t0, 8(s0)
+    bne  t0, x0, halt
+wait_restart:
+    lw   t0, 8(s0)
+    beq  t0, x0, wait_restart
+    jal  x0, _start
 
 # show_decimal: muestra el valor en a5 (0..99, se recorta a 99) como dos
 # digitos decimales reales en los 7-seg, reusando el decodificador hex2seg
