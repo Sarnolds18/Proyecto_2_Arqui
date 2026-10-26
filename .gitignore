@@ -20,3 +20,15 @@ module_stats/
 sim/sim
 *.vcd
 *.csv
+# LibreLane (Proyecto 3): las corridas son pesadas (GDS, DEF, netlists).
+# Se versionan solo los logs, reportes y metricas que cita el informe.
+!flow/*/config.json
+flow/*/runs/**
+!flow/*/runs/**/
+!flow/*/runs/**/*.log
+!flow/*/runs/**/*.rpt
+!flow/*/runs/**/metrics.json
+!flow/*/runs/**/metrics.csv
+!flow/*/runs/*/resolved.json
+flow/*/runs/*/tmp/
+!results/*.csv
