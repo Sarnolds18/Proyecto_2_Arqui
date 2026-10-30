@@ -31,4 +31,20 @@ flow/*/runs/**
 !flow/*/runs/**/metrics.csv
 !flow/*/runs/*/resolved.json
 flow/*/runs/*/tmp/
+# STA pre-PnR: solo summary.rpt (los reportes por corner no se usan y pesan decenas
+# de MB). STA intermedios: solo los resumenes chicos (ws/wns/tns, skew, power).
+flow/*/runs/*/*-openroad-staprepnr/*/
+flow/*/runs/*/*-openroad-stamidpnr*/max.rpt
+flow/*/runs/*/*-openroad-stamidpnr*/min.rpt
+flow/*/runs/*/*-openroad-stamidpnr*/checks.rpt
+flow/*/runs/*/*-openroad-stamidpnr*/openroad-stamidpnr*.log
+# sta.log repite el contenido de los .rpt de cada corner.
+flow/*/runs/**/sta.log
+# Rutas detalladas (max/min.rpt) solo en los corners del informe: tipico y mas lento.
+flow/*/runs/*/*-openroad-stapostpnr/*/max.rpt
+flow/*/runs/*/*-openroad-stapostpnr/*/min.rpt
+!flow/*/runs/*/*-openroad-stapostpnr/nom_tt_025C_5v00/max.rpt
+!flow/*/runs/*/*-openroad-stapostpnr/nom_tt_025C_5v00/min.rpt
+!flow/*/runs/*/*-openroad-stapostpnr/max_ss_125C_4v50/max.rpt
+!flow/*/runs/*/*-openroad-stapostpnr/max_ss_125C_4v50/min.rpt
 !results/*.csv
