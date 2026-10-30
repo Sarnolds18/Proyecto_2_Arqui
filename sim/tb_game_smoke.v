@@ -19,13 +19,8 @@
 // Run:
 //   iverilog -g2012 -o /tmp/tb_game_smoke.vvp sim/tb_game_smoke.v \
 //     rtl/pochoco_soc.v rtl/pochoco_ram.v rtl/pochoco_periph.v \
-//     rtl/pochoco_spi_slave.v rtl/debouncer.v rtl/espino_core/*.v \
-//     /usr/share/yosys/ice40/cells_sim.v
+//     rtl/pochoco_spi_slave.v rtl/debouncer.v rtl/espino_core/*.v
 //   vvp /tmp/tb_game_smoke.vvp
-//
-// (cells_sim.v provides a behavioral model for the SB_RAM40_4K primitives
-// that espino_register_file.v instantiates directly -- without it iverilog
-// can't elaborate the register file.)
 
 `timescale 1ns/1ps
 
