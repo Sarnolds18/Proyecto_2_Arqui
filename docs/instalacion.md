@@ -26,13 +26,25 @@ y comprobar con `nix --version`.
 
 ## 2. Clonar LibreLane y entrar al entorno
 
-LibreLane va fuera de este repo:
+LibreLane va fuera de este repo. Se usa la versión **3.0.16** (tag `3.0.16`), la misma
+de todas las corridas del proyecto: otra versión puede dar otros resultados (otras
+herramientas, otros valores por defecto) y fija otra revisión del PDK.
 
 ```bash
-git clone https://github.com/librelane/librelane ~/librelane
+git clone --branch 3.0.16 https://github.com/librelane/librelane ~/librelane
 cd ~/librelane
 nix-shell
 ```
+
+Si ya estaba clonado en otra versión:
+
+```bash
+cd ~/librelane
+git fetch --tags
+git checkout 3.0.16
+```
+
+Dentro del `nix-shell`, `librelane --version` debe mostrar `LibreLane v3.0.16`.
 
 La primera vez descarga ~860 MB (~5 GB descomprimidos). El prompt cambia a
 `[nix-shell:~/librelane]$`. Todas las herramientas del flujo (Yosys, OpenROAD, Magic,
