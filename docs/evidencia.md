@@ -10,6 +10,7 @@ existir en el repo (corrida guardada en `flow/asic_top/runs/`).
 |---|---|---|
 | `00_rtl_p2_sin_cambios` | Tag `p2-entrega` + `rtl/asic_top.v` | Se detiene en la etapa 3 de 80 (`Checker.LintErrors`): 2 errores de lint (`flow.log:7`, `error.log:1`) |
 | `01_regfile_ff` | `00` + register file de flip-flops (#1 resuelto) | Corrida con `--to OpenROAD.STAPrePNR` (etapas 1–12): lint y síntesis pasan sin errores. Ningún mensaje de error por #2–#5: Yosys los acepta y descarta los valores iniciales en silencio (ver detalle) |
+| `02_reset_externo` | `01` + reset externo, `debounce_bank` con reset, 7-seg activo alto (#4, #5, #7) + SDC propio | `--to OpenROAD.STAPrePNR`: lint sin `PROCASSINIT` ni `rst_ni` sin usar; en síntesis el único valor inicial que queda es el de la RAM (`06-yosys-synthesis/yosys-synthesis.log:1085`, punto 2) |
 
 | # | Construcción | Archivo | Mensaje de LibreLane (log:línea) | Reemplazo |
 |---|---|---|---|---|
@@ -20,6 +21,7 @@ existir en el repo (corrida guardada en `flow/asic_top/runs/`).
 | 5 | Bloque `initial` y registros sin reset | `rtl/debouncer.v` | `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:299`–`303` (`PROC_INIT`) y `:4102`–`4106`; sin warning | Reset asíncrono a 0 en `debounce_bank`; `initial` eliminado |
 | 6 | Supuesto de reloj de 25 MHz (`TICK_BITS`, constantes de `game.s`) | `rtl/debouncer.v`, `sw/game.s` | Sin mensaje (no es un error de síntesis, ver detalle) | `TICK_BITS` 18 → 17 (~13 ms a 10 MHz); constantes de `game.s`: pendiente (P3-07) |
 | 7 | Inversión `~seg` para displays activo-bajo de la Go Board | `rtl/pochoco_soc.v` | Sin mensaje (ver detalle) | Salidas activo alto en `pochoco_soc`/`asic_top`; la inversión queda solo en `game_top` |
+| 8 | Botones asíncronos sin sincronizador | `rtl/debouncer.v` | Sin mensaje (ver detalle) | Sincronizador de 2 FF por botón dentro de `debounce_bank` |
 
 ## Detalle por construcción
 
@@ -145,7 +147,9 @@ Reemplazo:
 Verificación: lint de Verilator sin `PROCASSINIT` ni `rst_ni` sin usar;
 `sim/tb_game_smoke.v` (que ahora maneja `i_Rst_n`) pasa con el mismo resultado que
 antes, con todos los eventos adelantados exactamente 4090 ciclos (reset de 4096 ciclos →
-~6 ciclos: 4 del testbench + 2 del sincronizador). Como en simulación todos los FF
+~6 ciclos: 4 del testbench + 2 del sincronizador). En la corrida `02_reset_externo` ya no aparece
+el warning `PROCASSINIT` ni la regla `PROC_INIT` de `por_cnt`; el único valor inicial
+que queda en `06-yosys-synthesis/yosys-synthesis.log` es el de la RAM (línea 1085). Como en simulación todos los FF
 arrancan en X, esto también muestra que el SoC ya no depende de valores iniciales
 (salvo el contenido de la RAM, punto 2).
 
@@ -202,3 +206,30 @@ convención de la placa en el silicio.
 Reemplazo: `pochoco_soc` (y por lo tanto `asic_top`) entrega los segmentos **activo
 alto**, `{G,F,E,D,C,B,A}`, tal como los produce `hex2seg`. La inversión `~seg` se movió a
 `game_top`, el top de la FPGA, que es el que conoce la placa.
+
+### 8. Botones sin sincronizador
+
+No produce ningún mensaje: el flujo no puede saber que `btn_i` viene de un botón
+mecánico, asíncrono al reloj. En el Proyecto 2 (y en el debouncer del Proyecto 1) los
+botones entraban directo a la lógica de muestreo, que los comparaba y guardaba en el
+mismo flanco. Si un botón cambia justo en la ventana de setup/hold de esos flip-flops,
+pueden quedar metaestables o tomar valores distintos para el mismo botón (uno lo ve
+apretado y otro no). En la FPGA nunca se observó una falla, pero en el ASIC no hay nada
+que lo garantice, y el STA no lo puede verificar porque la entrada no tiene una relación
+de tiempo real con `clk`.
+
+Reemplazo: cada bit de `btn_i` pasa por **2 flip-flops en cadena** (`btn_meta` →
+`btn_sync`, con reset a 0) antes del muestreo de `debounce_bank`. Si el primero queda
+metaestable, tiene un ciclo completo para estabilizarse antes de que lo lea el resto del
+circuito. Costo: 8 flip-flops. Las entradas SPI ya tenían un sincronizador equivalente
+(3 FF en `pochoco_spi_slave`).
+
+Efecto en el comportamiento: el sincronizador agrega 2 ciclos, pero como `btn_estable`
+solo cambia en los pulsos de `tick`, la latencia queda cuantizada al período de
+muestreo. Comparando el debouncer anterior con el nuevo en 32 posiciones de la pulsación
+(`TICK_BITS=4`), en 28 la latencia es idéntica y en 4 (2 de cada 16 ciclos del período)
+aumenta en un período de muestreo, ~13 ms en el ASIC: imperceptible para el jugador.
+`sim/tb_pochoco_periph.v` y `sim/tb_game_smoke.v` pasan. En el segundo cambian el
+promedio final y la secuencia de LEDs, porque el juego mide tiempos en ciclos y siembra
+su generador pseudoaleatorio con el contador de ciclos, así que cualquier corrimiento
+cambia ambos.

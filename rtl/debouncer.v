@@ -19,6 +19,11 @@
 // it was TICK_BITS=18, ~10.5 ms). Switch bounce settles well under that, so
 // two agreeing samples ~13 ms apart is enough for stability.
 //
+// btn_i is asynchronous to clk (mechanical buttons), so each bit first goes
+// through a 2-flip-flop synchronizer: if the first stage goes metastable it
+// has a full cycle to resolve before anything else samples it, and the 4
+// buttons are never compared in an unresolved state.
+//
 // All state has an asynchronous reset to 0 (in an ASIC flip-flops power up
 // undefined; there is no configuration step that clears them).
 
@@ -31,12 +36,23 @@ module debounce_bank #(
     output reg  [3:0] btn_estable
 );
 
+reg [3:0]           btn_meta, btn_sync;
 reg [TICK_BITS-1:0] tick_cnt;
 reg                 tick_bit_prev;
 reg [3:0]           btn_prev_sample;
 
 wire tick_bit = tick_cnt[TICK_BITS-1];
 wire tick     = tick_bit & ~tick_bit_prev; // one-cycle pulse, ~every 2^TICK_BITS cycles
+
+always @(posedge clk or negedge rst_ni) begin
+    if (!rst_ni) begin
+        btn_meta <= 4'b0;
+        btn_sync <= 4'b0;
+    end else begin
+        btn_meta <= btn_i;
+        btn_sync <= btn_meta;
+    end
+end
 
 always @(posedge clk or negedge rst_ni) begin
     if (!rst_ni) begin
@@ -48,8 +64,8 @@ always @(posedge clk or negedge rst_ni) begin
         tick_cnt      <= tick_cnt + 1'b1;
         tick_bit_prev <= tick_bit;
         if (tick) begin
-            if (btn_i == btn_prev_sample) btn_estable <= btn_i;
-            btn_prev_sample <= btn_i;
+            if (btn_sync == btn_prev_sample) btn_estable <= btn_sync;
+            btn_prev_sample <= btn_sync;
         end
     end
 end
