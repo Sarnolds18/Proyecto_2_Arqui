@@ -9,7 +9,7 @@
 // - Nicolás Villegas <navillegas@miuandes.cl>
 
 module pochoco_periph #(
-  parameter DEBOUNCE_TICK_BITS = 18 // ~10 ms at 25 MHz; override for fast sim
+  parameter DEBOUNCE_TICK_BITS = 17 // ~13 ms at 10 MHz; override for fast sim
 ) (
   input  wire        clk_i,
   input  wire        rst_ni,
@@ -53,6 +53,7 @@ module pochoco_periph #(
   wire [3:0] btn_estable;
   debounce_bank #(.TICK_BITS(DEBOUNCE_TICK_BITS)) u_debounce (
     .clk         (clk_i),
+    .rst_ni      (rst_ni),
     .btn_i       (btn_i),
     .btn_estable (btn_estable)
   );

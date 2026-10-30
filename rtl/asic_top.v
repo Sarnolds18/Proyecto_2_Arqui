@@ -11,11 +11,9 @@
 // los dos displays de 7 segmentos (activo alto) y SPI. A diferencia de
 // game_top no hay pines ni polaridades propias de la Go Board.
 //
-// Estado actual: instancia pochoco_soc tal como se entrego en el Proyecto 2
-// (tag p2-entrega), para que la primera corrida de LibreLane muestre las
-// construcciones dependientes de la FPGA (ver docs/evidencia.md). Por eso
-// rst_ni todavia no llega al SoC (este usa su POR interno) y seg1_o/seg2_o
-// salen invertidos por pochoco_soc.
+// rst_ni es asincrono y activo bajo; pochoco_soc lo sincroniza internamente
+// (asercion asincrona, liberacion sincronica). Reemplaza al reset de
+// encendido por valor inicial del Proyecto 2 (ver docs/evidencia.md).
 
 module asic_top (
   input  wire       clk_i,
@@ -38,6 +36,7 @@ module asic_top (
     .MemFile  ("../sw/game.hex")
   ) u_pochoco (
     .i_Clk        (clk_i),
+    .i_Rst_n      (rst_ni),
 
     .o_LED        (led_o),
     .i_Switch     (btn_i),

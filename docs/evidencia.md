@@ -16,10 +16,10 @@ existir en el repo (corrida guardada en `flow/asic_top/runs/`).
 | 1 | Primitiva `SB_RAM40_4K` (iCE40) | `rtl/espino_core/espino_register_file.v` | `flow/asic_top/runs/00_rtl_p2_sin_cambios/01-verilator-lint/verilator-lint.log:1` y `:13` (`%Error-MODMISSING`) | Banco de 15×32 flip-flops con lectura sincrónica y reset a 0 |
 | 2 | `initial $readmemh` | `rtl/pochoco_ram.v` | `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:1093` (`meminit`) y `:4102`–`4106` (`DFFLEGALIZE`); sin warning | pendiente (3.2) |
 | 3 | Inferencia de BRAM (512 palabras) | `rtl/pochoco_ram.v` | `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:1401`–`1406` (`MEMORY_MAP`) y `:4532`, `:4558` (estadísticas) | pendiente (3.2) |
-| 4 | Reset de encendido por valor inicial (`reg [12:0] por_cnt = 13'b0`) | `rtl/pochoco_soc.v` | `flow/asic_top/runs/01_regfile_ff/01-verilator-lint/verilator-lint.log:7` (`%Warning-PROCASSINIT`), `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:304`–`305` (`PROC_INIT`) y `:4102`–`4106`; además `verilator-lint.log:1` (`rst_ni` sin usar) | pendiente (P3-04) |
-| 5 | Bloque `initial` y registros sin reset | `rtl/debouncer.v` | `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:299`–`303` (`PROC_INIT`) y `:4102`–`4106`; sin warning | pendiente (P3-04) |
-| 6 | Supuesto de reloj de 25 MHz (`TICK_BITS`, constantes de `game.s`) | `rtl/debouncer.v`, `sw/game.s` | pendiente | pendiente |
-| 7 | Inversión `~seg` para displays activo-bajo de la Go Board | `rtl/pochoco_soc.v` | pendiente | pendiente |
+| 4 | Reset de encendido por valor inicial (`reg [12:0] por_cnt = 13'b0`) | `rtl/pochoco_soc.v` | `flow/asic_top/runs/01_regfile_ff/01-verilator-lint/verilator-lint.log:7` (`%Warning-PROCASSINIT`), `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:304`–`305` (`PROC_INIT`) y `:4102`–`4106`; además `verilator-lint.log:1` (`rst_ni` sin usar) | Puerto `rst_ni` en `asic_top` → sincronizador de 2 FF en `pochoco_soc` (aserción asíncrona, liberación sincrónica); `por_cnt` eliminado |
+| 5 | Bloque `initial` y registros sin reset | `rtl/debouncer.v` | `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:299`–`303` (`PROC_INIT`) y `:4102`–`4106`; sin warning | Reset asíncrono a 0 en `debounce_bank`; `initial` eliminado |
+| 6 | Supuesto de reloj de 25 MHz (`TICK_BITS`, constantes de `game.s`) | `rtl/debouncer.v`, `sw/game.s` | Sin mensaje (no es un error de síntesis, ver detalle) | `TICK_BITS` 18 → 17 (~13 ms a 10 MHz); constantes de `game.s`: pendiente (P3-07) |
+| 7 | Inversión `~seg` para displays activo-bajo de la Go Board | `rtl/pochoco_soc.v` | Sin mensaje (ver detalle) | Salidas activo alto en `pochoco_soc`/`asic_top`; la inversión queda solo en `game_top` |
 
 ## Detalle por construcción
 
@@ -130,7 +130,24 @@ pasa por reset, y en simulación queda en X y el reset no se suelta nunca. El wa
 de la línea 1 muestra la otra cara del problema: `asic_top` tiene un puerto `rst_ni`
 que todavía no llega a ningún lado.
 
-Reemplazo: pendiente (P3-04).
+Reemplazo:
+
+- `asic_top` lleva su puerto `rst_ni` (asíncrono, activo bajo) a un nuevo puerto
+  `i_Rst_n` de `pochoco_soc`.
+- `pochoco_soc` lo pasa por un **sincronizador de 2 flip-flops**: el reset se aplica
+  apenas baja `i_Rst_n` (asíncrono, no necesita reloj) y se libera dos flancos de reloj
+  después de que sube, sincronizado con `clk`. Así todos los FF del SoC salen de reset
+  en el mismo flanco y no hay violaciones de *recovery/removal* (la liberación de un
+  reset asíncrono se comporta como una entrada de datos respecto del reloj).
+- `por_cnt` se eliminó sin reemplazo de espera: los 4096 ciclos existían porque las BRAM
+  de la iCE40 necesitan tiempo tras la configuración, y en el ASIC no hay BRAM.
+
+Verificación: lint de Verilator sin `PROCASSINIT` ni `rst_ni` sin usar;
+`sim/tb_game_smoke.v` (que ahora maneja `i_Rst_n`) pasa con el mismo resultado que
+antes, con todos los eventos adelantados exactamente 4090 ciclos (reset de 4096 ciclos →
+~6 ciclos: 4 del testbench + 2 del sincronizador). Como en simulación todos los FF
+arrancan en X, esto también muestra que el SoC ya no depende de valores iniciales
+(salvo el contenido de la RAM, punto 2).
 
 ### 5. `initial` en `debounce_bank`
 
@@ -150,12 +167,38 @@ es más leve que en el punto 4 (`tick_cnt` es de libre corrida y `btn_estable` s
 corrige en el primer muestreo), pero hasta los primeros dos muestreos de `tick` el SoC puede
 leer botones falsos, y en simulación del netlist los registros quedan en X.
 
-Reemplazo: pendiente (P3-04).
+Reemplazo: `debounce_bank` recibe `rst_ni` (el mismo reset sincronizado del SoC, vía
+`pochoco_periph`) y sus cuatro registros tienen reset asíncrono a 0; el bloque
+`initial` se eliminó. Verificación: `sim/tb_pochoco_periph.v` pasa.
 
 ### 6. Supuesto de reloj de 25 MHz
 
-pendiente
+No produce ningún mensaje: para la síntesis un contador de 18 bits o una constante de
+75.000.000 son igual de válidos. El problema es de comportamiento. El diseño corre en el
+ASIC con `CLOCK_PERIOD` = 100 ns (10 MHz), no con los 25 MHz del oscilador de la Go Board,
+y todo lo que mide tiempo contando ciclos queda 2,5 veces más lento:
+
+- `debounce_bank` con `TICK_BITS=18` muestrea cada 2^18 / 10 MHz ≈ 26,2 ms (antes
+  ~10,5 ms a 25 MHz).
+- En `game.s`, los 3 s de espera (75.000.000 ciclos) pasarían a durar 7,5 s, y cada
+  décima medida (2.500.000 ciclos) pasaría a valer 0,25 s, así que el tiempo de reacción
+  mostrado quedaría mal.
+
+Reemplazo:
+
+- `TICK_BITS` por defecto 18 → **17** en `debounce_bank` y en `DEBOUNCE_TICK_BITS` de
+  `pochoco_periph`: 2^17 / 10 MHz ≈ 13,1 ms, cerca de la ventana de ~10 ms del
+  Proyecto 1.
+- Constantes de `game.s` para 10 MHz: pendiente (P3-07).
 
 ### 7. Inversión de los 7 segmentos
 
-pendiente
+No produce ningún mensaje: un inversor es lógica perfectamente sintetizable. El problema
+es que la polaridad activo bajo es propiedad de los displays de la Go Board,
+no del SoC. `asic_top` es un macro cuyas salidas son terminales lógicos, sin saber qué
+display (ni qué driver) va a conectarse, así que dejar la inversión adentro fijaría una
+convención de la placa en el silicio.
+
+Reemplazo: `pochoco_soc` (y por lo tanto `asic_top`) entrega los segmentos **activo
+alto**, `{G,F,E,D,C,B,A}`, tal como los produce `hex2seg`. La inversión `~seg` se movió a
+`game_top`, el top de la FPGA, que es el que conoce la placa.

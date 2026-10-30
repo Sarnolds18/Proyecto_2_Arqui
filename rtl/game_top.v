@@ -11,6 +11,14 @@
 // boots sw/game.hex. All the game logic lives in sw/game.s; there is no
 // extra glue logic here on purpose, since pochoco_soc + game.s already do
 // everything the game needs (LEDs, buttons, 7-seg, cycle counter).
+//
+// Proyecto 3: the SoC now takes an external reset and drives active-high
+// 7-seg outputs. The Go Board has no spare reset button, so i_Rst_n is tied
+// high: iCE40 flip-flops are 0 after configuration, so the SoC's reset
+// synchronizer still produces a power-on reset. The segment inversion for
+// the board's active-low displays lives here. This top is no longer kept
+// buildable for the HX1K (the flip-flop register file does not fit); the
+// board version is tag p2-entrega.
 
 module game_top (
   input  wire       i_Clk,
@@ -29,28 +37,37 @@ module game_top (
   output wire       o_SPI_MISO
 );
 
+  wire [6:0] seg1, seg2;  // {G..A}, active high
+
   pochoco_soc #(
     .NumWords (512),
     .MemFile  ("sw/game.hex")
   ) u_pochoco (
     .i_Clk        (i_Clk),
+    .i_Rst_n      (1'b1),
 
     .o_LED        (o_LED),
     .i_Switch     (i_Switch),
 
-    .o_Segment1_A (o_Segment1_A), .o_Segment1_B (o_Segment1_B),
-    .o_Segment1_C (o_Segment1_C), .o_Segment1_D (o_Segment1_D),
-    .o_Segment1_E (o_Segment1_E), .o_Segment1_F (o_Segment1_F),
-    .o_Segment1_G (o_Segment1_G),
-    .o_Segment2_A (o_Segment2_A), .o_Segment2_B (o_Segment2_B),
-    .o_Segment2_C (o_Segment2_C), .o_Segment2_D (o_Segment2_D),
-    .o_Segment2_E (o_Segment2_E), .o_Segment2_F (o_Segment2_F),
-    .o_Segment2_G (o_Segment2_G),
+    .o_Segment1_A (seg1[0]), .o_Segment1_B (seg1[1]),
+    .o_Segment1_C (seg1[2]), .o_Segment1_D (seg1[3]),
+    .o_Segment1_E (seg1[4]), .o_Segment1_F (seg1[5]),
+    .o_Segment1_G (seg1[6]),
+    .o_Segment2_A (seg2[0]), .o_Segment2_B (seg2[1]),
+    .o_Segment2_C (seg2[2]), .o_Segment2_D (seg2[3]),
+    .o_Segment2_E (seg2[4]), .o_Segment2_F (seg2[5]),
+    .o_Segment2_G (seg2[6]),
 
     .i_SPI_SCLK   (i_SPI_SCLK),
     .i_SPI_MOSI   (i_SPI_MOSI),
     .i_SPI_CS_n   (i_SPI_CS_n),
     .o_SPI_MISO   (o_SPI_MISO)
   );
+
+  // 7-seg is active-low on the board
+  assign {o_Segment1_G, o_Segment1_F, o_Segment1_E, o_Segment1_D,
+          o_Segment1_C, o_Segment1_B, o_Segment1_A} = ~seg1;
+  assign {o_Segment2_G, o_Segment2_F, o_Segment2_E, o_Segment2_D,
+          o_Segment2_C, o_Segment2_B, o_Segment2_A} = ~seg2;
 
 endmodule

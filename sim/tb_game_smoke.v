@@ -32,6 +32,15 @@ module tb_game_smoke;
   reg [3:0] switches = 4'b0000;
   wire [3:0] leds;
 
+  // External reset: held low for a few cycles from time 0, like asic_top's
+  // rst_ni. Every flip-flop starts as X in simulation, so this also checks
+  // that nothing depends on initial values.
+  reg rst_n = 1'b0;
+  initial begin
+    repeat (4) @(posedge clk);
+    #1 rst_n = 1'b1;
+  end
+
   // Instantiated exactly as game_top.v instantiates it for real hardware --
   // NumWords/MemFile are the only parameters pochoco_soc exposes, on
   // purpose, so production RTL doesn't need a testing-only knob threaded
@@ -44,6 +53,7 @@ module tb_game_smoke;
     .MemFile  ("sw/game_smoke_test.hex")
   ) dut (
     .i_Clk      (clk),
+    .i_Rst_n    (rst_n),
     .o_LED      (leds),
     .i_Switch   (switches),
     .i_SPI_SCLK (1'b0),

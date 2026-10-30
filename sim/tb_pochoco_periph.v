@@ -125,8 +125,8 @@ module tb_pochoco_periph;
     check32("seg2_o decodes low nibble (0x5)",  {25'b0, seg2_o}, {25'b0, 7'b1101101});
 
     // Buttons now go through debounce_bank (DEBOUNCE_TICK_BITS=4 here for
-    // speed -> samples every 2^4=16 cycles; 18 on real hardware -> ~10ms at
-    // 25MHz). It only accepts a value once two consecutive slow samples
+    // speed -> samples every 2^4=16 cycles; 17 in the ASIC -> ~13ms at
+    // 10MHz). It only accepts a value once two consecutive slow samples
     // agree, so simulate a bouncy press, then hold the final value across
     // more than 2 sample periods before checking it settled.
     btn_i = 4'b0000;

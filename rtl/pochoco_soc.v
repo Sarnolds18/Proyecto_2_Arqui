@@ -13,6 +13,7 @@ module pochoco_soc #(
   parameter MemFile    = "../sw/blink.hex"
 ) (
   input  wire       i_Clk,
+  input  wire       i_Rst_n,  // asynchronous, active low
 
   output wire [3:0] o_LED,
   input  wire [3:0] i_Switch,
@@ -31,16 +32,16 @@ module pochoco_soc #(
   wire clk;
   assign clk = i_Clk;
 
-  // Power-on reset. Held for 2^12 cycles (~164 us at 25 MHz) instead of
-  // just 15: right after configuration the iCE40 BRAMs (program RAM and
-  // register file) need some time before reads are reliable. Only the MSB
-  // is checked (no full-width compare) to save LUTs.
-  reg  [12:0] por_cnt = 13'b0;
-  wire        rst_ni;
-  always @(posedge clk) begin
-    if (!por_cnt[12]) por_cnt <= por_cnt + 13'd1;
+  // Reset synchronizer: asserts asynchronously with i_Rst_n and deasserts
+  // synchronously two clock edges after i_Rst_n rises, so every flip-flop
+  // leaves reset on the same edge (no recovery/removal violations).
+  reg  [1:0] rst_sync_q;
+  wire       rst_ni;
+  always @(posedge clk or negedge i_Rst_n) begin
+    if (!i_Rst_n) rst_sync_q <= 2'b00;
+    else          rst_sync_q <= {rst_sync_q[0], 1'b1};
   end
-  assign rst_ni = por_cnt[12];
+  assign rst_ni = rst_sync_q[1];
 
   // Core-memory wiring
   wire        instr_req;
@@ -136,10 +137,10 @@ module pochoco_soc #(
     .spi_miso_o (o_SPI_MISO)
   );
 
-  // 7-seg is active-low on the board
+  // 7-seg outputs are active high; board-specific polarity is up to the top
   assign {o_Segment1_G, o_Segment1_F, o_Segment1_E, o_Segment1_D,
-          o_Segment1_C, o_Segment1_B, o_Segment1_A} = ~seg1;
+          o_Segment1_C, o_Segment1_B, o_Segment1_A} = seg1;
   assign {o_Segment2_G, o_Segment2_F, o_Segment2_E, o_Segment2_D,
-          o_Segment2_C, o_Segment2_B, o_Segment2_A} = ~seg2;
+          o_Segment2_C, o_Segment2_B, o_Segment2_A} = seg2;
 
 endmodule
