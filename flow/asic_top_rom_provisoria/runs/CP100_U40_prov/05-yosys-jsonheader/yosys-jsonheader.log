@@ -1,0 +1,980 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.62 (git sha1 7326bb7d6641500ecb285c291a54a662cb1e76cf, clang++ 21.1.2 -fPIC -O3)
+
+1. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/runs/CP100_U40_prov/tmp/4d06e74c8e254d2e9ac10b5623419332.bb.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/runs/CP100_U40_prov/tmp/4d06e74c8e254d2e9ac10b5623419332.bb.v' to AST representation.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__addf_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__addf_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__addf_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__addf_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__addh_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__addh_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__addh_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__addh_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and2_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and2_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and2_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and2_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and3_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and3_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and3_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and3_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and4_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and4_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and4_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__and4_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__antenna'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__antenna_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi211_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi211_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi211_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi211_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi21_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi21_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi21_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi21_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi221_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi221_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi221_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi221_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi222_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi222_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi222_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi222_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi22_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi22_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi22_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__aoi22_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__buf_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__buf_12'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__buf_16'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__buf_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__buf_20'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__buf_3'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__buf_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__buf_8'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__buf_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__bufz_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__bufz_12'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__bufz_16'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__bufz_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__bufz_3'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__bufz_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__bufz_8'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__bufz_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkbuf_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkbuf_12'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkbuf_16'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkbuf_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkbuf_20'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkbuf_3'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkbuf_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkbuf_8'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkbuf_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkinv_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkinv_12'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkinv_16'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkinv_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkinv_20'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkinv_3'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkinv_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkinv_8'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__clkinv_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnrnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnrnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnrnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnrsnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnrsnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnrsnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnrsnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnsnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnsnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffnsnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffrnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffrnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffrnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffrnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffrsnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffrsnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffrsnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffrsnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffsnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffsnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffsnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dffsnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlya_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlya_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlya_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlya_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyb_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyb_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyb_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyb_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyc_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyc_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyc_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyc_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyd_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyd_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyd_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__dlyd_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__endcap'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__endcap_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fill_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fill_16'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fill_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fill_32'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fill_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fill_64'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fill_8'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fill_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fillcap_16'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fillcap_32'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fillcap_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fillcap_64'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fillcap_8'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__fillcap_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__filltie'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__filltie_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__hold'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__hold_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__icgtn_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__icgtn_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__icgtn_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__icgtn_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__icgtp_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__icgtp_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__icgtp_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__icgtp_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__inv_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__inv_12'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__inv_16'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__inv_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__inv_20'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__inv_3'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__inv_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__inv_8'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__inv_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__invz_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__invz_12'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__invz_16'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__invz_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__invz_3'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__invz_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__invz_8'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__invz_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latrnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latrnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latrnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latrnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latrsnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latrsnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latrsnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latrsnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latsnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latsnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latsnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__latsnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__mux2_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__mux2_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__mux2_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__mux2_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__mux4_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__mux4_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__mux4_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__mux4_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand2_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand2_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand2_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand2_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand3_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand3_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand3_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand3_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand4_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand4_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand4_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nand4_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor2_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor2_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor2_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor2_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor3_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor3_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor3_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor3_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor4_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor4_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor4_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__nor4_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai211_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai211_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai211_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai211_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai21_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai21_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai21_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai21_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai221_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai221_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai221_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai221_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai222_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai222_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai222_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai222_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai22_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai22_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai22_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai22_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai31_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai31_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai31_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai31_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai32_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai32_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai32_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai32_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai33_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai33_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai33_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__oai33_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or2_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or2_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or2_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or2_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or3_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or3_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or3_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or3_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or4_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or4_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or4_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__or4_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffrnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffrnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffrnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffrnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffrsnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffrsnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffrsnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffrsnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffsnq_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffsnq_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffsnq_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__sdffsnq_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__tieh'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__tieh_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__tiel'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__tiel_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xnor2_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xnor2_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xnor2_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xnor2_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xnor3_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xnor3_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xnor3_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xnor3_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xor2_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xor2_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xor2_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xor2_func'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xor3_1'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xor3_2'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xor3_4'.
+Generating RTLIL representation for module `\gf180mcu_fd_sc_mcu7t5v0__xor3_func'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/asic_top.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/asic_top.v' to AST representation.
+Storing AST representation for module `$abstract\asic_top'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v' to AST representation.
+Storing AST representation for module `$abstract\pochoco_soc'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/pochoco_ram.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/pochoco_ram.v' to AST representation.
+Storing AST representation for module `$abstract\pochoco_ram'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/game_rom.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/game_rom.v' to AST representation.
+Storing AST representation for module `$abstract\game_rom'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v' to AST representation.
+Storing AST representation for module `$abstract\pochoco_periph'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v' to AST representation.
+Storing AST representation for module `$abstract\pochoco_spi_slave'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v' to AST representation.
+Storing AST representation for module `$abstract\debounce_bank'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_core.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_core.v' to AST representation.
+Storing AST representation for module `$abstract\espino_core'.
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_if_stage.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_if_stage.v' to AST representation.
+Storing AST representation for module `$abstract\espino_if_stage'.
+Successfully finished Verilog frontend.
+
+11. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v' to AST representation.
+Storing AST representation for module `$abstract\espino_id_stage'.
+Successfully finished Verilog frontend.
+
+12. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v' to AST representation.
+Storing AST representation for module `$abstract\espino_decoder'.
+Successfully finished Verilog frontend.
+
+13. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v' to AST representation.
+Storing AST representation for module `$abstract\espino_register_file'.
+Successfully finished Verilog frontend.
+
+14. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v' to AST representation.
+Storing AST representation for module `$abstract\espino_alu'.
+Successfully finished Verilog frontend.
+
+15. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v' to AST representation.
+Storing AST representation for module `$abstract\espino_load_store_unit'.
+Successfully finished Verilog frontend.
+
+16. Executing Verilog-2005 frontend: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_controller.v
+Parsing SystemVerilog input from `/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_controller.v' to AST representation.
+Storing AST representation for module `$abstract\espino_controller'.
+Successfully finished Verilog frontend.
+
+17. Executing HIERARCHY pass (managing design hierarchy).
+
+18. Executing AST frontend in derive mode using pre-parsed AST for module `\asic_top'.
+Generating RTLIL representation for module `\asic_top'.
+
+18.1. Analyzing design hierarchy..
+Top module:  \asic_top
+Parameter \NumWords = 512
+Parameter \MemFile = 112'0010111000101110001011110111001101110111001011110110011101100001011011010110010100101110011010000110010101111000
+
+18.2. Executing AST frontend in derive mode using pre-parsed AST for module `\pochoco_soc'.
+Parameter \NumWords = 512
+Parameter \MemFile = 112'0010111000101110001011110111001101110111001011110110011101100001011011010110010100101110011010000110010101111000
+Generating RTLIL representation for module `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc'.
+
+18.3. Analyzing design hierarchy..
+Top module:  \asic_top
+Used module:     $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc
+
+18.4. Executing AST frontend in derive mode using pre-parsed AST for module `\pochoco_spi_slave'.
+Generating RTLIL representation for module `\pochoco_spi_slave'.
+
+18.5. Executing AST frontend in derive mode using pre-parsed AST for module `\pochoco_periph'.
+Generating RTLIL representation for module `\pochoco_periph'.
+Parameter \NumWords = 512
+Parameter \MemFile = 112'0010111000101110001011110111001101110111001011110110011101100001011011010110010100101110011010000110010101111000
+
+18.6. Executing AST frontend in derive mode using pre-parsed AST for module `\pochoco_ram'.
+Parameter \NumWords = 512
+Parameter \MemFile = 112'0010111000101110001011110111001101110111001011110110011101100001011011010110010100101110011010000110010101111000
+Generating RTLIL representation for module `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram'.
+Parameter \BootAddr = 0
+
+18.7. Executing AST frontend in derive mode using pre-parsed AST for module `\espino_core'.
+Parameter \BootAddr = 0
+Generating RTLIL representation for module `$paramod\espino_core\BootAddr=32'00000000000000000000000000000000'.
+
+18.8. Analyzing design hierarchy..
+Top module:  \asic_top
+Used module:     $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc
+Used module:         \pochoco_spi_slave
+Used module:         \pochoco_periph
+Used module:         $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram
+Used module:         $paramod\espino_core\BootAddr=32'00000000000000000000000000000000
+Parameter \TICK_BITS = 17
+
+18.9. Executing AST frontend in derive mode using pre-parsed AST for module `\debounce_bank'.
+Parameter \TICK_BITS = 17
+Generating RTLIL representation for module `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001'.
+
+18.10. Executing AST frontend in derive mode using pre-parsed AST for module `\game_rom'.
+Generating RTLIL representation for module `\game_rom'.
+
+18.11. Executing AST frontend in derive mode using pre-parsed AST for module `\espino_controller'.
+Generating RTLIL representation for module `\espino_controller'.
+
+18.12. Executing AST frontend in derive mode using pre-parsed AST for module `\espino_load_store_unit'.
+Generating RTLIL representation for module `\espino_load_store_unit'.
+
+18.13. Executing AST frontend in derive mode using pre-parsed AST for module `\espino_register_file'.
+Generating RTLIL representation for module `\espino_register_file'.
+Warning: Replacing memory \regs_q with list of registers. See /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:35
+
+18.14. Executing AST frontend in derive mode using pre-parsed AST for module `\espino_id_stage'.
+Generating RTLIL representation for module `\espino_id_stage'.
+Parameter \BootAddr = 0
+
+18.15. Executing AST frontend in derive mode using pre-parsed AST for module `\espino_if_stage'.
+Parameter \BootAddr = 0
+Generating RTLIL representation for module `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000'.
+
+18.16. Analyzing design hierarchy..
+Top module:  \asic_top
+Used module:     $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc
+Used module:         \pochoco_spi_slave
+Used module:         \pochoco_periph
+Used module:             $paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001
+Used module:         $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram
+Used module:             \game_rom
+Used module:         $paramod\espino_core\BootAddr=32'00000000000000000000000000000000
+Used module:             \espino_controller
+Used module:             \espino_load_store_unit
+Used module:             \espino_register_file
+Used module:             \espino_id_stage
+Used module:             $paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000
+
+18.17. Executing AST frontend in derive mode using pre-parsed AST for module `\espino_alu'.
+Generating RTLIL representation for module `\espino_alu'.
+
+18.18. Executing AST frontend in derive mode using pre-parsed AST for module `\espino_decoder'.
+Generating RTLIL representation for module `\espino_decoder'.
+
+18.19. Analyzing design hierarchy..
+Top module:  \asic_top
+Used module:     $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc
+Used module:         \pochoco_spi_slave
+Used module:         \pochoco_periph
+Used module:             $paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001
+Used module:         $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram
+Used module:             \game_rom
+Used module:         $paramod\espino_core\BootAddr=32'00000000000000000000000000000000
+Used module:             \espino_controller
+Used module:             \espino_load_store_unit
+Used module:             \espino_register_file
+Used module:             \espino_id_stage
+Used module:                 \espino_alu
+Used module:                 \espino_decoder
+Used module:             $paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000
+
+18.20. Analyzing design hierarchy..
+Top module:  \asic_top
+Used module:     $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc
+Used module:         \pochoco_spi_slave
+Used module:         \pochoco_periph
+Used module:             $paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001
+Used module:         $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram
+Used module:             \game_rom
+Used module:         $paramod\espino_core\BootAddr=32'00000000000000000000000000000000
+Used module:             \espino_controller
+Used module:             \espino_load_store_unit
+Used module:             \espino_register_file
+Used module:             \espino_id_stage
+Used module:                 \espino_alu
+Used module:                 \espino_decoder
+Used module:             $paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000
+Removing unused module `$abstract\espino_controller'.
+Removing unused module `$abstract\espino_load_store_unit'.
+Removing unused module `$abstract\espino_alu'.
+Removing unused module `$abstract\espino_register_file'.
+Removing unused module `$abstract\espino_decoder'.
+Removing unused module `$abstract\espino_id_stage'.
+Removing unused module `$abstract\espino_if_stage'.
+Removing unused module `$abstract\espino_core'.
+Removing unused module `$abstract\debounce_bank'.
+Removing unused module `$abstract\pochoco_spi_slave'.
+Removing unused module `$abstract\pochoco_periph'.
+Removing unused module `$abstract\game_rom'.
+Removing unused module `$abstract\pochoco_ram'.
+Removing unused module `$abstract\pochoco_soc'.
+Removing unused module `$abstract\asic_top'.
+Removed 15 unused modules.
+Renaming module asic_top to asic_top.
+
+19. Executing PROC pass (convert processes to netlists).
+
+19.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+19.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v:63$174 in module espino_alu.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v:50$170 in module espino_alu.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_if_stage.v:37$163 in module $paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:139$157 in module espino_id_stage.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:104$145 in module espino_id_stage.
+Marked 2 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:63$143 in module espino_id_stage.
+Removed 2 dead cases from process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126 in module espino_register_file.
+Marked 3 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126 in module espino_register_file.
+Marked 3 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116 in module espino_register_file.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:80$110 in module espino_load_store_unit.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:68$107 in module espino_load_store_unit.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:59$104 in module espino_load_store_unit.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:48$98 in module espino_load_store_unit.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:43$95 in module espino_load_store_unit.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/game_rom.v:11$83 in module game_rom.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:57$79 in module $paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:47$77 in module $paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.
+Removed 1 dead cases from process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$69 in module pochoco_periph.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$69 in module pochoco_periph.
+Removed 1 dead cases from process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$64 in module pochoco_periph.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$64 in module pochoco_periph.
+Marked 2 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:103$60 in module pochoco_periph.
+Marked 2 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:67$54 in module pochoco_periph.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:35$51 in module pochoco_periph.
+Marked 2 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:109$44 in module pochoco_spi_slave.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:104$40 in module pochoco_spi_slave.
+Marked 2 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:92$38 in module pochoco_spi_slave.
+Marked 2 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:69$32 in module pochoco_spi_slave.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:41$21 in module pochoco_spi_slave.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:81$11 in module $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.
+Marked 1 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:40$2 in module $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.
+Removed 2 dead cases from process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181 in module espino_decoder.
+Marked 9 switch rules as full_case in process $proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181 in module espino_decoder.
+Removed a total of 6 dead cases.
+
+19.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 13 redundant assignments.
+Promoted 37 assignments to connections.
+
+19.4. Executing PROC_INIT pass (extract init attributes).
+
+19.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_if_stage.v:37$163'.
+Found async reset \rst_ni in `\espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:63$143'.
+Found async reset \rst_ni in `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126'.
+Found async reset \rst_ni in `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+Found async reset \rst_ni in `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:48$98'.
+Found async reset \rst_ni in `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:57$79'.
+Found async reset \rst_ni in `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:47$77'.
+Found async reset \rst_ni in `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:103$60'.
+Found async reset \rst_ni in `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:67$54'.
+Found async reset \rst_ni in `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:35$51'.
+Found async reset \rst_ni in `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:109$44'.
+Found async reset \rst_ni in `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:104$40'.
+Found async reset \rst_ni in `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:92$38'.
+Found async reset \rst_ni in `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:69$32'.
+Found async reset \rst_ni in `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:41$21'.
+Found async reset \rst_ni in `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:81$11'.
+Found async reset \i_Rst_n in `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:40$2'.
+
+19.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 3 switches.
+<suppressed ~42 debug messages>
+
+19.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\espino_alu.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v:63$174'.
+     1/1: $1\result_o[31:0]
+Creating decoders for process `\espino_alu.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v:50$170'.
+     1/1: $1\cmp_result_o[0:0]
+Creating decoders for process `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_if_stage.v:37$163'.
+     1/3: $0\valid_q[0:0]
+     2/3: $0\pc_id_q[31:0]
+     3/3: $0\pc_q[31:0]
+Creating decoders for process `\espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:139$157'.
+     1/1: $1\rf_wdata_o[31:0]
+Creating decoders for process `\espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:104$145'.
+     1/1: $1\operand_a[31:0]
+Creating decoders for process `\espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:63$143'.
+     1/1: $0\ops_valid_q[0:0]
+Creating decoders for process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126'.
+     1/8: $2$mem2reg_rd$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:50$115_DATA[31:0]$139
+     2/8: $2$mem2reg_rd$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:49$114_DATA[31:0]$136
+     3/8: $0\rdata_b_o[31:0]
+     4/8: $1$mem2reg_rd$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:50$115_DATA[31:0]$135
+     5/8: $1$mem2reg_rd$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:50$115_ADDR[3:0]$134
+     6/8: $0\rdata_a_o[31:0]
+     7/8: $1$mem2reg_rd$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:49$114_DATA[31:0]$133
+     8/8: $1$mem2reg_rd$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:49$114_ADDR[3:0]$132
+Creating decoders for process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+     1/21: $2$mem2reg_wr$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:37$113_ADDR[3:0]$124
+     2/21: $2$mem2reg_wr$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:37$113_DATA[31:0]$125
+     3/21: $1$mem2reg_wr$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:37$113_DATA[31:0]$121
+     4/21: $1$mem2reg_wr$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:37$113_ADDR[3:0]$120
+     5/21: $1\i[31:0]
+     6/21: $0\regs_q[15][31:0]
+     7/21: $0\regs_q[14][31:0]
+     8/21: $0\regs_q[13][31:0]
+     9/21: $0\regs_q[12][31:0]
+    10/21: $0\regs_q[11][31:0]
+    11/21: $0\regs_q[10][31:0]
+    12/21: $0\regs_q[9][31:0]
+    13/21: $0\regs_q[8][31:0]
+    14/21: $0\regs_q[7][31:0]
+    15/21: $0\regs_q[6][31:0]
+    16/21: $0\regs_q[5][31:0]
+    17/21: $0\regs_q[4][31:0]
+    18/21: $0\regs_q[3][31:0]
+    19/21: $0\regs_q[2][31:0]
+    20/21: $0\regs_q[1][31:0]
+    21/21: $0\regs_q[0][31:0]
+Creating decoders for process `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:80$110'.
+     1/1: $1\rdata_o[31:0]
+Creating decoders for process `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:68$107'.
+     1/1: $1\data_wdata_o[31:0]
+Creating decoders for process `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:59$104'.
+     1/1: $1\data_be_o[3:0]
+Creating decoders for process `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:48$98'.
+     1/1: $0\busy_q[0:0]
+Creating decoders for process `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:43$95'.
+     1/1: $1\busy_d[0:0]
+Creating decoders for process `\game_rom.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/game_rom.v:11$83'.
+     1/1: $1\data_o[31:0]
+Creating decoders for process `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:57$79'.
+     1/4: $0\tick_bit_prev[0:0]
+     2/4: $0\tick_cnt[16:0]
+     3/4: $0\btn_prev_sample[3:0]
+     4/4: $0\btn_estable[3:0]
+Creating decoders for process `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:47$77'.
+     1/2: $0\btn_sync[3:0]
+     2/2: $0\btn_meta[3:0]
+Creating decoders for process `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/pochoco_ram.v:41$74'.
+     1/1: $0\a_rdata_o[31:0]
+Creating decoders for process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$69'.
+     1/1: $1\hex2seg$func$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$49.$result[6:0]$73
+Creating decoders for process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$64'.
+     1/1: $1\hex2seg$func$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$48.$result[6:0]$68
+Creating decoders for process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:103$60'.
+     1/1: $0\rdata_o[31:0]
+Creating decoders for process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:67$54'.
+     1/1: $0\cyc_q[31:0]
+Creating decoders for process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:35$51'.
+     1/2: $0\digit_q[7:0]
+     2/2: $0\led_q[3:0]
+Creating decoders for process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:109$44'.
+     1/1: $0\rdata_o[31:0]
+Creating decoders for process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:104$40'.
+     1/1: $0\tx_hold[7:0]
+Creating decoders for process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:92$38'.
+     1/2: $0\new_price_q[0:0]
+     2/2: $0\price_q[7:0]
+Creating decoders for process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:69$32'.
+     1/3: $0\bit_cnt[3:0]
+     2/3: $0\tx_shift[7:0]
+     3/3: $0\rx_shift[7:0]
+Creating decoders for process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:41$21'.
+     1/3: $0\cs_sync[2:0]
+     2/3: $0\mosi_sync[2:0]
+     3/3: $0\sclk_sync[2:0]
+Creating decoders for process `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:81$11'.
+     1/2: $0\rd_is_spi[0:0]
+     2/2: $0\rd_is_per[0:0]
+Creating decoders for process `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:40$2'.
+     1/1: $0\rst_sync_q[1:0]
+Creating decoders for process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+     1/29: $9\illegal_insn_o[0:0]
+     2/29: $8\illegal_insn_o[0:0]
+     3/29: $7\illegal_insn_o[0:0]
+     4/29: $4\alu_operator_o[3:0]
+     5/29: $6\illegal_insn_o[0:0]
+     6/29: $3\lsu_type_o[1:0]
+     7/29: $5\illegal_insn_o[0:0]
+     8/29: $2\lsu_sign_o[0:0]
+     9/29: $2\lsu_type_o[1:0]
+    10/29: $4\illegal_insn_o[0:0]
+    11/29: $3\alu_operator_o[3:0]
+    12/29: $3\illegal_insn_o[0:0]
+    13/29: $2\alu_operator_o[3:0]
+    14/29: $2\illegal_insn_o[0:0]
+    15/29: $1\rf_we_o[0:0]
+    16/29: $1\imm_operand_o[31:0]
+    17/29: $1\alu_op_a_sel_o[1:0]
+    18/29: $1\is_jalr_o[0:0]
+    19/29: $1\is_jal_o[0:0]
+    20/29: $1\is_branch_o[0:0]
+    21/29: $1\rf_wd_sel_o[1:0]
+    22/29: $1\imm_target_o[31:0]
+    23/29: $1\alu_op_b_sel_o[0:0]
+    24/29: $1\alu_operator_o[3:0]
+    25/29: $1\illegal_insn_o[0:0]
+    26/29: $1\lsu_sign_o[0:0]
+    27/29: $1\lsu_type_o[1:0]
+    28/29: $1\lsu_we_o[0:0]
+    29/29: $1\lsu_req_o[0:0]
+
+19.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\espino_alu.\result_o' from process `\espino_alu.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v:63$174'.
+No latch inferred for signal `\espino_alu.\cmp_result_o' from process `\espino_alu.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v:50$170'.
+No latch inferred for signal `\espino_id_stage.\rf_wdata_o' from process `\espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:139$157'.
+No latch inferred for signal `\espino_id_stage.\operand_a' from process `\espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:104$145'.
+No latch inferred for signal `\espino_load_store_unit.\rdata_o' from process `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:80$110'.
+No latch inferred for signal `\espino_load_store_unit.\data_wdata_o' from process `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:68$107'.
+No latch inferred for signal `\espino_load_store_unit.\data_be_o' from process `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:59$104'.
+No latch inferred for signal `\espino_load_store_unit.\busy_d' from process `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:43$95'.
+No latch inferred for signal `\game_rom.\data_o' from process `\game_rom.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/game_rom.v:11$83'.
+No latch inferred for signal `\pochoco_periph.\hex2seg$func$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$47.$result' from process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$69'.
+No latch inferred for signal `\pochoco_periph.\hex2seg$func$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$49.$result' from process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$69'.
+No latch inferred for signal `\pochoco_periph.\hex2seg$func$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$49.hex' from process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$69'.
+No latch inferred for signal `\pochoco_periph.\hex2seg$func$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$46.$result' from process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$64'.
+No latch inferred for signal `\pochoco_periph.\hex2seg$func$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$48.$result' from process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$64'.
+No latch inferred for signal `\pochoco_periph.\hex2seg$func$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$48.hex' from process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$64'.
+No latch inferred for signal `\espino_decoder.\rf_we_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\lsu_req_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\lsu_we_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\lsu_type_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\lsu_sign_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\illegal_insn_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\alu_operator_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\alu_op_a_sel_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\alu_op_b_sel_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\imm_operand_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\imm_target_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\rf_wd_sel_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\is_branch_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\is_jal_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+No latch inferred for signal `\espino_decoder.\is_jalr_o' from process `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+
+19.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.\pc_q' using process `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_if_stage.v:37$163'.
+  created $adff cell `$procdff$893' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.\pc_id_q' using process `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_if_stage.v:37$163'.
+  created $adff cell `$procdff$898' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.\valid_q' using process `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_if_stage.v:37$163'.
+  created $adff cell `$procdff$903' with positive edge clock and positive level reset.
+Creating register for signal `\espino_id_stage.\ops_valid_q' using process `\espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:63$143'.
+  created $adff cell `$procdff$908' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\rdata_a_o' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126'.
+  created $adff cell `$procdff$913' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\rdata_b_o' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126'.
+  created $adff cell `$procdff$918' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.$mem2reg_rd$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:49$114_ADDR' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126'.
+  created $adff cell `$procdff$923' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.$mem2reg_rd$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:49$114_DATA' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126'.
+  created $adff cell `$procdff$928' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.$mem2reg_rd$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:50$115_ADDR' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126'.
+  created $adff cell `$procdff$933' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.$mem2reg_rd$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:50$115_DATA' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126'.
+  created $adff cell `$procdff$938' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\i' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$943' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[0]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $dff cell `$procdff$950' with positive edge clock.
+Creating register for signal `\espino_register_file.\regs_q[1]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$955' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[2]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$960' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[3]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$965' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[4]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$970' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[5]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$975' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[6]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$980' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[7]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$985' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[8]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$990' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[9]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$995' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[10]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$1000' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[11]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$1005' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[12]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$1010' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[13]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$1015' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[14]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$1020' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.\regs_q[15]' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$1025' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.$mem2reg_wr$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:37$113_ADDR' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$1030' with positive edge clock and positive level reset.
+Creating register for signal `\espino_register_file.$mem2reg_wr$\regs_q$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:37$113_DATA' using process `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+  created $adff cell `$procdff$1035' with positive edge clock and positive level reset.
+Creating register for signal `\espino_load_store_unit.\busy_q' using process `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:48$98'.
+  created $adff cell `$procdff$1040' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.\btn_estable' using process `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:57$79'.
+  created $adff cell `$procdff$1045' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.\tick_cnt' using process `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:57$79'.
+  created $adff cell `$procdff$1050' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.\tick_bit_prev' using process `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:57$79'.
+  created $adff cell `$procdff$1055' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.\btn_prev_sample' using process `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:57$79'.
+  created $adff cell `$procdff$1060' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.\btn_meta' using process `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:47$77'.
+  created $adff cell `$procdff$1065' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.\btn_sync' using process `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:47$77'.
+  created $adff cell `$procdff$1070' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram.\a_rdata_o' using process `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/pochoco_ram.v:41$74'.
+  created $dff cell `$procdff$1071' with positive edge clock.
+Creating register for signal `\pochoco_periph.\rdata_o' using process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:103$60'.
+  created $adff cell `$procdff$1076' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_periph.\cyc_q' using process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:67$54'.
+  created $adff cell `$procdff$1081' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_periph.\led_q' using process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:35$51'.
+  created $adff cell `$procdff$1086' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_periph.\digit_q' using process `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:35$51'.
+  created $adff cell `$procdff$1091' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_spi_slave.\rdata_o' using process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:109$44'.
+  created $adff cell `$procdff$1096' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_spi_slave.\tx_hold' using process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:104$40'.
+  created $adff cell `$procdff$1101' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_spi_slave.\price_q' using process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:92$38'.
+  created $adff cell `$procdff$1106' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_spi_slave.\new_price_q' using process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:92$38'.
+  created $adff cell `$procdff$1111' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_spi_slave.\rx_shift' using process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:69$32'.
+  created $adff cell `$procdff$1116' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_spi_slave.\tx_shift' using process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:69$32'.
+  created $adff cell `$procdff$1121' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_spi_slave.\bit_cnt' using process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:69$32'.
+  created $adff cell `$procdff$1126' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_spi_slave.\sclk_sync' using process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:41$21'.
+  created $adff cell `$procdff$1131' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_spi_slave.\mosi_sync' using process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:41$21'.
+  created $adff cell `$procdff$1136' with positive edge clock and positive level reset.
+Creating register for signal `\pochoco_spi_slave.\cs_sync' using process `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:41$21'.
+  created $adff cell `$procdff$1141' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.\rd_is_per' using process `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:81$11'.
+  created $adff cell `$procdff$1146' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.\rd_is_spi' using process `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:81$11'.
+  created $adff cell `$procdff$1151' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.\rst_sync_q' using process `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:40$2'.
+  created $adff cell `$procdff$1156' with positive edge clock and positive level reset.
+
+19.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+19.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\espino_alu.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v:63$174'.
+Removing empty process `espino_alu.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v:63$174'.
+Found and cleaned up 1 empty switch in `\espino_alu.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v:50$170'.
+Removing empty process `espino_alu.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_alu.v:50$170'.
+Found and cleaned up 1 empty switch in `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_if_stage.v:37$163'.
+Removing empty process `$paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_if_stage.v:37$163'.
+Found and cleaned up 1 empty switch in `\espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:139$157'.
+Removing empty process `espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:139$157'.
+Found and cleaned up 1 empty switch in `\espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:104$145'.
+Removing empty process `espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:104$145'.
+Found and cleaned up 1 empty switch in `\espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:63$143'.
+Removing empty process `espino_id_stage.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_id_stage.v:63$143'.
+Found and cleaned up 2 empty switches in `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126'.
+Removing empty process `espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:44$126'.
+Found and cleaned up 2 empty switches in `\espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+Removing empty process `espino_register_file.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_register_file.v:33$116'.
+Found and cleaned up 1 empty switch in `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:80$110'.
+Removing empty process `espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:80$110'.
+Found and cleaned up 1 empty switch in `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:68$107'.
+Removing empty process `espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:68$107'.
+Found and cleaned up 1 empty switch in `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:59$104'.
+Removing empty process `espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:59$104'.
+Removing empty process `espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:48$98'.
+Found and cleaned up 1 empty switch in `\espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:43$95'.
+Removing empty process `espino_load_store_unit.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_load_store_unit.v:43$95'.
+Found and cleaned up 1 empty switch in `\game_rom.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/game_rom.v:11$83'.
+Removing empty process `game_rom.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/game_rom.v:11$83'.
+Found and cleaned up 2 empty switches in `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:57$79'.
+Removing empty process `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:57$79'.
+Removing empty process `$paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/debouncer.v:47$77'.
+Found and cleaned up 1 empty switch in `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/pochoco_ram.v:41$74'.
+Removing empty process `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/pochoco_ram.v:41$74'.
+Found and cleaned up 1 empty switch in `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$69'.
+Removing empty process `pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:100$69'.
+Found and cleaned up 1 empty switch in `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$64'.
+Removing empty process `pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:99$64'.
+Found and cleaned up 2 empty switches in `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:103$60'.
+Removing empty process `pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:103$60'.
+Found and cleaned up 1 empty switch in `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:67$54'.
+Removing empty process `pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:67$54'.
+Found and cleaned up 2 empty switches in `\pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:35$51'.
+Removing empty process `pochoco_periph.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_periph.v:35$51'.
+Found and cleaned up 2 empty switches in `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:109$44'.
+Removing empty process `pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:109$44'.
+Found and cleaned up 1 empty switch in `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:104$40'.
+Removing empty process `pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:104$40'.
+Found and cleaned up 3 empty switches in `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:92$38'.
+Removing empty process `pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:92$38'.
+Found and cleaned up 4 empty switches in `\pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:69$32'.
+Removing empty process `pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:69$32'.
+Removing empty process `pochoco_spi_slave.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_spi_slave.v:41$21'.
+Found and cleaned up 1 empty switch in `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:81$11'.
+Removing empty process `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:81$11'.
+Removing empty process `$paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/pochoco_soc.v:40$2'.
+Found and cleaned up 9 empty switches in `\espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+Removing empty process `espino_decoder.$proc$/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/rtl/espino_core/espino_decoder.v:102$181'.
+Cleaned up 45 empty switches.
+
+19.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module asic_top.
+Optimizing module espino_alu.
+<suppressed ~1 debug messages>
+Optimizing module $paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.
+<suppressed ~9 debug messages>
+Optimizing module espino_id_stage.
+<suppressed ~5 debug messages>
+Optimizing module espino_register_file.
+<suppressed ~56 debug messages>
+Optimizing module espino_load_store_unit.
+<suppressed ~5 debug messages>
+Optimizing module espino_controller.
+Optimizing module game_rom.
+<suppressed ~2 debug messages>
+Optimizing module $paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.
+<suppressed ~12 debug messages>
+Optimizing module $paramod\espino_core\BootAddr=32'00000000000000000000000000000000.
+Optimizing module $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram.
+Optimizing module pochoco_periph.
+<suppressed ~9 debug messages>
+Optimizing module pochoco_spi_slave.
+<suppressed ~25 debug messages>
+Optimizing module $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.
+<suppressed ~6 debug messages>
+Optimizing module espino_decoder.
+<suppressed ~13 debug messages>
+
+20. Executing FLATTEN pass (flatten design).
+Deleting now unused module espino_alu.
+Deleting now unused module $paramod\espino_if_stage\BootAddr=32'00000000000000000000000000000000.
+Deleting now unused module espino_id_stage.
+Deleting now unused module espino_register_file.
+Deleting now unused module espino_load_store_unit.
+Deleting now unused module espino_controller.
+Deleting now unused module game_rom.
+Deleting now unused module $paramod\debounce_bank\TICK_BITS=s32'00000000000000000000000000010001.
+Deleting now unused module $paramod\espino_core\BootAddr=32'00000000000000000000000000000000.
+Deleting now unused module $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_ram.
+Deleting now unused module pochoco_periph.
+Deleting now unused module pochoco_spi_slave.
+Deleting now unused module $paramod$835383a1764bd0d1e5dc811afe6c304a9d0eb002\pochoco_soc.
+Deleting now unused module espino_decoder.
+<suppressed ~14 debug messages>
+
+21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \asic_top..
+Removed 172 unused cells and 668 unused wires.
+<suppressed ~377 debug messages>

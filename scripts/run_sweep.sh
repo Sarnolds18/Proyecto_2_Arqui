@@ -1,19 +1,23 @@
 #!/usr/bin/env bash
-# Barrido de corridas de LibreLane sobre flow/asic_top: una corrida por cada
-# combinacion de CLOCK_PERIOD x FP_CORE_UTIL, con tag CP<T>_U<U>_<sufijo>.
+# Barrido de corridas de LibreLane: una corrida por cada combinacion de
+# CLOCK_PERIOD x FP_CORE_UTIL, con tag CP<T>_U<U>_<sufijo>.
 #
 # Uso:
 #   scripts/run_sweep.sh -s <sufijo> -p "<periodos ns>" -u "<utilizaciones %>" \
-#                        [-c KEY=VAL ...] [-- <args extra de librelane>]
+#                        [-d <dir de flujo>] [-c KEY=VAL ...] [-- <args de librelane>]
+#
+# -d elige el flujo (carpeta con config.json); por defecto flow/asic_top.
 #
 # Ejemplos:
 #   scripts/run_sweep.sh -s rom -p "100" -u "40"
 #   scripts/run_sweep.sh -s rom -p "100 50 40 30" -u "40"
 #   scripts/run_sweep.sh -s rom -p "100" -u "30 40 50 60" -- --to OpenROAD.GlobalRouting
+#   scripts/run_sweep.sh -d flow/asic_top_rom_provisoria -s prov -p "100" -u "40"
 #
 # Un tag que ya existe en runs/ se salta (nunca se sobrescribe una corrida).
-# Si una corrida falla se sigue con la siguiente; al final se imprime un
-# resumen y el comando para extraer las metricas a CSV.
+# Si una corrida falla se sigue con la siguiente. Despues de cada corrida se
+# guardan sus peores rutas en runs/<tag>/rutas_criticas.rpt. Al final se
+# imprime un resumen y el comando para extraer las metricas a CSV.
 
 set -u
 
@@ -22,15 +26,16 @@ FLOW_DIR="$REPO/flow/asic_top"
 LIBRELANE_DIR="${LIBRELANE_DIR:-$HOME/librelane}"
 PDK="${PDK:-gf180mcuD}"
 
-uso() { sed -n '2,17p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit "${1:-1}"; }
+uso() { sed -n '2,20p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit "${1:-1}"; }
 
-SUFIJO="" PERIODOS="" UTILS=""
+SUFIJO="" PERIODOS="" UTILS="" DIR_ARG=""
 OVERRIDES=()
-while getopts "s:p:u:c:h" opt; do
+while getopts "s:p:u:d:c:h" opt; do
   case "$opt" in
     s) SUFIJO="$OPTARG" ;;
     p) PERIODOS="$OPTARG" ;;
     u) UTILS="$OPTARG" ;;
+    d) DIR_ARG="$OPTARG" ;;
     c) OVERRIDES+=(-c "$OPTARG") ;;
     h) uso 0 ;;
     *) uso ;;
@@ -42,6 +47,15 @@ EXTRA=("$@")
 
 [ -n "$SUFIJO" ] && [ -n "$PERIODOS" ] && [ -n "$UTILS" ] || uso
 
+# -d se acepta relativo al directorio actual o a la raiz del repo
+if [ -n "$DIR_ARG" ]; then
+  if [ -d "$DIR_ARG" ]; then FLOW_DIR="$(cd "$DIR_ARG" && pwd)"
+  elif [ -d "$REPO/$DIR_ARG" ]; then FLOW_DIR="$(cd "$REPO/$DIR_ARG" && pwd)"
+  else echo "error: no existe el flujo '$DIR_ARG'" >&2; exit 1
+  fi
+fi
+[ -f "$FLOW_DIR/config.json" ] || { echo "error: falta $FLOW_DIR/config.json" >&2; exit 1; }
+
 # LibreLane vive en el nix-shell de ~/librelane: si no esta en el PATH, se
 # vuelve a ejecutar este mismo script dentro de ese shell.
 if ! command -v librelane >/dev/null 2>&1; then
@@ -51,7 +65,7 @@ if ! command -v librelane >/dev/null 2>&1; then
   NIX_PROFILE=/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
   [ -f "$NIX_PROFILE" ] && . "$NIX_PROFILE"
   exec env IN_SWEEP_NIX_SHELL=1 nix-shell "$LIBRELANE_DIR/shell.nix" \
-    --run "$(printf '%q ' "${BASH_SOURCE[0]}" -s "$SUFIJO" -p "$PERIODOS" -u "$UTILS" \
+    --run "$(printf '%q ' "${BASH_SOURCE[0]}" -s "$SUFIJO" -p "$PERIODOS" -u "$UTILS" -d "$FLOW_DIR" \
              "${OVERRIDES[@]}" -- "${EXTRA[@]}")"
 fi
 
@@ -73,6 +87,8 @@ for T in $PERIODOS; do
       "${EXTRA[@]}" config.json
     RC=$?
     DUR=$(( $(date +%s) - INICIO ))
+    # Peores rutas a un .rpt chico (los max/min.rpt completos no se versionan)
+    python3 "$REPO/scripts/extract_critical_paths.py" "runs/$TAG" || true
     if [ $RC -eq 0 ]; then
       RESUMEN+=("$TAG  OK (${DUR} s)")
     else
@@ -85,4 +101,4 @@ echo
 echo "=== Resumen del barrido ==="
 printf '%s\n' "${RESUMEN[@]}"
 echo
-echo "Metricas: python3 scripts/extract_metrics.py -o results/<nombre>.csv flow/asic_top/runs/CP*_${SUFIJO}"
+echo "Metricas: python3 scripts/extract_metrics.py -o results/<nombre>.csv ${FLOW_DIR#$REPO/}/runs/CP*_${SUFIJO}"

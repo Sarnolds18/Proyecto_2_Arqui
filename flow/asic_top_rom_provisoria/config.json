@@ -1,0 +1,25 @@
+{
+  "DESIGN_NAME": "asic_top",
+  "VERILOG_FILES": [
+    "dir::../../rtl/asic_top.v",
+    "dir::../../rtl/pochoco_soc.v",
+    "dir::pochoco_ram.v",
+    "dir::../../rtl/game_rom.v",
+    "dir::../../rtl/pochoco_periph.v",
+    "dir::../../rtl/pochoco_spi_slave.v",
+    "dir::../../rtl/debouncer.v",
+    "dir::../../rtl/espino_core/espino_core.v",
+    "dir::../../rtl/espino_core/espino_if_stage.v",
+    "dir::../../rtl/espino_core/espino_id_stage.v",
+    "dir::../../rtl/espino_core/espino_decoder.v",
+    "dir::../../rtl/espino_core/espino_register_file.v",
+    "dir::../../rtl/espino_core/espino_alu.v",
+    "dir::../../rtl/espino_core/espino_load_store_unit.v",
+    "dir::../../rtl/espino_core/espino_controller.v"
+  ],
+  "CLOCK_PORT": "clk_i",
+  "CLOCK_PERIOD": 100,
+  "FP_CORE_UTIL": 40,
+  "PNR_SDC_FILE": "dir::../asic_top/asic_top.sdc",
+  "SIGNOFF_SDC_FILE": "dir::../asic_top/asic_top.sdc"
+}

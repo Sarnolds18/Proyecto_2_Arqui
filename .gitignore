@@ -40,11 +40,8 @@ flow/*/runs/*/*-openroad-stamidpnr*/checks.rpt
 flow/*/runs/*/*-openroad-stamidpnr*/openroad-stamidpnr*.log
 # sta.log repite el contenido de los .rpt de cada corner.
 flow/*/runs/**/sta.log
-# Rutas detalladas (max/min.rpt) solo en los corners del informe: tipico y mas lento.
+# Rutas detalladas post-PnR (max/min.rpt, ~10 MB c/u en el SoC): no se versionan.
+# scripts/extract_critical_paths.py guarda las peores en <corrida>/rutas_criticas.rpt.
 flow/*/runs/*/*-openroad-stapostpnr/*/max.rpt
 flow/*/runs/*/*-openroad-stapostpnr/*/min.rpt
-!flow/*/runs/*/*-openroad-stapostpnr/nom_tt_025C_5v00/max.rpt
-!flow/*/runs/*/*-openroad-stapostpnr/nom_tt_025C_5v00/min.rpt
-!flow/*/runs/*/*-openroad-stapostpnr/max_ss_125C_4v50/max.rpt
-!flow/*/runs/*/*-openroad-stapostpnr/max_ss_125C_4v50/min.rpt
 !results/*.csv

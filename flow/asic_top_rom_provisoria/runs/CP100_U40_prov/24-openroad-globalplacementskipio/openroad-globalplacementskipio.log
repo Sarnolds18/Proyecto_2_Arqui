@@ -1,0 +1,117 @@
+Reading timing models for corner nom_tt_025C_5v00…
+Reading timing library for the 'nom_tt_025C_5v00' corner at '/home/sarnolds/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__tt_025C_5v00.lib'…
+Reading OpenROAD database at '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/runs/CP100_U40_prov/21-openroad-generatepdn/asic_top.odb'…
+Reading design constraints file at '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top/asic_top.sdc'…
++ global_placement -density 0.533656 -skip_io -pad_right 0 -pad_left 0 -init_wirelength_coef 0.25
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 2000
+[INFO GPL-0003] SiteSize: (  0.560  3.920 ) um
+[INFO GPL-0004] CoreBBox: (  6.720 15.680 ) ( 579.600 588.000 ) um
+[INFO GPL-0036] Movable instances area:     131470.528 um^2
+[INFO GPL-0037] Total instances area:       140901.107 um^2
+[INFO GPL-0035] Pin density area adjust:     18707.804 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:              7131
+[INFO GPL-0007] Movable instances:                4983
+[INFO GPL-0008] Fixed instances:                  2148
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                   4992
+[INFO GPL-0011] Number of pins:                  19046
+[INFO GPL-0012] Die BBox:  (  0.000  0.000 ) ( 586.745 604.665 ) um
+[INFO GPL-0013] Core BBox: (  6.720 15.680 ) ( 579.600 588.000 ) um
+[INFO GPL-0016] Core area:                  327870.682 um^2
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                327870.682 um^2
+[INFO GPL-0017] Fixed instances area:         9430.579 um^2
+[INFO GPL-0018] Movable instances area:     150178.332 um^2
+[INFO GPL-0019] Utilization:                    47.161 %
+[INFO GPL-0020] Standard cells area:        150178.332 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 4983	Region center = 0
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[INFO GPL-0023] Placement target density:       0.5337
+[INFO GPL-0024] Movable insts average area:     30.138 um^2
+[INFO GPL-0025] Ideal bin area:                 56.475 um^2
+[INFO GPL-0026] Ideal bin count:                  5805
+[INFO GPL-0027] Total bin area:             327870.682 um^2
+[INFO GPL-0028] Bin count (X, Y):          64 ,     64
+[INFO GPL-0029] Bin size (W * H):       8.951 *  8.943 um
+[INFO GPL-0030] Number of bins:                   4096
+[INFO GPL-0007] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9977 |  2.193594e+04 |   +0.00% |  1.72e-16 |      
+       10 |   0.9966 |  1.763629e+04 |  -19.60% |  2.81e-16 |      
+       20 |   0.9965 |  1.735062e+04 |   -1.62% |  4.57e-16 |      
+       30 |   0.9964 |  1.717590e+04 |   -1.01% |  7.45e-16 |      
+       40 |   0.9964 |  1.709452e+04 |   -0.47% |  1.21e-15 |      
+       50 |   0.9964 |  1.705927e+04 |   -0.21% |  1.98e-15 |      
+       60 |   0.9960 |  1.704759e+04 |   -0.07% |  3.22e-15 |      
+       70 |   0.9960 |  1.705421e+04 |   +0.04% |  5.25e-15 |      
+       80 |   0.9960 |  1.706582e+04 |   +0.07% |  8.55e-15 |      
+       90 |   0.9960 |  1.707857e+04 |   +0.07% |  1.39e-14 |      
+      100 |   0.9955 |  1.713700e+04 |   +0.34% |  2.27e-14 |      
+      110 |   0.9949 |  1.736209e+04 |   +1.31% |  3.69e-14 |      
+      120 |   0.9931 |  1.813352e+04 |   +4.44% |  6.01e-14 |      
+      130 |   0.9896 |  1.955320e+04 |   +7.83% |  9.79e-14 |      
+      140 |   0.9819 |  2.201019e+04 |  +12.57% |  1.59e-13 |      
+      150 |   0.9749 |  2.674731e+04 |  +21.52% |  2.59e-13 |      
+      160 |   0.9624 |  3.436445e+04 |  +28.48% |  4.22e-13 |      
+      170 |   0.9479 |  4.252556e+04 |  +23.75% |  6.86e-13 |      
+      180 |   0.9340 |  4.926873e+04 |  +15.86% |  1.12e-12 |      
+      190 |   0.9172 |  5.622133e+04 |  +14.11% |  1.82e-12 |      
+      200 |   0.8963 |  6.598626e+04 |  +17.37% |  2.95e-12 |      
+      210 |   0.8682 |  7.736555e+04 |  +17.24% |  4.79e-12 |      
+      220 |   0.8401 |  8.741849e+04 |  +12.99% |  7.79e-12 |      
+      230 |   0.8088 |  9.775464e+04 |  +11.82% |  1.27e-11 |      
+      240 |   0.7696 |  1.087841e+05 |  +11.28% |  2.06e-11 |      
+      250 |   0.7308 |  1.190141e+05 |   +9.40% |  3.34e-11 |      
+      260 |   0.6912 |  1.293664e+05 |   +8.70% |  5.44e-11 |      
+      270 |   0.6475 |  1.392415e+05 |   +7.63% |  8.83e-11 |      
+      280 |   0.6018 |  1.496829e+05 |   +7.50% |  1.44e-10 |      
+      290 |   0.5561 |  1.567068e+05 |   +4.69% |  2.33e-10 |      
+      300 |   0.5115 |  1.615697e+05 |   +3.10% |  3.80e-10 |      
+      310 |   0.4664 |  1.666615e+05 |   +3.15% |  6.18e-10 |      
+      320 |   0.4218 |  1.711719e+05 |   +2.71% |  1.01e-09 |      
+      330 |   0.3758 |  1.751334e+05 |   +2.31% |  1.64e-09 |      
+      340 |   0.3338 |  1.784657e+05 |   +1.90% |  2.59e-09 |      
+      350 |   0.2947 |  1.809868e+05 |   +1.41% |  3.81e-09 |      
+      360 |   0.2604 |  1.833056e+05 |   +1.28% |  5.61e-09 |      
+      370 |   0.2237 |  1.848174e+05 |   +0.82% |  8.26e-09 |      
+      380 |   0.1939 |  1.863800e+05 |   +0.85% |  1.22e-08 |      
+      390 |   0.1685 |  1.875629e+05 |   +0.63% |  1.79e-08 |      
+      400 |   0.1435 |  1.886862e+05 |   +0.60% |  2.64e-08 |      
+      410 |   0.1214 |  1.894351e+05 |   +0.40% |  3.89e-08 |      
+      420 |   0.1051 |  1.901091e+05 |   +0.36% |  5.72e-08 |      
+      424 |   0.0990 |  1.903751e+05 |          |  6.95e-08 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 424
+[INFO GPL-1002] Placed Cell Area            150178.3322
+[INFO GPL-1003] Available Free Area         318440.1024
+[INFO GPL-1004] Minimum Feasible Density        0.4800 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.5240
+[INFO GPL-1008]     - For 80% usage of free space: 0.5895
+[INFO GPL-1009]     - For 50% usage of free space: 0.9432
+[INFO GPL-1014] Final placement area: 150178.33 (+0.00%)
+Setting global connections for newly added cells…
+[INFO] Setting global connections...
+[INFO ODB-0403] 0 connections made, 0 conflicts skipped.
+Updating metrics…
+Cell type report:                       Count       Area
+  Endcap cell                             292    1282.00
+  Tap cell                               2148    9430.58
+  Tie cell                                  1       8.78
+  Buffer                                   14     184.40
+  Inverter                                193    1694.69
+  Sequential cell                         808   59979.45
+  Multi-Input combinational cell         3967   69603.21
+  Total                                  7423  142183.10
+Writing OpenROAD database to '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/runs/CP100_U40_prov/24-openroad-globalplacementskipio/asic_top.odb'…
+Writing netlist to '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/runs/CP100_U40_prov/24-openroad-globalplacementskipio/asic_top.nl.v'…
+Writing powered netlist to '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/runs/CP100_U40_prov/24-openroad-globalplacementskipio/asic_top.pnl.v'…
+Writing layout to '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/runs/CP100_U40_prov/24-openroad-globalplacementskipio/asic_top.def'…
+Writing timing constraints to '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top_rom_provisoria/runs/CP100_U40_prov/24-openroad-globalplacementskipio/asic_top.sdc'…
