@@ -28,7 +28,7 @@ de más abajo describen esa versión.
 | PDK | `gf180mcuD`, revisión `54435919abffb937387ec956209f9cf5fd2dfbee` (instalada por LibreLane con ciel) |
 | Biblioteca de celdas | `gf180mcu_fd_sc_mcu7t5v0` |
 | Herramientas (dentro del `nix-shell` de LibreLane 3.0.16) | Yosys 0.62, OpenROAD `dcf36133a369abc8f3c5e5738cd4d82e4903c0e0`, Magic 8.3.623, Netgen 1.5.316, KLayout 0.30.7 |
-| Corrida final | *pendiente* |
+| Corrida final | `flow/asic_top/runs/CP100_U40_final`: T = 100 ns, `FP_CORE_UTIL` = 40 %, memoria ROM. Setup WS 73,95 ns (típico) / 51,40 ns (`max_ss`), hold WS 0,14 ns, TNS 0; Magic DRC 0, KLayout DRC 0, LVS 0, antena 0; 196.097 µm² de celdas, die 0,4387 mm² |
 
 La revisión del PDK y la configuración completa de cada corrida quedan registradas en
 `flow/asic_top/runs/<corrida>/resolved.json`.
@@ -82,7 +82,7 @@ scripts/run_sweep.sh -d flow/asic_top -s final -p "100" -u "40"
 ```
 
 Corre LibreLane con `flow/asic_top/config.json` (T = 100 ns, `FP_CORE_UTIL` = 40 %) y
-deja todo en `flow/asic_top/runs/CP100_U40_final/`. Tarda ~6 min. El script nunca
+deja todo en `flow/asic_top/runs/CP100_U40_final/`. Tarda ~12 min (incluye el DRC de KLayout). El script nunca
 sobrescribe una corrida existente: si el tag ya existe, la salta. Equivale a:
 
 ```bash
@@ -120,7 +120,11 @@ El comando de cada uno está en el comentario de cabecera del archivo.
 | [`docs/memoria.md`](docs/memoria.md) | 3.2: las dos estrategias de memoria |
 | [`docs/timing.md`](docs/timing.md) | 3.4: barrido de `CLOCK_PERIOD`, ruta crítica y optimización |
 | [`docs/simulacion_post_sintesis.md`](docs/simulacion_post_sintesis.md) | 3.7: simulación RTL vs. netlist |
-| `results/*.csv` | métricas extraídas de las corridas |
+| [`docs/floorplan.md`](docs/floorplan.md) | 3.5: barrido de utilización, pines y costo |
+| [`docs/signoff.md`](docs/signoff.md) | 3.6: DRC, LVS, antena, slew y layout anotado |
+| [`docs/decisiones.md`](docs/decisiones.md) | registro de decisiones del proyecto |
+| [`docs/informe/`](docs/informe) | secciones del informe (3.1 a 3.7) |
+| `results/*.csv`, `results/sintesis.md` | métricas extraídas de las corridas |
 
 ## Repository Structure
 
