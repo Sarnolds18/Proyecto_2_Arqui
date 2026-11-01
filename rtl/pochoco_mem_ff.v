@@ -40,8 +40,10 @@ module pochoco_mem_ff #(
   output reg  [31:0] b_rdata_o
 );
 
-  // Direccion de palabra de 8 bits, igual que game_rom.
-  localparam [7:0] Words = NumWords;
+  // Direccion de palabra de 8 bits, igual que game_rom. El indice de mem
+  // usa solo IdxBits; los bits altos ya quedan cubiertos por word < Words.
+  localparam [7:0] Words   = NumWords;
+  localparam       IdxBits = $clog2(NumWords);
 
   wire [7:0] a_word = a_addr_i[9:2];
   wire [7:0] b_word = b_addr_i[9:2];
@@ -73,11 +75,11 @@ module pochoco_mem_ff #(
   endgenerate
 
   always @(posedge clk_i) begin
-    if (a_req_i) a_rdata_o <= (a_word < Words) ? mem[a_word] : 32'h0;
+    if (a_req_i) a_rdata_o <= (a_word < Words) ? mem[a_word[IdxBits-1:0]] : 32'h0;
   end
 
   always @(posedge clk_i) begin
-    b_rdata_o <= (b_word < Words) ? mem[b_word] : 32'h0;
+    b_rdata_o <= (b_word < Words) ? mem[b_word[IdxBits-1:0]] : 32'h0;
   end
 
 endmodule
