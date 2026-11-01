@@ -1,7 +1,7 @@
 // game_rom: imagen del programa como ROM combinacional.
 // ARCHIVO GENERADO, no editar a mano.
-// PROVISORIA: generada desde sw/game.hex por scripts/rom_provisoria.py.
-// Se reemplaza por la salida de sw/assembler.py (debe dar el mismo contenido).
+// Generado desde sw/game.s por sw/assembler.py --rom.
+// 99 palabras de instruccion.
 
 module game_rom (
   input  wire [7:0]  addr_i,  // direccion de palabra
@@ -18,8 +18,8 @@ module game_rom (
       8'd5: data_o = 32'h00c42603;
       8'd6: data_o = 32'h00f00293;
       8'd7: data_o = 32'h00542223;
-      8'd8: data_o = 32'h04787337;
-      8'd9: data_o = 32'h8c030313;
+      8'd8: data_o = 32'h01c9c337;
+      8'd9: data_o = 32'h38030313;
       8'd10: data_o = 32'h00c42383;
       8'd11: data_o = 32'h40c383b3;
       8'd12: data_o = 32'hfe63cce3;
@@ -45,8 +45,8 @@ module game_rom (
       8'd32: data_o = 32'h00c42303;
       8'd33: data_o = 32'h40c30333;
       8'd34: data_o = 32'h04e29863;
-      8'd35: data_o = 32'h002623b7;
-      8'd36: data_o = 32'h5a038393;
+      8'd35: data_o = 32'h000f43b7;
+      8'd36: data_o = 32'h24038393;
       8'd37: data_o = 32'h00000793;
       8'd38: data_o = 32'h00734863;
       8'd39: data_o = 32'h40730333;
@@ -56,8 +56,8 @@ module game_rom (
       8'd43: data_o = 32'h00150513;
       8'd44: data_o = 32'h090000ef;
       8'd45: data_o = 32'h00c42603;
-      8'd46: data_o = 32'h02faf337;
-      8'd47: data_o = 32'h08030313;
+      8'd46: data_o = 32'h01313337;
+      8'd47: data_o = 32'hd0030313;
       8'd48: data_o = 32'h00c42383;
       8'd49: data_o = 32'h40c383b3;
       8'd50: data_o = 32'hfe63cce3;
@@ -67,8 +67,8 @@ module game_rom (
       8'd54: data_o = 32'h00042223;
       8'd55: data_o = 32'h0ee00293;
       8'd56: data_o = 32'h00542023;
-      8'd57: data_o = 32'h00262337;
-      8'd58: data_o = 32'h5a030313;
+      8'd57: data_o = 32'h000f4337;
+      8'd58: data_o = 32'h24030313;
       8'd59: data_o = 32'h00500293;
       8'd60: data_o = 32'h00028e63;
       8'd61: data_o = 32'h00c42603;

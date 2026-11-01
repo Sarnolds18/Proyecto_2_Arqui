@@ -18,10 +18,15 @@
 #   8. Boton incorrecto: indicar error y reiniciar SOLO la ronda actual
 #      (correct_count/sum_decimas ya acumulados se conservan).
 #
-# Reloj de la Go Board: 25 MHz (mismo oscilador de Proyecto 1, ver
-# proyecto1/constraints/go-board.pcf). Conversion ciclos -> tiempo:
-#   3 segundos       = 75,000,000 ciclos
-#   1 decima de seg  =  2,500,000 ciclos
+# Reloj del macro ASIC (Proyecto 3): CLOCK_PERIOD = 100 ns -> f = 10 MHz.
+# Conversion ciclos -> tiempo (ciclos = segundos * f):
+#   3 segundos       = 3   * 10,000,000 = 30,000,000 ciclos = 0x01C9C380
+#   2 segundos       = 2   * 10,000,000 = 20,000,000 ciclos = 0x01312D00
+#   1 decima de seg  = 0.1 * 10,000,000 =  1,000,000 ciclos = 0x000F4240
+# Cada constante se carga con lui + addi: lui pone los 20 bits altos y addi
+# suma los 12 bajos con signo, asi que si el bit 11 de la constante es 1 se
+# usa hi + 1 y un addi negativo (caso de los 2 s: 0x1313 y 0xD00 - 0x1000).
+# En la Go Board (Proyecto 2, 25 MHz) eran 75,000,000 / 50,000,000 / 2,500,000.
 #
 # Generacion pseudoaleatoria: espino_alu.v tiene los shifts deshabilitados
 # (ejecutan como ADD), asi que en vez de un LFSR clasico se mezcla un estado
@@ -73,8 +78,8 @@ round_start:
     addi t0, x0, 15
     sw   t0, 4(s0)          # LEDs = 1111
 
-    lui  t1, 0x4787
-    addi t1, t1, -1856      # t1 = 75,000,000 ciclos (3s a 25 MHz)
+    lui  t1, 0x1C9C
+    addi t1, t1, 896        # t1 = 30,000,000 ciclos (3s a 10 MHz)
 
 wait_3s:
     lw   t2, 12(s0)
@@ -119,9 +124,9 @@ wait_button:
 
     bne  t0, a4, wrong_button
 
-    # Correcto: decimas de segundo = t1 / 2,500,000 (resta repetida).
-    lui  t2, 0x262
-    addi t2, t2, 1440        # t2 = 2,500,000 ciclos (1 decima a 25 MHz)
+    # Correcto: decimas de segundo = t1 / 1,000,000 (resta repetida).
+    lui  t2, 0xF4
+    addi t2, t2, 576         # t2 = 1,000,000 ciclos (1 decima a 10 MHz)
     addi a5, x0, 0
 response_div:
     blt  t1, t2, response_div_done
@@ -137,8 +142,8 @@ response_div_done:
     # Mantiene el tiempo de la ronda visible ~2s antes de seguir (si no,
     # round_start lo borra al instante y nunca se alcanza a leer).
     lw   a2, 12(s0)
-    lui  t1, 0x2FAF
-    addi t1, t1, 128         # t1 = 50,000,000 ciclos (2s a 25 MHz)
+    lui  t1, 0x1313
+    addi t1, t1, -768        # t1 = 20,000,000 ciclos (2s a 10 MHz)
 hold_result:
     lw   t2, 12(s0)
     sub  t2, t2, a2
@@ -154,8 +159,8 @@ wrong_button:
     addi t0, x0, 238          # 0xEE: hex2seg muestra 'E' en ambos digitos
     sw   t0, 0(s0)
 
-    lui  t1, 0x262
-    addi t1, t1, 1440         # t1 = 2,500,000 ciclos (1 decima), reusado abajo
+    lui  t1, 0xF4
+    addi t1, t1, 576          # t1 = 1,000,000 ciclos (1 decima), reusado abajo
     addi t0, x0, 5            # pausa de error = 5 decimas (~0.5s) visibles
 error_pause_outer:
     beq  t0, x0, error_pause_done
