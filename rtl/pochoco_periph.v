@@ -58,17 +58,18 @@ module pochoco_periph #(
     .btn_estable (btn_estable)
   );
 
-  // Free-running cycle counter, offset 0x0C. Increments every clock cycle
-  // from reset; a write to this offset loads wdata_i instead (writing 0
-  // zeroes it), so software can restart the count at the start of a round
-  // instead of always subtracting two reads.
-  reg [31:0] cyc_q;
+  // Free-running cycle counter, offset 0x0C (see rtl/pochoco_cycle_counter.v).
+  // A write to this offset loads wdata_i, so software can restart the count
+  // at the start of a round instead of always subtracting two reads.
+  wire [31:0] cyc_q;
 
-  always @(posedge clk_i or negedge rst_ni) begin
-    if (!rst_ni) cyc_q <= 32'b0;
-    else if (access & we_i & (off == 6'd3)) cyc_q <= wdata_i;
-    else cyc_q <= cyc_q + 32'd1;
-  end
+  pochoco_cycle_counter u_cycle_counter (
+    .clk_i   (clk_i),
+    .rst_ni  (rst_ni),
+    .load_i  (access & we_i & (off == 6'd3)),
+    .data_i  (wdata_i),
+    .count_o (cyc_q)
+  );
 
   // Hex to 7-segment decoder function
   function [6:0] hex2seg;

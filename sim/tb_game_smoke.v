@@ -23,7 +23,8 @@
 //     --rom sim/build/smoke_rom.v
 //   iverilog -g2012 -o sim/build/tb_game_smoke.vvp sim/tb_game_smoke.v \
 //     rtl/pochoco_soc.v rtl/pochoco_mem_rom.v rtl/pochoco_mem_ff.v \
-//     rtl/pochoco_periph.v rtl/pochoco_spi_slave.v rtl/debouncer.v \
+//     rtl/pochoco_periph.v rtl/pochoco_cycle_counter.v \
+//     rtl/pochoco_spi_slave.v rtl/debouncer.v \
 //     rtl/espino_core/*.v sim/build/smoke_rom.v
 //   vvp sim/build/tb_game_smoke.vvp
 

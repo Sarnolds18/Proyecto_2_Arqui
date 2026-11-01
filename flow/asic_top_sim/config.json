@@ -7,6 +7,7 @@
     "dir::../../rtl/pochoco_mem_ff.v",
     "dir::../../sim/build/game_rom.v",
     "dir::../../rtl/pochoco_periph.v",
+    "dir::../../rtl/pochoco_cycle_counter.v",
     "dir::../../rtl/pochoco_spi_slave.v",
     "dir::../../rtl/debouncer.v",
     "dir::../../rtl/espino_core/espino_core.v",
