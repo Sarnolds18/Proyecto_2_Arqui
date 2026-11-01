@@ -52,7 +52,7 @@ son 3.424 FF (107 × 32) y **1.096 de ellos son de tipo set**, exactamente la ca
 bits en 1 de `game.hex`: las instancias de `game_rom` se reducen a constantes y no queda
 ROM.
 
-## Comparación (M6) — pendiente de las corridas
+## Comparación (M6)
 
 ```bash
 scripts/run_sweep.sh -s rom -p "100" -u "40"
@@ -61,10 +61,43 @@ python3 scripts/extract_metrics.py -o results/memoria.csv \
   flow/asic_top/runs/CP100_U40_rom flow/asic_top_ff/runs/CP100_U40_ff
 ```
 
-| | Estrategia 1 (ROM) | Estrategia 2 (FF) |
-|---|---|---|
-| Área de celdas (µm²) | pendiente | pendiente |
-| Flip-flops | pendiente | pendiente |
-| Utilización | pendiente | pendiente |
-| Frecuencia máxima (MHz) | pendiente | pendiente |
-| ¿Cierra a 100 ns / 40 %? | pendiente | pendiente |
+Corridas `flow/asic_top/runs/CP100_U40_rom` y `flow/asic_top_ff/runs/CP100_U40_ff`, flujo
+completo a T = 100 ns y `FP_CORE_UTIL` = 40 %. Las dos usan el mismo RTL y la misma
+configuración (síntesis aplanada, antes de la optimización del LSU de 3.4); solo cambia
+`POCHOCO_MEM_FF`. Datos de `results/memoria.csv`:
+
+| | Estrategia 1 (ROM) | Estrategia 2 (FF) | FF / ROM |
+|---|---|---|---|
+| Área de celdas (µm²) | **211.393** | 816.279 | 3,9× |
+| Celdas estándar | 9.638 | 32.356 | 3,4× |
+| Flip-flops | **1.096** | 4.265 | 3,9× |
+| Utilización final | 51,6 % | 53,9 % | |
+| Área del die (µm²) | **440.736** (0,44 mm²) | 1.571.020 (1,57 mm²) | 3,6× |
+| Setup WS típico / lento (ns) | 64,96 / 33,30 | 56,34 / 16,09 | |
+| Hold WS peor corner (ns) | 0,152 | 0,122 | |
+| Frecuencia máxima r2r (MHz) | **15,0** | 11,9 | |
+| Violaciones de antena (redes) | 0 | 1 | |
+| Max slew / max cap (todos los corners) | 3.398 / 8 | 14.587 / 1.397 | |
+| ¿Cierra a 100 ns / 40 %? | **sí** | **no** (antena) | |
+
+Frecuencia máxima = 1000 / (T − WS de setup reg→reg), peor entre los corners típico
+(`nom_tt_025C_5v00`) y lento (`max_ss_125C_4v50`); es una estimación desde una sola
+corrida, el período mínimo real sale del barrido de 3.4.
+
+**Por qué la FF no cierra.** Setup y hold pasan en todos los corners. Lo que falla es la antena: después del
+ruteo global hay 133 redes que violan
+(`40-openroad-checkantennas/reports/antenna_summary.rpt`), el repair las deja en 0
+(`42-openroad-repairantennas/2-openroad-checkantennas`), pero el ruteo detallado vuelve
+a crear una: `net4125` → `fanout4124/I`, Metal2, razón 472,61 / 400
+(`46-openroad-checkantennas-1/reports/antenna_summary.rpt`). Se podría corregir (más
+iteraciones de repair o un diodo), pero no cambia la decisión.
+
+**Elección: estrategia 1 (ROM).** Es ~4 veces más chica en celdas, FF y die (y por lo tanto
+en costo), cierra sin intervención y tiene más margen de timing. La memoria FF paga 32 FF
+por palabra de programa más el mux de lectura de 107 entradas en los dos puertos, y
+la mayoría de esos FF nunca se escribe: el programa es constante. En la ROM esas mismas
+palabras son lógica combinacional que Yosys minimiza (bits repetidos, palabras
+parecidas), y quedan 1.096 FF, casi todos del core y los periféricos. La ventaja que le
+queda a la FF es la arquitectura unificada (un programa podría modificarse a sí mismo o
+usar todo el espacio para datos), que el juego no usa. La corrida final
+(`CP100_U40_final`) usa la ROM.
