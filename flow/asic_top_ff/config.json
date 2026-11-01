@@ -7,6 +7,7 @@
     "dir::../../rtl/pochoco_mem_ff.v",
     "dir::../../rtl/game_rom.v",
     "dir::../../rtl/pochoco_periph.v",
+    "dir::../../rtl/pochoco_cycle_counter.v",
     "dir::../../rtl/pochoco_spi_slave.v",
     "dir::../../rtl/debouncer.v",
     "dir::../../rtl/espino_core/espino_core.v",
@@ -21,6 +22,11 @@
   "CLOCK_PORT": "clk_i",
   "CLOCK_PERIOD": 100,
   "FP_CORE_UTIL": 40,
+  "SYNTH_KEEP_HIERARCHY_MODULES": [
+    "espino_register_file",
+    "espino_alu",
+    "pochoco_cycle_counter"
+  ],
   "PNR_SDC_FILE": "dir::../asic_top/asic_top.sdc",
   "SIGNOFF_SDC_FILE": "dir::../asic_top/asic_top.sdc",
   "VERILOG_DEFINES": [

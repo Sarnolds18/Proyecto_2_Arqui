@@ -8,6 +8,120 @@ Welcome to the repository! This project contains the RTL for a custom 32-bit pro
 
 This is meant to be forked, not just cloned. You'll be poking around the RTL, so make it your own, we won't judge (we might even be a little proud).
 
+## Proyecto 3: de RTL a GDSII
+
+La rama `proyecto3` lleva el Pochoco SoC y el juego de reflejos a un macro digital de
+celdas estándar con [LibreLane](https://librelane.readthedocs.io/en/stable/) y el PDK
+GF180MCU. El top del macro es `rtl/asic_top.v`: sus puertos son terminales lógicos
+(reloj, reset, LEDs, botones, displays de 7 segmentos y SPI), no pads de I/O.
+
+La versión para la FPGA (Go Board) es la entrega del Proyecto 2, tag **`p2-entrega`**.
+En esta rama el RTL ya no apunta a la iCE40 (el register file de flip-flops no cabe en
+la HX1K), así que las secciones *How to Build*, *Flashing from WSL* y *Power-on reset*
+de más abajo describen esa versión.
+
+### Versiones de la corrida final
+
+| Componente | Versión |
+|---|---|
+| LibreLane | 3.0.16 (tag `3.0.16`) |
+| PDK | `gf180mcuD`, revisión `54435919abffb937387ec956209f9cf5fd2dfbee` (instalada por LibreLane con ciel) |
+| Biblioteca de celdas | `gf180mcu_fd_sc_mcu7t5v0` |
+| Herramientas (dentro del `nix-shell` de LibreLane 3.0.16) | Yosys 0.62, OpenROAD `dcf36133a369abc8f3c5e5738cd4d82e4903c0e0`, Magic 8.3.623, Netgen 1.5.316, KLayout 0.30.7 |
+| Corrida final | *pendiente* |
+
+La revisión del PDK y la configuración completa de cada corrida quedan registradas en
+`flow/asic_top/runs/<corrida>/resolved.json`.
+
+### Instalar LibreLane
+
+Guía completa en [`docs/instalacion.md`](docs/instalacion.md). En resumen (Linux o
+WSL2 con systemd):
+
+```bash
+# 1. Nix con el caché binario de FOSSi (sin el caché compila todo desde cero)
+curl --proto '=https' --tlsv1.2 -fsSL https://artifacts.nixos.org/nix-installer | sh -s -- install --no-confirm --extra-conf "
+    extra-substituters = https://nix-cache.fossi-foundation.org
+    extra-trusted-public-keys = nix-cache.fossi-foundation.org:3+K59iFwXqKsL7BNu6Guy0v+uTlwsxYQxjspXzqLYQs=
+    extra-experimental-features = nix-command flakes
+"
+# 2. LibreLane 3.0.16, fuera de este repo
+git clone --branch 3.0.16 https://github.com/librelane/librelane ~/librelane
+cd ~/librelane && nix-shell      # la primera vez descarga ~860 MB
+librelane --version              # LibreLane v3.0.16
+librelane --smoke-test
+```
+
+La primera corrida con `gf180mcuD` descarga el PDK en `~/.ciel`.
+
+En WSL2, el disco de Linux es un archivo `ext4.vhdx` dentro de C:. Nix, el PDK y las
+corridas ocupan unos 15 GB, y cada corrida completa agrega ~1,3 GB más en el disco
+local (casi todo son logs de STA que no se versionan). Controlar el espacio real con
+`df -h /mnt/c`, no con `df -h /`. Además, usar este repo con el Git de Linux (o
+`git config core.autocrlf false`): el Git de Windows convierte los archivos a CRLF y
+los scripts `.sh` dejan de funcionar.
+
+### Regenerar el programa desde `game.s`
+
+```bash
+python3 -B sw/assembler.py sw/game.s sw/game.hex --rom rtl/game_rom.v
+python3 -m unittest discover -s sw -p "test_assembler.py"   # tests del assembler
+python3 -B scripts/contar_palabras.py sw/game.s              # palabras de instrucción y datos
+```
+
+`--rom` genera `rtl/game_rom.v`, la ROM combinacional que usa la memoria del SoC (no se
+edita a mano). Ver [`docs/memoria.md`](docs/memoria.md).
+
+### Ejecutar la corrida final
+
+Dentro del `nix-shell` de LibreLane (o fuera: el script entra solo), desde la raíz del
+repo:
+
+```bash
+scripts/run_sweep.sh -d flow/asic_top -s final -p "100" -u "40"
+```
+
+Corre LibreLane con `flow/asic_top/config.json` (T = 100 ns, `FP_CORE_UTIL` = 40 %) y
+deja todo en `flow/asic_top/runs/CP100_U40_final/`. Tarda ~6 min. El script nunca
+sobrescribe una corrida existente: si el tag ya existe, la salta. Equivale a:
+
+```bash
+cd flow/asic_top
+librelane --pdk gf180mcuD --run-tag CP100_U40_final -c CLOCK_PERIOD=100 -c FP_CORE_UTIL=40 config.json
+python3 ../../scripts/extract_critical_paths.py runs/CP100_U40_final   # 5 peores rutas por corner
+```
+
+Resultados y análisis:
+
+```bash
+R=flow/asic_top/runs/CP100_U40_final
+python3 scripts/extract_metrics.py -o results/final.csv $R       # WNS/TNS por corner, área, DRC, LVS, antena
+python3 scripts/analisis_sintesis.py $R -o results/sintesis.md   # área por módulo, top-5 celdas (3.3)
+python3 scripts/desglose_ruta.py $R/rutas_criticas.rpt           # ruta crítica por tramos (3.4)
+```
+
+### Simulaciones
+
+| Testbench | Qué verifica |
+|---|---|
+| `sim/tb_register_file.v` | register file de flip-flops |
+| `sim/tb_load_store_unit.v` | loads de byte/media palabra/palabra en todos los offsets, stores |
+| `sim/tb_pochoco_periph.v` | periféricos MMIO y contador de ciclos |
+| `sim/tb_game_smoke.v` | el juego completo con tiempos acortados |
+| `sim/tb_game_fixed_stimuli.v` | juego con botones en ciclos fijos, RTL y netlist post-síntesis (`sim/run_fixed_stimuli.sh`, ver [`docs/simulacion_post_sintesis.md`](docs/simulacion_post_sintesis.md)) |
+
+El comando de cada uno está en el comentario de cabecera del archivo.
+
+### Documentación del Proyecto 3
+
+| Archivo | Contenido |
+|---|---|
+| [`docs/evidencia.md`](docs/evidencia.md) | 3.1: construcciones FPGA → ASIC y la evidencia de LibreLane |
+| [`docs/memoria.md`](docs/memoria.md) | 3.2: las dos estrategias de memoria |
+| [`docs/timing.md`](docs/timing.md) | 3.4: barrido de `CLOCK_PERIOD`, ruta crítica y optimización |
+| [`docs/simulacion_post_sintesis.md`](docs/simulacion_post_sintesis.md) | 3.7: simulación RTL vs. netlist |
+| `results/*.csv` | métricas extraídas de las corridas |
+
 ## Repository Structure
 
 The hardware is written in Verilog and divided into these main categories:
