@@ -47,10 +47,17 @@ case "$modo" in
     ;;
   netlist)
     netlist="${2:?falta el netlist}"
+    # ciel deja el PDK en ~/.ciel/ciel/gf180mcu/versions/<rev>/; se prueba
+    # primero la revision de la corrida final.
     pdk_root="${PDK_ROOT:-$HOME/.ciel}"
-    celdas="$pdk_root/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/verilog"
-    [ -f "$celdas/gf180mcu_fd_sc_mcu7t5v0.v" ] || {
-      echo "error: no estan los modelos de celdas en $celdas" >&2; exit 1; }
+    rev=54435919abffb937387ec956209f9cf5fd2dfbee
+    scl=gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/verilog
+    celdas=""
+    for d in "$pdk_root/ciel/gf180mcu/versions/$rev/$scl" "$pdk_root/$scl"; do
+      [ -f "$d/gf180mcu_fd_sc_mcu7t5v0.v" ] && { celdas="$d"; break; }
+    done
+    [ -n "$celdas" ] || {
+      echo "error: no estan los modelos de celdas bajo $pdk_root (PDK $rev)" >&2; exit 1; }
     modelos=("$celdas/gf180mcu_fd_sc_mcu7t5v0.v")
     [ -f "$celdas/primitives.v" ] && modelos=("$celdas/primitives.v" "${modelos[@]}")
     iverilog -g2012 -DGATE_LEVEL -DFUNCTIONAL -DUNIT_DELAY=#0 -o "$BUILD/tb_netlist.vvp" \

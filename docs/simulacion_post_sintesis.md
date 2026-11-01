@@ -29,15 +29,26 @@ sim/run_fixed_stimuli.sh rtl                 # RTL -> sim/build/rtl_rom.log (~1,
 
 # Netlist: el programa está dentro del netlist, así que se sintetiza con la ROM de
 # game_sim.s (flow/asic_top_sim usa sim/build/game_rom.v, que genera el paso anterior).
-scripts/run_sweep.sh -d flow/asic_top_sim -s sim -p "100" -u "40" -- --to Yosys.Synthesis
-sim/run_fixed_stimuli.sh netlist flow/asic_top_sim/runs/CP100_U40_sim/06-yosys-synthesis/asic_top.nl.v
+scripts/run_sweep.sh -d flow/asic_top_sim -s sim2 -p "100" -u "40" -- --to Yosys.Synthesis
+sim/run_fixed_stimuli.sh netlist flow/asic_top_sim/runs/CP100_U40_sim2/06-yosys-synthesis/asic_top.nl.v
 
 sim/run_fixed_stimuli.sh compara sim/build/rtl_rom.log sim/build/netlist.log
 ```
 
-El netlist se simula sin retardos con los modelos Verilog de las celdas de GF180
-(`$PDK_ROOT/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/verilog`). La síntesis de
-`flow/asic_top_sim` es la misma que la de la corrida final (mismo RTL y misma
-configuración); solo cambia el contenido de la ROM.
+El netlist se simula sin retardos con los modelos Verilog de las celdas de GF180. El
+script los busca en `~/.ciel/ciel/gf180mcu/versions/<revisión>/gf180mcuD/...`, que es
+donde los deja LibreLane, o bajo `$PDK_ROOT`. `flow/asic_top_sim` tiene la misma
+configuración de síntesis que `flow/asic_top` (RTL, módulos con jerarquía conservada y
+celdas `dly*` excluidas); solo cambia el contenido de la ROM.
 
-Resultado del netlist: pendiente.
+## Resultado
+
+Corrida `flow/asic_top_sim/runs/CP100_U40_sim` (solo síntesis), simulada con Icarus
+(67 min): `compara` da **IGUALES**. El netlist reproduce evento por evento el log RTL:
+el botón incorrecto muestra `EE` y reinicia la ronda, y la ronda correcta mide
+**305.585 ciclos** (display `30`), igual que el RTL.
+
+Esa síntesis es anterior a la optimización del LSU de 3.4 (registro `boff_q`) y a los
+cambios de configuración de la corrida final. Con el RTL final, la simulación RTL da
+exactamente los mismos eventos y ciclos (verificado con `rtl` y `compara`). La simulación del netlist
+con el RTL final está pendiente: corrida `CP100_U40_sim2`.
