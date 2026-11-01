@@ -1,0 +1,411 @@
+Reading timing models for corner max_ff_n40C_5v50…
+Reading timing library for the 'max_ff_n40C_5v50' corner at '/home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__ff_n40C_5v50.lib'…
+Reading timing models for corner max_tt_025C_5v00…
+Reading timing library for the 'max_tt_025C_5v00' corner at '/home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__tt_025C_5v00.lib'…
+Reading timing models for corner nom_ff_n40C_5v50…
+Reading timing library for the 'nom_ff_n40C_5v50' corner at '/home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__ff_n40C_5v50.lib'…
+[WARNING STA-1140] /home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__ff_n40C_5v50.lib line 17, library gf180mcu_fd_sc_mcu7t5v0__ff_n40C_5v50 already exists.
+Reading timing models for corner nom_tt_025C_5v00…
+Reading timing library for the 'nom_tt_025C_5v00' corner at '/home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__tt_025C_5v00.lib'…
+[WARNING STA-1140] /home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__tt_025C_5v00.lib line 17, library gf180mcu_fd_sc_mcu7t5v0__tt_025C_5v00 already exists.
+Reading timing models for corner min_ss_125C_4v50…
+Reading timing library for the 'min_ss_125C_4v50' corner at '/home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__ss_125C_4v50.lib'…
+Reading timing models for corner min_ff_n40C_5v50…
+Reading timing library for the 'min_ff_n40C_5v50' corner at '/home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__ff_n40C_5v50.lib'…
+[WARNING STA-1140] /home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__ff_n40C_5v50.lib line 17, library gf180mcu_fd_sc_mcu7t5v0__ff_n40C_5v50 already exists.
+Reading timing models for corner min_tt_025C_5v00…
+Reading timing library for the 'min_tt_025C_5v00' corner at '/home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__tt_025C_5v00.lib'…
+[WARNING STA-1140] /home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__tt_025C_5v00.lib line 17, library gf180mcu_fd_sc_mcu7t5v0__tt_025C_5v00 already exists.
+Reading timing models for corner max_ss_125C_4v50…
+Reading timing library for the 'max_ss_125C_4v50' corner at '/home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__ss_125C_4v50.lib'…
+[WARNING STA-1140] /home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__ss_125C_4v50.lib line 17, library gf180mcu_fd_sc_mcu7t5v0__ss_125C_4v50 already exists.
+Reading timing models for corner nom_ss_125C_4v50…
+Reading timing library for the 'nom_ss_125C_4v50' corner at '/home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__ss_125C_4v50.lib'…
+[WARNING STA-1140] /home/lester/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__ss_125C_4v50.lib line 17, library gf180mcu_fd_sc_mcu7t5v0__ss_125C_4v50 already exists.
+Reading OpenROAD database at '/home/lester/arqui/P3_para_el_grupo/Proyecto_2_Arqui/flow/asic_top/runs/CP60_U40_margen/35-openroad-cts/asic_top.odb'…
+Reading design constraints file at '/home/lester/arqui/P3_para_el_grupo/Proyecto_2_Arqui/flow/asic_top/asic_top.sdc'…
++ repair_timing -verbose -setup -setup_margin 14.0 -max_buffer_percent 50.0
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0094] Found 300 endpoints with setup violations.
+[INFO RSZ-0099] Repairing 300 out of 300 (100.00%) violating endpoints...
+   Iter   | Removed | Resized | Inserted | Cloned |  Pin  |   Area   |    WNS   |   TNS      |  Viol  | Worst
+          | Buffers |  Gates  | Buffers  |  Gates | Swaps |          |          |            | Endpts | Endpt
+--------------------------------------------------------------------------------------------------------------
+        0 |       0 |       0 |        0 |      0 |     0 |    +0.0% |    9.379 |        0.0 |    300 | u_pochoco.u_periph.u_cycle_counter/_264_/D
+        9 |       0 |       8 |        0 |      0 |     0 |    -0.0% |   13.033 |        0.0 |    298 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       10 |       0 |       8 |        0 |      0 |     0 |    -0.0% |   13.033 |        0.0 |    298 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       12 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    297 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       13 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    296 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       14 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    295 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       15 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    294 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       17 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    293 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       18 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    292 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       19 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    291 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       20 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    291 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       20 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    290 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       21 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    289 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       22 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    288 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       23 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    287 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       24 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    286 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       25 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    285 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       26 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    284 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       27 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    283 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       28 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    282 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       29 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    281 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       30 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    281 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       30 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    280 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       31 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    279 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       32 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    278 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       33 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    277 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       34 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    276 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       35 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    275 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       36 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    274 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       37 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    273 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       38 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    272 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       39 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    271 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       40 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    271 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       40 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    270 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       41 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    269 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       42 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    268 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       43 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    267 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       44 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    266 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       45 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    265 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       46 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    264 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       47 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    263 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       48 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    262 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       49 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    261 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       50 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    261 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       50 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    260 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       51 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    259 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       52 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    258 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       53 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    257 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       54 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    256 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       55 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    255 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       56 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    254 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       57 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    253 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       58 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    252 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       59 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    251 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       60 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    251 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       60 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    250 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       61 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    249 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       62 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    248 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       63 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    247 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       64 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    246 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       65 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    245 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       66 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    244 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       67 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    243 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       68 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    242 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       69 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    241 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       70 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    241 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       70 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    240 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       71 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    239 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       72 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    238 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       73 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    237 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       74 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    236 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       75 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    235 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       76 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    234 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       77 |       0 |       9 |        0 |      0 |     0 |    -0.0% |   13.399 |        0.0 |    233 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       80 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    232 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       80 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    231 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       81 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    230 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       82 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    229 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       83 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    228 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       84 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    227 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       85 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    226 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       86 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    225 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       87 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    224 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       88 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    223 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       89 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    222 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       90 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    222 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       90 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    221 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       91 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    220 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       92 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    219 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       93 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    218 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       94 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    217 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       95 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    216 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       96 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    215 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       97 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    214 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       98 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    213 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+       99 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    212 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      100 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    212 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      100 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    211 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      101 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    210 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      102 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    209 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      103 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    208 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      104 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    207 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      105 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    206 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      106 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    205 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      107 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    204 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      108 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    203 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      109 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    202 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      110 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    202 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      110 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    201 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      111 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    200 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      112 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    199 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      113 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    198 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      114 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    197 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      115 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    196 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      116 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    195 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      117 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    194 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      118 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    193 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      119 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    192 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      120 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    192 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      120 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    191 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      121 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    190 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      122 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    189 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      123 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    188 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      124 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    187 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      125 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    186 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      126 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    185 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      127 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    184 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      128 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    183 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      129 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    182 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      130 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    182 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      130 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    181 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      131 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    180 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      132 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    179 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      133 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    178 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      134 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    177 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      135 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    176 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      136 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    175 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      137 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    174 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      138 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    173 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      139 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    172 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      140 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    172 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      140 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    171 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      141 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    170 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      142 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    169 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      143 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    168 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      144 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    167 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      145 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    166 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      146 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    165 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      147 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    164 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      148 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    163 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      149 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    162 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      150 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    162 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      150 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    161 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      151 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    160 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      152 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    159 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      153 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    158 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      154 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    157 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      155 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    156 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      156 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    155 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      157 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    154 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      158 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    153 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      159 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    152 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      160 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    152 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      160 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    151 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      161 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    150 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      162 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    149 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      163 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    148 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      164 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    147 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      165 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    146 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      166 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    145 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      167 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    144 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      168 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    143 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      169 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    142 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      170 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    142 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      170 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    141 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      171 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    140 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      172 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    139 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      173 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    138 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      174 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    137 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      175 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    136 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      176 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    135 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      177 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    134 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      178 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    133 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      179 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    132 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      180 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    132 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      180 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    131 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      181 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    130 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      182 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    129 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      183 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    128 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      184 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    127 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      185 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    126 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      186 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    125 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      187 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    124 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      188 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    123 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      189 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    122 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      190 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    122 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      190 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    121 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      191 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    120 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      192 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    119 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      193 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    118 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      194 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    117 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      195 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    116 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      196 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    115 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      197 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    114 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      198 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    113 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      199 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    112 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      200 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    112 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      200 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    111 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      201 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    110 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      202 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    109 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      203 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    108 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      204 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    107 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      205 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    106 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      206 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    105 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      207 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    104 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      208 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    103 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      209 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    102 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      210 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    102 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      210 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    101 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      211 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |    100 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      212 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     99 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      213 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     98 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      214 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     97 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      215 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     96 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      216 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     95 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      217 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     94 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      218 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     93 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      219 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     92 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      220 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     92 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      220 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     91 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      221 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     90 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      222 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     89 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      223 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     88 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      224 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     87 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      225 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     86 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      226 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     85 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      227 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     84 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      228 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     83 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      229 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     82 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      230 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     82 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      230 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     81 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      231 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     80 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      232 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     79 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      233 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     78 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      234 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     77 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      235 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     76 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      236 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     75 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      237 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     74 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      238 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     73 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      239 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     72 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      240 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     72 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      240 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     71 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      241 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     70 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      242 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     69 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      243 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     68 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      244 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     67 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      245 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     66 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      246 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     65 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      247 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     64 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      248 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     63 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      249 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     62 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      250 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     62 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      250 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     61 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      251 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     60 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      252 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     59 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      253 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     58 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      254 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     57 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      255 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     56 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      256 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     55 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      257 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     54 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      258 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     53 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      259 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     52 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      260 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     52 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      260 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     51 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      261 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     50 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      262 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     49 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      263 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     48 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      264 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     47 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      265 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     46 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      266 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     45 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      267 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     44 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      268 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     43 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      269 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     42 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      270 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     42 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      270 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     41 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      271 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     40 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      272 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     39 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      273 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     38 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      274 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     37 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      275 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     36 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      276 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     35 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      277 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     34 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      278 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     33 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      279 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     32 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      280 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     32 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      280 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     31 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      281 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     30 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      282 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     29 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      283 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     28 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      284 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     27 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      285 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     26 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      286 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     25 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      287 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     24 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      288 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     23 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      289 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     22 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      290 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     22 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      290 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     21 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      291 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     20 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      292 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     19 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      293 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     18 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      294 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     17 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      295 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     16 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      296 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     15 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      297 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     14 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      298 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     13 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      299 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     12 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      300 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     12 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      300 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     11 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      301 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |     10 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      302 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      9 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      303 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      8 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      304 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      7 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      305 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      6 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      306 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      5 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      307 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      4 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      308 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      3 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      309 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      2 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      310 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      2 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      310 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      1 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      311 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      0 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      312 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      0 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+      313 |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      0 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+    final |       0 |      11 |        0 |      0 |     0 |    -0.1% |   14.106 |        0.0 |      0 | u_pochoco.u_periph.u_cycle_counter/_288_/D
+--------------------------------------------------------------------------------------------------------------
+[INFO RSZ-0051] Resized 11 instances: 11 up, 0 up match, 0 down, 0 VT
++ repair_timing -verbose -hold -setup_margin 14.0 -hold_margin 0.1000000000000000055511151231257827021181583404541015625 -max_buffer_percent 50.0
+[INFO RSZ-0046] Found 8 endpoints with hold violations.
+Iteration | Resized | Buffers | Cloned Gates |   Area   |   WNS   |   TNS   | Endpoint
+--------------------------------------------------------------------------------------
+        0 |       0 |       0 |            0 |    +0.0% |   0.028 |   0.000 | _5445_/D
+    final |       0 |       8 |            0 |    +0.2% |   0.130 |   0.000 | _5423_/D
+--------------------------------------------------------------------------------------
+[INFO RSZ-0032] Inserted 8 hold buffers.
++ detailed_placement -max_displacement  500 100 
+Placement Analysis
+---------------------------------
+total displacement        131.0 u
+average displacement        0.0 u
+max displacement           33.7 u
+original HPWL          354735.2 u
+legalized HPWL         361110.3 u
+delta HPWL                    2 %
+
+[INFO DPL-0020] Mirrored 2385 instances
+[INFO DPL-0021] HPWL before          361110.3 u
+[INFO DPL-0022] HPWL after           354766.8 u
+[INFO DPL-0023] HPWL delta               -1.8 %
+Setting global connections for newly added cells…
+[INFO] Setting global connections...
+[INFO ODB-0403] 32 connections made, 0 conflicts skipped.
+Updating metrics…
+Cell type report:                       Count       Area
+  Endcap cell                             326    1431.27
+  Tap cell                               2642   11599.44
+  Tie cell                                  1       8.78
+  Buffer                                   14     184.40
+  Clock buffer                            121    6063.14
+  Timing Repair Buffer                    877   27903.19
+  Inverter                                270    2370.82
+  Clock inverter                           30     487.33
+  Sequential cell                        1096   78313.76
+  Multi-Input combinational cell         4251   82838.07
+  Total                                  9628  211200.19
+Writing OpenROAD database to '/home/lester/arqui/P3_para_el_grupo/Proyecto_2_Arqui/flow/asic_top/runs/CP60_U40_margen/37-openroad-resizertimingpostcts/asic_top.odb'…
+Writing netlist to '/home/lester/arqui/P3_para_el_grupo/Proyecto_2_Arqui/flow/asic_top/runs/CP60_U40_margen/37-openroad-resizertimingpostcts/asic_top.nl.v'…
+Writing powered netlist to '/home/lester/arqui/P3_para_el_grupo/Proyecto_2_Arqui/flow/asic_top/runs/CP60_U40_margen/37-openroad-resizertimingpostcts/asic_top.pnl.v'…
+Writing layout to '/home/lester/arqui/P3_para_el_grupo/Proyecto_2_Arqui/flow/asic_top/runs/CP60_U40_margen/37-openroad-resizertimingpostcts/asic_top.def'…
+Writing timing constraints to '/home/lester/arqui/P3_para_el_grupo/Proyecto_2_Arqui/flow/asic_top/runs/CP60_U40_margen/37-openroad-resizertimingpostcts/asic_top.sdc'…

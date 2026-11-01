@@ -1,5 +1,79 @@
 # Timing (sección 3.4)
 
+## Barrido de `CLOCK_PERIOD` (L4)
+
+Todas las corridas usan el mismo RTL y configuración que la corrida final
+(estrategia ROM, jerarquía conservada, `FP_CORE_UTIL` = 40 %); solo cambia lo que dice
+la columna "Variante". Métricas en `results/timing.csv`, generado con:
+
+```bash
+scripts/run_sweep.sh -d flow/asic_top -s jerarquia -p "70 60 50" -u 40
+scripts/run_sweep.sh -d flow/asic_top -s rszss -p "60" -u 40 -c "PNR_CORNERS=nom_tt_025C_5v00,max_ss_125C_4v50,min_ff_n40C_5v50"
+scripts/run_sweep.sh -d flow/asic_top -s margen -p "60" -u 40 -c "PL_RESIZER_SETUP_SLACK_MARGIN=14"
+python3 scripts/extract_metrics.py -o results/timing.csv flow/asic_top/runs/CP100_U40_jerarquia \
+  flow/asic_top/runs/CP70_U40_jerarquia flow/asic_top/runs/CP60_U40_jerarquia \
+  flow/asic_top/runs/CP50_U40_jerarquia flow/asic_top/runs/CP60_U40_rszss \
+  flow/asic_top/runs/CP60_U40_margen
+```
+
+Típico = `nom_tt_025C_5v00`, más lento = `max_ss_125C_4v50` (WNS / TNS en ns). En
+las 6 corridas, Magic DRC = 0, LVS = 0 y antena = 0.
+
+| Corrida | T (ns) | Variante | Setup típico | Setup lento | Hold típico | Hold lento | Área celdas (µm²) | Celdas | ¿Cierra? |
+|---|---:|---|---|---|---|---|---:|---:|---|
+| `CP100_U40_jerarquia` | 100 | por defecto | 66,62 / 0 | 36,46 / 0 | 0,384 / 0 | 0,958 / 0 | 211.325 | 9.631 | sí |
+| `CP70_U40_jerarquia` | 70 | por defecto | 36,62 / 0 | 6,46 / 0 | 0,384 / 0 | 0,958 / 0 | 211.325 | 9.631 | sí |
+| `CP60_U40_jerarquia` | 60 | por defecto | 26,62 / 0 | **−3,54 / −440,18** | 0,384 / 0 | 0,958 / 0 | 211.325 | 9.631 | **no** |
+| `CP50_U40_jerarquia` | 50 | por defecto | 17,37 / 0 | **−11,89 / −4.836,41** | 0,384 / 0 | 0,958 / 0 | 211.314 | 9.631 | **no** |
+| `CP60_U40_rszss` | 60 | `PNR_CORNERS` con `max_ss` | 26,62 / 0 | **−3,54 / −440,18** | 0,384 / 0 | 0,958 / 0 | 211.325 | 9.631 | **no** |
+| `CP60_U40_margen` | 60 | `PL_RESIZER_SETUP_SLACK_MARGIN = 14` | 29,67 / 0 | 2,48 / 0 | 0,384 / 0 | 0,959 / 0 | 211.218 | 9.632 | **sí** |
+
+**Menor período que cierra en todos los corners: 60 ns** (16,7 MHz), con margen de
+setup en el resizer. Con la configuración por defecto, el menor que cierra es 70 ns.
+Por debajo de 60 ns con margen: *pendiente*.
+
+### Por qué la configuración por defecto no re-optimiza
+
+Con la configuración por defecto, el circuito de 100, 70 y 60 ns es **el mismo**: el
+área y las celdas no cambian, y el slack baja exactamente lo que baja el período.
+A 50 ns la diferencia es mínima (−11 µm²). El resizer de OpenROAD no encontró nada
+que reparar: `RSZ-0098 No setup violations found`
+(`CP60_U40_jerarquia/37-openroad-resizertimingpostcts/openroad-resizertimingpostcts.log:29`).
+
+El motivo es que el resizer optimiza con parásitos **estimados** desde el placement,
+y en este diseño esa estimación es muy optimista frente a los parásitos **extraídos**
+del layout final. En `CP60_U40_rszss` (que agrega `max_ss` a los corners del STA
+intermedio), el slack de setup en `max_ss` a 60 ns es:
+
+| Etapa | Slack setup `max_ss` | Fuente |
+|---|---:|---|
+| Después de CTS (aquí trabaja el resizer) | +9,38 ns | `36-openroad-stamidpnr-1/ws.max.rpt:6` |
+| Después del global routing | +6,29 ns | `43-openroad-stamidpnr-3/ws.max.rpt:6` |
+| Signoff (SPEF extraído) | −3,54 ns | `55-openroad-stapostpnr/summary.rpt` |
+
+Agregar el corner lento a `PNR_CORNERS` no cambia nada (`CP60_U40_rszss` es idéntica a
+`CP60_U40_jerarquia`): el resizer ya veía `max_ss`, pero con +9,38 ns no tenía nada que
+arreglar. Además, LibreLane solo marca como error las violaciones de los corners
+`*tt*` (`TIMING_VIOLATION_CORNERS = ['*tt*']`), por eso el flujo dice "completo" aunque
+`max_ss` viole.
+
+### Re-optimización con margen (`CP60_U40_margen`)
+
+`PL_RESIZER_SETUP_SLACK_MARGIN = 14` obliga al resizer a reparar hasta tener 14 ns de
+sobra según su estimación (más que el error de estimación de unos 13 ns de la tabla
+anterior). El resizer reparó los 300 endpoints (`RSZ-0099`, línea 30) cambiando el
+tamaño de **11 celdas** (`RSZ-0051 Resized 11 instances: 11 up`, línea 368 de
+`37-openroad-resizertimingpostcts/openroad-resizertimingpostcts.log`). Comparando los
+DEF finales, son los buffers de fanout de la ruta crítica: `dlyb_1` → `dlya_1` (celda
+de retardo más corta) o `clkbuf_2`. Las celdas de retardo de la ruta crítica pasan de
+31,35 ns a 22,21 ns (`desglose_ruta.py`), y el slack en `max_ss` de −3,54 a +2,48 ns.
+El área casi no cambia (211.325 → 211.218 µm², −0,05 %).
+
+Esto muestra que **cada `CLOCK_PERIOD` re-optimiza el circuito solo si el resizer ve
+violaciones**: el área, el buffering y el placement cambian únicamente cuando la
+herramienta tiene algo que reparar. Con la estimación optimista de este diseño, a 60 ns
+hizo falta un margen explícito para que eso pasara.
+
 ## Ruta crítica (L5)
 
 Corrida analizada: `flow/asic_top/runs/CP100_U40_jerarquia` (T = 100 ns, U = 40 %,

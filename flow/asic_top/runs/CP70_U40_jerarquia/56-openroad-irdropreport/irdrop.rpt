@@ -1,0 +1,26 @@
++ analyze_power_grid -net VDD -voltage_file /home/lester/arqui/P3_para_el_grupo/Proyecto_2_Arqui/flow/asic_top/runs/CP70_U40_jerarquia/56-openroad-irdropreport/net-VDD.csv
+[INFO PSM-0040] All shapes on net VDD are connected.
+########## IR report #################
+Net              : VDD
+Corner           : nom_tt_025C_5v00
+Total power      : 1.48e-02 W
+Supply voltage   : 5.00e+00 V
+Worstcase voltage: 5.00e+00 V
+Average voltage  : 5.00e+00 V
+Average IR drop  : 3.66e-05 V
+Worstcase IR drop: 1.52e-04 V
+Percentage drop  : 0.00 %
+######################################
++ analyze_power_grid -net VSS -voltage_file /home/lester/arqui/P3_para_el_grupo/Proyecto_2_Arqui/flow/asic_top/runs/CP70_U40_jerarquia/56-openroad-irdropreport/net-VSS.csv
+[INFO PSM-0040] All shapes on net VSS are connected.
+########## IR report #################
+Net              : VSS
+Corner           : nom_tt_025C_5v00
+Total power      : 1.48e-02 W
+Supply voltage   : 0.00e+00 V
+Worstcase voltage: 1.21e-04 V
+Average voltage  : 3.54e-05 V
+Average IR drop  : 3.54e-05 V
+Worstcase IR drop: 1.21e-04 V
+Percentage drop  : 0.00 %
+######################################
