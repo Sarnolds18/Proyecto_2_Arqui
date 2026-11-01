@@ -157,17 +157,81 @@ por tramo.
   salida de la memoria de instrucciones (`a_rdata_o[5]`), pero los nombres internos se
   pierden y no se puede seguir por módulo. Ese es el motivo de L2.
 
-### Candidatos para acortarla (L6)
+## Optimización de la ruta crítica (L6)
 
-Se decide después del barrido de períodos (L4). Hay que preferir cambios que **no
-cambien el número de ciclos** del juego, para no invalidar la simulación de 3.7:
+### El cambio
 
-1. **Registrar `boff` en la LSU** cuando se emite el load (primer ciclo) y usar el
-   valor registrado en el segundo ciclo. Así se corta el tramo
-   ALU → alineación → write-back, sin cambiar la latencia. La ruta pasaría a terminar
-   en `alu_result` → `rf_wdata` (WD_ALU), y lo que se gana depende de cuánto tarda el
-   bit alto de la suma.
-2. **Pre-decodificar `alu_op_b_sel`** a partir de `rom_data` y registrarlo junto con
-   la instrucción, con el mismo enable. El mux de `operand_b` pasa a depender de un FF
-   y no de la lógica de decode (el tramo más largo, 44,6 %). Requiere un puerto extra
-   en las dos memorias (`pochoco_mem_rom` y `pochoco_mem_ff`).
+`rtl/espino_core/espino_load_store_unit.v`: el offset de byte de un load
+(`boff = addr_i[1:0]`) se registra en `boff_q` en el ciclo en que se emite el load
+(`busy_d = 1`), y la alineación del dato leído (`lhalf`/`lbyte`) usa `boff_q` en vez
+de `boff`.
+
+Un load ya tardaba dos ciclos: en el primero la LSU detiene el core (`busy_o`) y la
+memoria lee, y en el segundo llega el dato y se escribe en el register file. La
+dirección no cambia entre los dos ciclos (la instrucción y los operandos están
+congelados por el stall), así que `boff_q` en el segundo ciclo vale lo mismo que
+`boff`. **No cambia la latencia ni el comportamiento**: solo saca la ALU del camino
+alineación → write-back, que era el tramo "acceso a memoria + write-back" (15,2 ns) de
+la ruta crítica. Costo: 2 flip-flops. Los stores no cambian (siguen usando `boff`,
+porque se resuelven en un ciclo).
+
+Se eligió este cambio frente a pre-decodificar `alu_op_b_sel` (que ataca el tramo de
+decode, más largo) porque toca un solo módulo y no cambia la interfaz de las dos
+memorias.
+
+### Verificación funcional
+
+- `sim/tb_load_store_unit.v` (nuevo): `lb`/`lbu`/`lh`/`lhu`/`lw` en todos los offsets
+  de 4 palabras (bytes con y sin el bit de signo), dos loads seguidos con offsets
+  distintos, y byte enables/datos de los stores. 174 chequeos contra un modelo de
+  referencia escrito en el testbench. Pasa con la LSU original y con la nueva. Con una
+  LSU saboteada (`boff_q` nunca se actualiza) fallan 24 chequeos: el test distingue el
+  cambio. Hace falta porque el juego solo usa `lw` alineado y no ejercita la
+  alineación.
+- `tb_game_smoke` y `sim/run_fixed_stimuli.sh rtl rom` / `rtl ff`: salida idéntica
+  byte a byte a la del RTL anterior (mismos eventos en los mismos ciclos).
+
+### Resultado (T = 60 ns, configuración por defecto)
+
+Comparación a 60 ns, donde la versión anterior no cierra en `max_ss`. Métricas en
+`results/optimizacion.csv`; violaciones de `55-openroad-stapostpnr/summary.rpt`.
+
+| | `CP60_U40_jerarquia` (antes) | `CP60_U40_boffreg` (L6) | Cambio |
+|---|---:|---:|---:|
+| Setup WNS `max_ss` | −3,54 ns | −2,63 ns | +0,91 ns |
+| Setup TNS `max_ss` | −440,18 ns | −21,13 ns | −95 % |
+| Endpoints que violan setup en `max_ss` | 191 | 10 | −181 |
+| Setup WNS `nom_tt` | 26,62 ns | 26,89 ns | +0,27 ns |
+| Hold WNS peor corner | 0,139 ns | 0,117 ns | sigue ≥ 0 |
+| Área de celdas | 211.325 µm² | 211.391 µm² | +66 µm² (+0,03 %) |
+| Flip-flops | 1.096 | 1.098 | +2 (`boff_q`) |
+| DRC / LVS / antena | 0 / 0 / 0 | 0 / 0 / 0 | |
+
+**La ruta anterior desaparece**: ninguna de las 20 peores rutas de
+`rutas_criticas.rpt` (setup y hold, `nom_tt` y `max_ss`) pasa ya por `lsu_addr`. Los
+endpoints que violan bajan de 191 a 10, porque el camino alineación → write-back
+llegaba a los 32 bits de los 15 registros del register file. El WNS mejora menos
+(0,91 ns) porque queda otra ruta casi igual de larga, que antes estaba escondida
+detrás de la primera:
+
+| Tramo (`max_ss`) | Desde → hasta | Retardo |
+|---|---|---:|
+| Fetch | flanco en `_5393_` → `a_rdata_o[4]` | 2,01 ns |
+| Decode | `a_rdata_o[4]` → `u_id.operand_b[17]` | 25,71 ns |
+| Ejecución (comparación) | `operand_b[17]` → ALU → `u_id.alu_cmp_result` | 12,79 ns |
+| Branch → PC | `alu_cmp_result` → `branch_taken` → `pc_set` → `pc_next` → D de `_5248_` | 21,26 ns |
+| **Total** | | **61,77 ns** |
+
+El fin, `_5248_`, es el bit 25 del PC (`pc_q`, `espino_if_stage.v`; su salida es
+`a_addr_i[25]` de la memoria de instrucciones). La nueva ruta crítica es la de un
+**branch**: decode → la ALU compara los operandos → si se toma el salto, el
+`pc_target` entra al mux de next-PC de la etapa IF. 10 celdas `dlyb_1` suman 33,90 ns
+(54,9 %) de la ruta. A 100 ns (la corrida final) las dos versiones cierran con mucho
+margen; la mejora se ve en la frontera de los 60 ns.
+
+### Siguiente candidato (no implementado)
+
+El tramo más largo sigue siendo el decode (25,7 ns): `opcode` → `alu_op_b_sel` → mux de
+32 bits de `operand_b`. Pre-decodificar `alu_op_b_sel` desde la salida de la ROM y
+registrarlo junto con la instrucción lo sacaría de la ruta, a cambio de un puerto más
+en `pochoco_mem_rom` y `pochoco_mem_ff`.

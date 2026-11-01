@@ -50,6 +50,17 @@ module espino_load_store_unit (
     else         busy_q <= busy_d;
   end
 
+  // Byte offset of a load, captured in the cycle the request is issued. The
+  // data comes back (and is written back) in the next cycle, so aligning it
+  // with boff_q instead of addr_i takes the ALU adder out of the
+  // load-alignment -> write-back path. Same latency: the address does not
+  // change between the two cycles of a load.
+  reg [1:0] boff_q;
+  always @(posedge clk_i or negedge rst_ni) begin
+    if (!rst_ni)     boff_q <= 2'b00;
+    else if (busy_d) boff_q <= boff;
+  end
+
   assign busy_o      = is_load & ~busy_q;
   assign data_req_o  = req_i & ~busy_q;
   assign data_we_o   = is_store;
@@ -74,8 +85,8 @@ module espino_load_store_unit (
   end
 
   // Load data
-  wire [15:0] lhalf = boff[1] ? data_rdata_i[31:16] : data_rdata_i[15:0];
-  wire [7:0]  lbyte = boff[0] ? lhalf[15:8]         : lhalf[7:0];
+  wire [15:0] lhalf = boff_q[1] ? data_rdata_i[31:16] : data_rdata_i[15:0];
+  wire [7:0]  lbyte = boff_q[0] ? lhalf[15:8]         : lhalf[7:0];
 
   always @* begin
     case (type_i)
