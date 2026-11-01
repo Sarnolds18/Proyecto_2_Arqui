@@ -1,0 +1,31 @@
+Reading timing models for corner nom_tt_025C_5v00…
+Reading timing library for the 'nom_tt_025C_5v00' corner at '/home/sarnolds/.ciel/ciel/gf180mcu/versions/54435919abffb937387ec956209f9cf5fd2dfbee/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/lib/gf180mcu_fd_sc_mcu7t5v0__tt_025C_5v00.lib'…
+Reading OpenROAD database at '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top/runs/CP100_U70_pines/39-openroad-globalrouting/asic_top.odb'…
+Reading design constraints file at '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top/asic_top.sdc'…
++ repair_antennas gf180mcu_fd_sc_mcu7t5v0__antenna -iterations 3 -ratio_margin 10
+[INFO GRT-0012] Found 6 antenna violations.
+[INFO GRT-0302] Inserted 2 jumpers for 2 nets.
+[INFO GRT-0012] Found 4 antenna violations.
+[INFO GRT-0015] Inserted 6 diodes.
+[INFO GRT-0012] Found 14 antenna violations.
+[INFO GRT-0302] Inserted 14 jumpers for 14 nets.
+[INFO GRT-0012] Found 0 antenna violations.
+Setting global connections for newly added cells…
+[INFO] Setting global connections...
+[INFO ODB-0403] 24 connections made, 0 conflicts skipped.
+Updating metrics…
+Cell type report:                       Count       Area
+  Endcap cell                             246    1080.04
+  Tap cell                               1502    6594.38
+  Antenna cell                              6      26.34
+  Tie cell                                  1       8.78
+  Buffer                                   14     184.40
+  Clock buffer                            103    5575.81
+  Timing Repair Buffer                    810   26520.21
+  Inverter                                219    1923.00
+  Clock inverter                           33     474.16
+  Sequential cell                        1096   78313.76
+  Multi-Input combinational cell         4359   84212.26
+  Total                                  8389  204913.14
+Writing OpenROAD database to '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top/runs/CP100_U70_pines/42-openroad-repairantennas/1-openroad-diodeinsertion/asic_top.odb'…
+Writing layout to '/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top/runs/CP100_U70_pines/42-openroad-repairantennas/1-openroad-diodeinsertion/asic_top.def'…
