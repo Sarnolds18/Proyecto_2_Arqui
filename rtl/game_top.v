@@ -39,10 +39,7 @@ module game_top (
 
   wire [6:0] seg1, seg2;  // {G..A}, active high
 
-  pochoco_soc #(
-    .NumWords (512),
-    .MemFile  ("sw/game.hex")
-  ) u_pochoco (
+  pochoco_soc u_pochoco (
     .i_Clk        (i_Clk),
     .i_Rst_n      (1'b1),
 

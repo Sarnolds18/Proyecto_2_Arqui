@@ -15,11 +15,11 @@ existir en el repo (corrida guardada en `flow/asic_top/runs/`).
 | # | Construcción | Archivo | Mensaje de LibreLane (log:línea) | Reemplazo |
 |---|---|---|---|---|
 | 1 | Primitiva `SB_RAM40_4K` (iCE40) | `rtl/espino_core/espino_register_file.v` | `flow/asic_top/runs/00_rtl_p2_sin_cambios/01-verilator-lint/verilator-lint.log:1` y `:13` (`%Error-MODMISSING`) | Banco de 15×32 flip-flops con lectura sincrónica y reset a 0 |
-| 2 | `initial $readmemh` | `rtl/pochoco_ram.v` | `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:1093` (`meminit`) y `:4102`–`4106` (`DFFLEGALIZE`); sin warning | pendiente (3.2) |
-| 3 | Inferencia de BRAM (512 palabras) | `rtl/pochoco_ram.v` | `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:1401`–`1406` (`MEMORY_MAP`) y `:4532`, `:4558` (estadísticas) | pendiente (3.2) |
+| 2 | `initial $readmemh` | `rtl/pochoco_ram.v` | `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:1093` (`meminit`) y `:4102`–`4106` (`DFFLEGALIZE`); sin warning | El programa queda en el circuito: ROM combinacional `game_rom` generada por `sw/assembler.py --rom` (estrategia 1) o valores de reset de los flip-flops (estrategia 2); `pochoco_ram.v` eliminado (ver `docs/memoria.md`) |
+| 3 | Inferencia de BRAM (512 palabras) | `rtl/pochoco_ram.v` | `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:1401`–`1406` (`MEMORY_MAP`) y `:4532`, `:4558` (estadísticas) | Memoria dimensionada al uso real (99 palabras de instrucción, 0 de datos): `pochoco_mem_rom` (ROM + 8 palabras de datos) o `pochoco_mem_ff` (107 palabras de flip-flops) |
 | 4 | Reset de encendido por valor inicial (`reg [12:0] por_cnt = 13'b0`) | `rtl/pochoco_soc.v` | `flow/asic_top/runs/01_regfile_ff/01-verilator-lint/verilator-lint.log:7` (`%Warning-PROCASSINIT`), `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:304`–`305` (`PROC_INIT`) y `:4102`–`4106`; además `verilator-lint.log:1` (`rst_ni` sin usar) | Puerto `rst_ni` en `asic_top` → sincronizador de 2 FF en `pochoco_soc` (aserción asíncrona, liberación sincrónica); `por_cnt` eliminado |
 | 5 | Bloque `initial` y registros sin reset | `rtl/debouncer.v` | `flow/asic_top/runs/01_regfile_ff/06-yosys-synthesis/yosys-synthesis.log:299`–`303` (`PROC_INIT`) y `:4102`–`4106`; sin warning | Reset asíncrono a 0 en `debounce_bank`; `initial` eliminado |
-| 6 | Supuesto de reloj de 25 MHz (`TICK_BITS`, constantes de `game.s`) | `rtl/debouncer.v`, `sw/game.s` | Sin mensaje (no es un error de síntesis, ver detalle) | `TICK_BITS` 18 → 17 (~13 ms a 10 MHz); constantes de `game.s`: pendiente (P3-07) |
+| 6 | Supuesto de reloj de 25 MHz (`TICK_BITS`, constantes de `game.s`) | `rtl/debouncer.v`, `sw/game.s` | Sin mensaje (no es un error de síntesis, ver detalle) | `TICK_BITS` 18 → 17 (~13 ms a 10 MHz); constantes de `game.s` recalculadas para 10 MHz (P3-07) |
 | 7 | Inversión `~seg` para displays activo-bajo de la Go Board | `rtl/pochoco_soc.v` | Sin mensaje (ver detalle) | Salidas activo alto en `pochoco_soc`/`asic_top`; la inversión queda solo en `game_top` |
 | 8 | Botones asíncronos sin sincronizador | `rtl/debouncer.v` | Sin mensaje (ver detalle) | Sincronizador de 2 FF por botón dentro de `debounce_bank` |
 
@@ -84,7 +84,9 @@ warning ni error** (`warning.log` solo tiene los avisos de lint y de SDC). En la
 bitstream carga el contenido de la BRAM al configurarse; en el silicio no hay ningún
 mecanismo que lo haga, así que el SoC arrancaría ejecutando memoria indeterminada.
 
-Reemplazo: pendiente (sección 3.2, las dos estrategias de memoria).
+Reemplazo: el programa ya no se carga desde un archivo. `sw/assembler.py --rom` genera
+`rtl/game_rom.v` desde `game.s`; la estrategia 1 lo usa como ROM y la 2 como valores de
+reset de los flip-flops. Detalle y comparación en `docs/memoria.md`.
 
 ### 3. Inferencia de BRAM
 
@@ -107,7 +109,8 @@ sus multiplexores de lectura y escritura. El diseño completo queda en 67.817 ce
 flujo, pero el área se dispara y casi toda es memoria que el juego no usa: el
 programa ocupa 99 palabras de instrucción y 0 de datos.
 
-Reemplazo: pendiente (sección 3.2, memoria dimensionada al uso real).
+Reemplazo: memoria dimensionada al uso real del juego (99 palabras de instrucción y 0
+de datos, contadas con `scripts/contar_palabras.py`). Ver `docs/memoria.md`.
 
 ### 4. Reset de encendido por valor inicial
 
@@ -193,7 +196,8 @@ Reemplazo:
 - `TICK_BITS` por defecto 18 → **17** en `debounce_bank` y en `DEBOUNCE_TICK_BITS` de
   `pochoco_periph`: 2^17 / 10 MHz ≈ 13,1 ms, cerca de la ventana de ~10 ms del
   Proyecto 1.
-- Constantes de `game.s` para 10 MHz: pendiente (P3-07).
+- Constantes de `game.s` para 10 MHz (P3-07): 3 s = 30.000.000 ciclos, 2 s =
+  20.000.000 y 1 décima = 1.000.000 (cálculo en la cabecera de `sw/game.s`).
 
 ### 7. Inversión de los 7 segmentos
 

@@ -16,11 +16,16 @@
 // correct_count/sum_decimas), the 10-round loop, and the average/display
 // packing.
 //
-// Run:
-//   iverilog -g2012 -o /tmp/tb_game_smoke.vvp sim/tb_game_smoke.v \
-//     rtl/pochoco_soc.v rtl/pochoco_ram.v rtl/pochoco_periph.v \
-//     rtl/pochoco_spi_slave.v rtl/debouncer.v rtl/espino_core/*.v
-//   vvp /tmp/tb_game_smoke.vvp
+// Run (the program lives in game_rom since Proyecto 3, so build a ROM from
+// game_smoke_test.s and use it instead of rtl/game_rom.v):
+//   mkdir -p sim/build
+//   python3 -B sw/assembler.py sw/game_smoke_test.s sim/build/smoke.hex \
+//     --rom sim/build/smoke_rom.v
+//   iverilog -g2012 -o sim/build/tb_game_smoke.vvp sim/tb_game_smoke.v \
+//     rtl/pochoco_soc.v rtl/pochoco_mem_rom.v rtl/pochoco_mem_ff.v \
+//     rtl/pochoco_periph.v rtl/pochoco_spi_slave.v rtl/debouncer.v \
+//     rtl/espino_core/*.v sim/build/smoke_rom.v
+//   vvp sim/build/tb_game_smoke.vvp
 
 `timescale 1ns/1ps
 
@@ -41,17 +46,12 @@ module tb_game_smoke;
     #1 rst_n = 1'b1;
   end
 
-  // Instantiated exactly as game_top.v instantiates it for real hardware --
-  // NumWords/MemFile are the only parameters pochoco_soc exposes, on
-  // purpose, so production RTL doesn't need a testing-only knob threaded
-  // through it. The real ~10ms debounce would make a full 10-round game
+  // Instantiated with its default memory (pochoco_mem_rom); the program is
+  // whichever game_rom.v is compiled in. The real ~13ms debounce would make a full 10-round game
   // impractically slow to simulate, so `defparam` below reaches straight
   // into the u_periph instance buried inside dut and overrides its
   // DEBOUNCE_TICK_BITS just for this simulation.
-  pochoco_soc #(
-    .NumWords (512),
-    .MemFile  ("sw/game_smoke_test.hex")
-  ) dut (
+  pochoco_soc dut (
     .i_Clk      (clk),
     .i_Rst_n    (rst_n),
     .o_LED      (leds),

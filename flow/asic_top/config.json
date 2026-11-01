@@ -3,7 +3,9 @@
   "VERILOG_FILES": [
     "dir::../../rtl/asic_top.v",
     "dir::../../rtl/pochoco_soc.v",
-    "dir::../../rtl/pochoco_ram.v",
+    "dir::../../rtl/pochoco_mem_rom.v",
+    "dir::../../rtl/pochoco_mem_ff.v",
+    "dir::../../rtl/game_rom.v",
     "dir::../../rtl/pochoco_periph.v",
     "dir::../../rtl/pochoco_spi_slave.v",
     "dir::../../rtl/debouncer.v",

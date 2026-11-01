@@ -31,9 +31,19 @@ module asic_top (
   output wire       spi_miso_o
 );
 
+  // Estrategia de memoria (seccion 3.2): ROM por defecto; la estrategia de
+  // flip-flops se elige definiendo POCHOCO_MEM_FF (VERILOG_DEFINES en el
+  // config.json de flow/asic_top_ff).
+`ifdef POCHOCO_MEM_FF
+  localparam MemStrategy = "ff";
+`else
+  localparam MemStrategy = "rom";
+`endif
+
   pochoco_soc #(
-    .NumWords (512),
-    .MemFile  ("../sw/game.hex")
+    .MemStrategy (MemStrategy),
+    .DataWords   (8),
+    .NumWords    (107)
   ) u_pochoco (
     .i_Clk        (clk_i),
     .i_Rst_n      (rst_ni),

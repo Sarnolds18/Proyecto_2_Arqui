@@ -8,9 +8,14 @@
 // Authors:
 // - Nicolás Villegas <navillegas@miuandes.cl>
 
+// Proyecto 3: el programa ya no se carga con $readmemh. MemStrategy elige
+// la memoria (seccion 3.2): "rom" = pochoco_mem_rom (game_rom + RAM de datos
+// de DataWords palabras), "ff" = pochoco_mem_ff (memoria unificada de
+// NumWords palabras de flip-flops cargada en el reset).
 module pochoco_soc #(
-  parameter NumWords   = 512,
-  parameter MemFile    = "../sw/blink.hex"
+  parameter MemStrategy = "rom",
+  parameter DataWords   = 8,
+  parameter NumWords    = 107
 ) (
   input  wire       i_Clk,
   input  wire       i_Rst_n,  // asynchronous, active low
@@ -90,18 +95,36 @@ module pochoco_soc #(
   assign data_rdata = rd_is_per ? per_rdata :
                       rd_is_spi ? spi_rdata : ram_b_rdata;
 
-  pochoco_ram #(.NumWords(NumWords), .MemFile(MemFile)) u_ram (
-    .clk_i     (clk),
-    .a_req_i   (instr_req),
-    .a_addr_i  (instr_addr),
-    .a_rdata_o (instr_rdata),
-    .b_req_i   (ram_b_req),
-    .b_we_i    (data_we),
-    .b_be_i    (data_be),
-    .b_addr_i  (data_addr),
-    .b_wdata_i (data_wdata),
-    .b_rdata_o (ram_b_rdata)
-  );
+  generate
+    if (MemStrategy == "ff") begin : g_mem_ff
+      pochoco_mem_ff #(.NumWords(NumWords)) u_ram (
+        .clk_i     (clk),
+        .rst_ni    (rst_ni),
+        .a_req_i   (instr_req),
+        .a_addr_i  (instr_addr),
+        .a_rdata_o (instr_rdata),
+        .b_req_i   (ram_b_req),
+        .b_we_i    (data_we),
+        .b_be_i    (data_be),
+        .b_addr_i  (data_addr),
+        .b_wdata_i (data_wdata),
+        .b_rdata_o (ram_b_rdata)
+      );
+    end else begin : g_mem_rom
+      pochoco_mem_rom #(.DataWords(DataWords)) u_ram (
+        .clk_i     (clk),
+        .a_req_i   (instr_req),
+        .a_addr_i  (instr_addr),
+        .a_rdata_o (instr_rdata),
+        .b_req_i   (ram_b_req),
+        .b_we_i    (data_we),
+        .b_be_i    (data_be),
+        .b_addr_i  (data_addr),
+        .b_wdata_i (data_wdata),
+        .b_rdata_o (ram_b_rdata)
+      );
+    end
+  endgenerate
 
   // Peripherals
   wire [6:0] seg1, seg2;
