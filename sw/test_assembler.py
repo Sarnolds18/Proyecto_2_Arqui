@@ -1,4 +1,8 @@
+import contextlib
+import io
 import os
+import re
+import tempfile
 import unittest
 
 import assembler as asm
@@ -186,6 +190,63 @@ class TestGameRegression(unittest.TestCase):
             committed = f.read()
 
         self.assertEqual(produced, committed)
+
+
+class TestRomVerilog(unittest.TestCase):
+    """--rom output: the game_rom module agreed for rtl/game_rom.v."""
+
+    CASE_LINE = re.compile(r"^\s*8'd(\d+): data_o = 32'h([0-9a-f]{8});$")
+
+    def rom_entries(self, text):
+        """Return {address: word} from the case lines of a game_rom module."""
+        entries = {}
+        for line in text.splitlines():
+            match = self.CASE_LINE.match(line)
+            if match:
+                entries[int(match.group(1))] = int(match.group(2), 16)
+        return entries
+
+    def test_format(self):
+        text = asm.to_rom_verilog([0x80000437, 0x00000013], "x.s")
+        self.assertIn("module game_rom (", text)
+        self.assertIn("input  wire [7:0]  addr_i", text)
+        self.assertIn("      8'd0: data_o = 32'h80000437;", text)
+        self.assertIn("      8'd1: data_o = 32'h00000013;", text)
+        self.assertIn("default: data_o = 32'h00000000;", text)
+        self.assertEqual(self.rom_entries(text), {0: 0x80000437, 1: 0x00000013})
+
+    def test_full_rom_fits(self):
+        text = asm.to_rom_verilog([0x13] * asm.ROM_WORDS, "x.s")
+        self.assertEqual(len(self.rom_entries(text)), 256)
+
+    def test_too_many_words(self):
+        with self.assertRaises(ValueError):
+            asm.to_rom_verilog([0x13] * (asm.ROM_WORDS + 1), "x.s")
+
+    def test_game_rom_matches_game_hex(self):
+        # Independent oracle: every word of game.hex at its index, nothing else.
+        here = os.path.dirname(os.path.abspath(__file__))
+        code = asm.drop_comments(asm.code_to_list(asm.read_file(os.path.join(here, "game.s"))))
+        text = asm.to_rom_verilog(asm.assemble(code), "sw/game.s")
+        with open(os.path.join(here, "game.hex")) as f:
+            expected = {i: int(w, 16) for i, w in enumerate(f.read().split())}
+        self.assertEqual(self.rom_entries(text), expected)
+
+    def test_command_line_writes_hex_and_rom(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            src = os.path.join(tmp, "p.s")
+            with open(src, "w") as f:
+                f.write("start: addi t0, x0, 1\n jal x0, start\n")
+            hex_path, rom_path = os.path.join(tmp, "p.hex"), os.path.join(tmp, "p.v")
+            self.assertEqual(asm.main(["assembler.py", src, hex_path, "--rom", rom_path]), 0)
+            with open(hex_path) as f:
+                words = [int(w, 16) for w in f.read().split()]
+            with open(rom_path) as f:
+                self.assertEqual(self.rom_entries(f.read()), dict(enumerate(words)))
+
+    def test_command_line_rejects_bad_flag(self):
+        with contextlib.redirect_stderr(io.StringIO()):
+            self.assertEqual(asm.main(["assembler.py", "a.s", "a.hex", "--romm", "a.v"]), 1)
 
 
 if __name__ == "__main__":

@@ -118,6 +118,10 @@ NUMBER_PATTERN = re.compile(r"[+-]?(0[xX][0-9a-fA-F]+|0[bB][01]+|0[0-7]*|[1-9][0
 OPERAND_COUNT = {"R": 3, "I": 3, "SHIFT": 3, "LOAD": 2, "S": 2,
                  "B": 3, "U": 2, "J": 2, "JALR": 2}
 
+# Combinational ROM written by --rom (Proyecto 3): word address width and size.
+ROM_ADDR_BITS = 8
+ROM_WORDS = 1 << ROM_ADDR_BITS
+
 def read_file(file_path: str) -> str:
     """Return the contents of a text file. Raises OSError if it can't be read."""
     with open(file_path, 'r') as file:
@@ -471,6 +475,42 @@ def to_hex(words: list) -> str:
     """Format words for $readmemh: 8 lowercase hex digits per line."""
     return "".join(f"{word:08x}\n" for word in words)
 
+def to_rom_verilog(words: list, source_name: str) -> str:
+    """
+    Format words as the combinational ROM module game_rom (rtl/game_rom.v).
+
+    addr_i is a word address (ROM_ADDR_BITS bits); addresses past the end of
+    the program read 0, which the core executes as a no-op.
+    Raises ValueError if the program doesn't fit.
+    """
+    if len(words) > ROM_WORDS:
+        raise ValueError(f"program has {len(words)} words, the ROM holds {ROM_WORDS}")
+    lines = [
+        "// game_rom: imagen del programa como ROM combinacional.",
+        "// ARCHIVO GENERADO, no editar a mano.",
+        f"// Generado desde {source_name} por sw/assembler.py --rom.",
+        f"// {len(words)} palabras de instruccion.",
+        "",
+        "module game_rom (",
+        f"  input  wire [{ROM_ADDR_BITS - 1}:0]  addr_i,  // direccion de palabra",
+        "  output reg  [31:0] data_o",
+        ");",
+        "",
+        "  always @* begin",
+        "    case (addr_i)",
+    ]
+    lines += [f"      {ROM_ADDR_BITS}'d{i}: data_o = 32'h{word:08x};"
+              for i, word in enumerate(words)]
+    lines += [
+        "      default: data_o = 32'h00000000;",
+        "    endcase",
+        "  end",
+        "",
+        "endmodule",
+        "",
+    ]
+    return "\n".join(lines)
+
 def is_empty(string: str) -> bool:
     """Return True if string is empty or only whitespace."""
     return not string.strip()
@@ -482,9 +522,18 @@ def report(diagnostics: list, filename: str) -> None:
         print(diagnostic, file=sys.stderr)
 
 def main(argv: list) -> int:
-    """Command line entry point: assembler.py <input.s> <output.hex>. Returns the exit code."""
-    if len(argv) != 3:
-        print(f"usage: python3 {argv[0]} <input.s> <output.hex>", file=sys.stderr)
+    """
+    Command line entry point: assembler.py <input.s> <output.hex> [--rom <rom.v>].
+    With --rom it also writes the program as the combinational ROM game_rom.
+    Returns the exit code.
+    """
+    usage = f"usage: python3 {argv[0]} <input.s> <output.hex> [--rom <rom.v>]"
+    if len(argv) == 5 and argv[3] == "--rom":
+        rom_path = argv[4]
+    elif len(argv) == 3:
+        rom_path = None
+    else:
+        print(usage, file=sys.stderr)
         return 1
     source_path, output_path = argv[1], argv[2]
 
@@ -500,12 +549,21 @@ def main(argv: list) -> int:
         return 1
     report(warnings, source_path)
 
-    try:
-        with open(output_path, "w") as file:
-            file.write(to_hex(words))
-    except OSError as err:
-        print(f"{output_path}: error: cannot write file: {err.strerror}", file=sys.stderr)
-        return 1
+    outputs = [(output_path, to_hex(words))]
+    if rom_path is not None:
+        try:
+            outputs.append((rom_path, to_rom_verilog(words, source_path)))
+        except ValueError as err:
+            print(f"{source_path}: error: {err}", file=sys.stderr)
+            return 1
+
+    for path, text in outputs:
+        try:
+            with open(path, "w") as file:
+                file.write(text)
+        except OSError as err:
+            print(f"{path}: error: cannot write file: {err.strerror}", file=sys.stderr)
+            return 1
     return 0
 
 if __name__ == "__main__":
