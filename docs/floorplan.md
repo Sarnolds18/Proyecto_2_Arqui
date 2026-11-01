@@ -38,10 +38,10 @@ lógica.
 
 | `FP_CORE_UTIL` | Die (µm) | Die (mm²) | Util. final | Uso ruteo global | Violaciones DRT iter. 0 | Setup WS ss (ns) | Hold WS ss (ns) | ¿Cierra? | Costo (US$) |
 |---|---|---|---|---|---|---|---|---|---|
-| 40 % | 655,0 × 672,9 | 0,4407 | 51,4 % | 23,26 % | 14 | 37,56 | 0,95 | sí | 10.136 |
+| 40 % | 655,0 × 672,9 | 0,4407 | 51,4 % | 23,26 % | 14 | 37,56 | 0,95 | sí | 10.137 |
 | 50 % | 587,3 × 605,2 | 0,3554 | 63,5 % | 27,22 % | 27 | 36,50 | 0,93 | sí | 8.174 |
-| 60 % | 537,3 × 555,2 | 0,2983 | 75,5 % | 31,81 % | 5 | 39,82 | 0,99 | sí | 6.861 |
-| **70 %** | **498,4 × 516,3** | **0,2573** | 87,6 % | 42,45 % | 130 | 41,28 | 1,00 | **sí** | **5.918** |
+| 60 % | 537,3 × 555,2 | 0,2983 | 75,5 % | 31,81 % | 5 | 39,82 | 0,99 | sí | 6.860 |
+| **70 %** | **498,4 × 516,3** | **0,2573** | 87,6 % | 42,45 % | 130 | 41,28 | 1,00 | **sí** | **5.919** |
 | 75 % | — | — | — | — | — | — | — | no: el flujo no termina | — |
 | 80 % | — | — | — | — | — | — | — | no: el flujo no termina | — |
 
@@ -74,8 +74,8 @@ las celdas, no el timing ni el ruteo.
 
 Con US$23.000/mm² escalando linealmente con el área del die:
 
-- Corrida exigida (U = 40 %): 0,4407 mm² → **US$10.136**.
-- Área mínima que cierra (U = 70 %): 0,2573 mm² → **US$5.918** (−42 %).
+- Corrida exigida (U = 40 %): 0,4407 mm² → **US$10.137**.
+- Área mínima que cierra (U = 70 %): 0,2573 mm² → **US$5.919** (−42 %).
 
 Limitaciones de la aproximación:
 - Es solo el macro: un chip real necesita el anillo de pads, que para un diseño tan

@@ -48,7 +48,7 @@ def fila(run):
     r["drt_viol_iter0"] = m.get("route__drc_errors__iter:0")
     if r.get("area_die_um2") is not None:
         r["die_mm2"] = round(r["area_die_um2"] / 1e6, 4)
-        r["costo_usd"] = round(r["die_mm2"] * USD_POR_MM2)
+        r["costo_usd"] = round(r["area_die_um2"] / 1e6 * USD_POR_MM2)
     return r
 
 
