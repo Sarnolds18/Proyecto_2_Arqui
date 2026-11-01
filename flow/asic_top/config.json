@@ -24,5 +24,19 @@
   "PNR_SDC_FILE": "dir::asic_top.sdc",
   "SIGNOFF_SDC_FILE": "dir::asic_top.sdc",
   "IO_PIN_ORDER_CFG": "dir::pin_order.cfg",
-  "ERRORS_ON_UNMATCHED_IO": "both"
+  "ERRORS_ON_UNMATCHED_IO": "both",
+  "EXTRA_EXCLUDED_CELLS": [
+    "gf180mcu_fd_sc_mcu7t5v0__dly*"
+  ],
+  "KLAYOUT_DRC_RUNSET": "pdk_dir::libs.tech/klayout/tech/drc/gf180mcu.drc",
+  "KLAYOUT_DRC_DEFINES": {
+    "metal_top": "11K",
+    "mim_option": "B",
+    "metal_level": "5LM",
+    "feol": "true",
+    "beol": "true",
+    "offgrid": "true",
+    "conn_drc": "true",
+    "run_mode": "deep"
+  }
 }
