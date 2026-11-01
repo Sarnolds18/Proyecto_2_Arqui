@@ -1,0 +1,49 @@
+148. Printing statistics.
+
+=== asic_top ===
+
+        +----------Local Count, excluding submodules.
+        | 
+    19222 wires
+    23613 wire bits
+      191 public wires
+     4436 public wire bits
+       10 ports
+       28 port bits
+    23522 cells
+     9086   $_ANDNOT_
+      146   $_AND_
+       63   $_DFFE_PN0N_
+     2908   $_DFFE_PN0P_
+     1096   $_DFFE_PN1P_
+      131   $_DFF_PN0_
+        3   $_DFF_PN1_
+      556   $_MUX_
+      189   $_NAND_
+      199   $_NOR_
+      283   $_NOT_
+      138   $_ORNOT_
+     8389   $_OR_
+       32   $_SDFFCE_PP0N_
+       32   $_SDFF_PP0_
+       63   $_XNOR_
+      208   $_XOR_
+
+   Area for cell type $_ANDNOT_ is unknown!
+   Area for cell type $_AND_ is unknown!
+   Area for cell type $_DFFE_PN0N_ is unknown!
+   Area for cell type $_DFFE_PN0P_ is unknown!
+   Area for cell type $_DFFE_PN1P_ is unknown!
+   Area for cell type $_DFF_PN0_ is unknown!
+   Area for cell type $_DFF_PN1_ is unknown!
+   Area for cell type $_MUX_ is unknown!
+   Area for cell type $_NAND_ is unknown!
+   Area for cell type $_NOR_ is unknown!
+   Area for cell type $_NOT_ is unknown!
+   Area for cell type $_ORNOT_ is unknown!
+   Area for cell type $_OR_ is unknown!
+   Area for cell type $_SDFFCE_PP0N_ is unknown!
+   Area for cell type $_SDFF_PP0_ is unknown!
+   Area for cell type $_XNOR_ is unknown!
+   Area for cell type $_XOR_ is unknown!
+
