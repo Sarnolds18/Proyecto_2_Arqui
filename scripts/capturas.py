@@ -11,9 +11,10 @@ Genera en el directorio de salida:
   bloques.png            solo el contorno del core y las celdas de cada bloque
   bloques.csv            celdas, flip-flops y area por bloque
 
-Como se identifica cada bloque. LibreLane aplana la jerarquia en la sintesis
-(SYNTH_HIERARCHY_MODE = flatten), asi que las instancias quedan con nombres
-como _09531_. Se usan dos fuentes, en este orden:
+Como se identifica cada bloque. El netlist final queda aplanado, pero los
+modulos de SYNTH_KEEP_HIERARCHY_MODULES (register file, ALU, contador) conservan
+su prefijo de instancia (u_rf, u_alu, u_cycle_counter); el resto de las celdas
+queda con nombres como _09531_. Se usan dos fuentes, en este orden:
   1. El nombre de la instancia, si conserva la jerarquia (u_..._alu...).
   2. Para los flip-flops, el nombre de la red de su salida Q, que Yosys conserva
      desde el RTL (p. ej. u_pochoco.u_core.u_rf.regs_q[2][28]).
@@ -22,8 +23,8 @@ pertenece al bloque si todas las celdas a las que llega su salida ya son del
 bloque (cono de entrada exclusivo; se itera hasta que no cambia). Asi entran
 los multiplexores de lectura/escritura del register file y el incrementador
 del contador, pero no la logica compartida con otros bloques. La ALU es pura
-logica combinacional: sin jerarquia no tiene flip-flops propios que sirvan de
-semilla y no se puede identificar.
+logica combinacional: solo se identifica por el prefijo u_alu (sin
+SYNTH_KEEP_HIERARCHY_MODULES no tiene flip-flops que sirvan de semilla).
 """
 
 import argparse
