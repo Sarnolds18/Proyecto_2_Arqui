@@ -22,6 +22,11 @@
   "CLOCK_PORT": "clk_i",
   "CLOCK_PERIOD": 100,
   "FP_CORE_UTIL": 40,
+  "SYNTH_KEEP_HIERARCHY_MODULES": [
+    "espino_register_file",
+    "espino_alu",
+    "pochoco_cycle_counter"
+  ],
   "PNR_SDC_FILE": "dir::asic_top.sdc",
   "SIGNOFF_SDC_FILE": "dir::asic_top.sdc"
 }
