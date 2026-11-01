@@ -1,0 +1,43 @@
+# 3.7 Simulación funcional post-síntesis
+
+## Programa con los tiempos acortados
+
+Simular 3 s a 10 MHz son 30 millones de ciclos por ronda; en el netlist eso tarda horas.
+`scripts/game_sim.py` genera `sim/build/game_sim.s` desde `sw/game.s` dividiendo por 100
+las cuatro constantes de tiempo (3 s → 300.000 ciclos, 2 s → 200.000, 1 décima → 10.000).
+Las instrucciones y direcciones son las mismas; solo cambian esos inmediatos. El
+hardware no cambia: el debounce sigue con `TICK_BITS = 17`, por eso cada pulsación del
+testbench dura 300.000 ciclos. **Las dos simulaciones usan este mismo programa.**
+
+## Testbench
+
+`sim/tb_game_fixed_stimuli.v` instancia `asic_top` (el mismo top que el netlist) y
+aprieta botones en ciclos fijos (no mira los LEDs para decidir). Registra cada cambio de
+los LEDs y los displays con su ciclo:
+
+1. Ciclo 350.000: botón `0001` con el objetivo `0010` → display `EE` y la ronda se
+   reinicia (LEDs `1111` de nuevo).
+2. Ciclo 1.000.000: botón `0010` (correcto) → el display muestra el tiempo en décimas.
+
+Resultado RTL: objetivo encendido en el ciclo 939.978, resultado en el ciclo 1.245.563
+(**305.585 ciclos**), display `30` décimas (305.585 / 10.000 = 30,5).
+
+## Cómo correrlo
+
+```bash
+sim/run_fixed_stimuli.sh rtl                 # RTL -> sim/build/rtl_rom.log (~1,5 min)
+
+# Netlist: el programa está dentro del netlist, así que se sintetiza con la ROM de
+# game_sim.s (flow/asic_top_sim usa sim/build/game_rom.v, que genera el paso anterior).
+scripts/run_sweep.sh -d flow/asic_top_sim -s sim -p "100" -u "40" -- --to Yosys.Synthesis
+sim/run_fixed_stimuli.sh netlist flow/asic_top_sim/runs/CP100_U40_sim/06-yosys-synthesis/asic_top.nl.v
+
+sim/run_fixed_stimuli.sh compara sim/build/rtl_rom.log sim/build/netlist.log
+```
+
+El netlist se simula sin retardos con los modelos Verilog de las celdas de GF180
+(`$PDK_ROOT/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/verilog`). La síntesis de
+`flow/asic_top_sim` es la misma que la de la corrida final (mismo RTL y misma
+configuración); solo cambia el contenido de la ROM.
+
+Resultado del netlist: pendiente.

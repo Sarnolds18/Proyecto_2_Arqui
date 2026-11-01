@@ -18,6 +18,7 @@ module_stats/
 
 # Simulation Artifacts (Iverilog / GTKWave / Cocotb)
 sim/sim
+sim/build/
 *.vcd
 *.csv
 # LibreLane (Proyecto 3): las corridas son pesadas (GDS, DEF, netlists).
