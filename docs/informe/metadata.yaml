@@ -1,11 +1,4 @@
 ---
-title: "Proyecto 3: Pochoco SoC, de RTL a GDSII"
-subtitle: "Arquitectura de Computadores, Universidad de los Andes, 2026-2"
-author:
-  - Santiago Arnolds
-  - Lucas Nestler
-  - Matias Veto
-date: "4 de noviembre de 2026"
 lang: es
 papersize: a4
 margin:
@@ -16,6 +9,10 @@ mainfont: "Libertinus Serif"
 codefont: "DejaVu Sans Mono"
 header-includes: |
   ```{=typst}
+  // La portada (pagina 1) no lleva numero.
+  #set page(footer: context {
+    if counter(page).get().first() > 1 { align(center, counter(page).display("1")) }
+  })
   // Tablas: se pueden partir entre paginas, alineadas a la izquierda, con lineas.
   #show figure: set block(breakable: true)
   #show figure: set align(left)
@@ -27,5 +24,39 @@ header-includes: |
   #show raw: set text(size: 0.9em)
   // Cada seccion 3.x empieza en una pagina nueva.
   #show heading.where(level: 1): it => { pagebreak(weak: true); it }
+  ```
+# Portada con el mismo diseno que la del Informe del Proyecto 2.
+include-before: |
+  ```{=typst}
+  #set document(
+    title: "Informe Proyecto 3: Pochoco SoC, de RTL a GDSII",
+    author: ("Lucas Nestler", "Santiago Arnolds", "Matías Veto"),
+  )
+  #[
+    #set text(font: "DejaVu Sans", fill: luma(25))
+    #set par(justify: false)
+    #place(top + left, image("../img/logo_uniandes.png", width: 6cm))
+    #place(top + left, dy: 9.3cm)[
+      #text(size: 9pt, tracking: 0.32em, fill: luma(70))[INFORME PROYECTO 3]
+      #v(0.45cm)
+      #text(size: 27pt, hyphenate: false)[Pochoco SoC:\ de RTL a GDSII]
+      #v(0.55cm)
+      #line(length: 6.4cm, stroke: 1.2pt + luma(25))
+      #v(0.35cm)
+      #text(size: 10pt, fill: luma(70))[
+        Implementación del Pochoco SoC y el juego de reflejos como macro digital\
+        LibreLane — PDK GF180MCU (gf180mcuD)
+      ]
+    ]
+    #place(bottom + right, dy: -3cm, align(right, text(size: 10pt)[
+      Integrantes: Lucas Nestler, Santiago Arnolds, Matías Veto\
+      Curso: Arquitectura de Computadores, semestre 2026-2\
+      Profesor: Jorge Gómez Mir
+    ]))
+    #place(bottom + left, dy: -0.65cm, text(size: 8.5pt, fill: luma(70))[
+      Entrega en GitHub: 4 de noviembre #h(0.3em) · #h(0.3em) Defensa presencial: 4 de noviembre
+    ])
+  ]
+  #pagebreak()
   ```
 ---
