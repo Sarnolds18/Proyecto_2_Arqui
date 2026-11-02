@@ -46,3 +46,4 @@ flow/*/runs/**/sta.log
 flow/*/runs/*/*-openroad-stapostpnr/*/max.rpt
 flow/*/runs/*/*-openroad-stapostpnr/*/min.rpt
 !results/*.csv
+!docs/img/*.csv
