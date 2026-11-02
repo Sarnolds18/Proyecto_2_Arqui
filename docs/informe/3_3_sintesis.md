@@ -61,7 +61,7 @@ repair, el árbol de reloj, ni las celdas de tap y relleno).
 ## Las 5 celdas más usadas
 
 | Celda | Total | Register file | ALU | Contador | Resto | Qué la explica |
-|---|---:|---:|---:|---:|---:|---|
+|-------|-----:|-----:|-----:|-----:|-----:|----------------------------------------|
 | `nand2_1` | 976 | 142 | 82 | 39 | 713 | Lógica combinacional general: decoder, mux de operandos, decodificación de direcciones y periféricos |
 | `dffrnq_1` | 776 | 544 | 0 | 32 | 200 | Flip-flop con reset asíncrono. 544 del register file (15 registros × 32 bits + 2 × 32 de los registros de lectura sincrónica), 32 del contador y el resto PC, periféricos, SPI y debouncer |
 | `aoi22_1` | 615 | 384 | 9 | 0 | 222 | Árboles de mux de lectura del register file (dos puertos de lectura de 16 a 1 de 32 bits) |

@@ -1,0 +1,31 @@
+---
+title: "Proyecto 3: Pochoco SoC, de RTL a GDSII"
+subtitle: "Arquitectura de Computadores, Universidad de los Andes, 2026-2"
+author:
+  - Santiago Arnolds
+  - Lucas Nestler
+  - Matias Veto
+date: "4 de noviembre de 2026"
+lang: es
+papersize: a4
+margin:
+  x: 2cm
+  y: 2.2cm
+fontsize: 10pt
+mainfont: "Libertinus Serif"
+codefont: "DejaVu Sans Mono"
+header-includes: |
+  ```{=typst}
+  // Tablas: se pueden partir entre paginas, alineadas a la izquierda, con lineas.
+  #show figure: set block(breakable: true)
+  #show figure: set align(left)
+  #set table(stroke: 0.4pt + luma(170), inset: (x: 4pt, y: 3pt))
+  #show table: set text(size: 8.5pt)
+  #show table: set align(left)
+  #show table: set par(justify: false)
+  #show table.cell.where(y: 0): set text(weight: "bold")
+  #show raw: set text(size: 0.9em)
+  // Cada seccion 3.x empieza en una pagina nueva.
+  #show heading.where(level: 1): it => { pagebreak(weak: true); it }
+  ```
+---
