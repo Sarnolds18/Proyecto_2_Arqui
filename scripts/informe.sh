@@ -2,7 +2,7 @@
 # Arma el informe del Proyecto 3 en PDF a partir de las secciones en Markdown.
 #
 # Uso (desde cualquier carpeta del repo):
-#   scripts/informe.sh [salida.pdf]          # por defecto Informe_Proyecto3.pdf
+#   scripts/informe.sh [salida.pdf]          # por defecto Informe_proyecto3.pdf
 #
 # Junta docs/informe/metadata.yaml (portada) y docs/informe/3_*.md en orden de
 # nombre, los convierte a Typst con pandoc y compila el PDF con typst. Las
@@ -17,7 +17,7 @@ set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIR="$REPO/docs/informe"
-SALIDA="${1:-$REPO/Informe_Proyecto3.pdf}"
+SALIDA="${1:-$REPO/Informe_proyecto3.pdf}"
 NIXPKGS="github:NixOS/nixpkgs/d357a2b54f0b6dc4aeb4e993190a52cf151b6f24"
 
 if ! command -v pandoc >/dev/null || ! command -v typst >/dev/null; then
