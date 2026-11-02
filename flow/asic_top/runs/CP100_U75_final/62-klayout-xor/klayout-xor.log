@@ -1,0 +1,389 @@
+Using 12 threads…
+Using a tile size of (500 µm)²…
+Reading /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top/runs/CP100_U75_final/57-magic-streamout/asic_top.magic.gds ..
+Reading /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top/runs/CP100_U75_final/58-klayout-streamout/asic_top.klayout.gds ..
+--- Running XOR for layer 0/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 12770 (flat)  60 (hierarchical)
+    Elapsed: 0.000s  Memory: 432.00M
+"input" in: xor.drc:109
+    Polygons (raw): 12770 (flat)  60 (hierarchical)
+    Elapsed: 0.000s  Memory: 432.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.240s  Memory: 436.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.010s  Memory: 436.00M
+--- Running XOR for layer 112/1 ---
+"input" in: xor.drc:109
+    Polygons (raw): 12769 (flat)  59 (hierarchical)
+    Elapsed: 0.000s  Memory: 436.00M
+"input" in: xor.drc:109
+    Polygons (raw): 12769 (flat)  59 (hierarchical)
+    Elapsed: 0.000s  Memory: 436.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.280s  Memory: 437.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 437.00M
+--- Running XOR for layer 204/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 12769 (flat)  59 (hierarchical)
+    Elapsed: 0.000s  Memory: 437.00M
+"input" in: xor.drc:109
+    Polygons (raw): 12769 (flat)  59 (hierarchical)
+    Elapsed: 0.000s  Memory: 437.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.320s  Memory: 438.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 437.00M
+--- Running XOR for layer 204/10 ---
+"input" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 437.00M
+"input" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 437.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 437.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 437.00M
+--- Running XOR for layer 21/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 12769 (flat)  59 (hierarchical)
+    Elapsed: 0.000s  Memory: 437.00M
+"input" in: xor.drc:109
+    Polygons (raw): 12769 (flat)  59 (hierarchical)
+    Elapsed: 0.000s  Memory: 437.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.320s  Memory: 446.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 446.00M
+--- Running XOR for layer 21/10 ---
+"input" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 446.00M
+"input" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 446.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 446.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 446.00M
+--- Running XOR for layer 22/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 26031 (flat)  189 (hierarchical)
+    Elapsed: 0.000s  Memory: 446.00M
+"input" in: xor.drc:109
+    Polygons (raw): 26031 (flat)  189 (hierarchical)
+    Elapsed: 0.010s  Memory: 446.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.400s  Memory: 446.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 446.00M
+--- Running XOR for layer 30/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 35716 (flat)  257 (hierarchical)
+    Elapsed: 0.000s  Memory: 446.00M
+"input" in: xor.drc:109
+    Polygons (raw): 35716 (flat)  257 (hierarchical)
+    Elapsed: 0.000s  Memory: 446.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.810s  Memory: 448.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 448.00M
+--- Running XOR for layer 31/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 14400 (flat)  61 (hierarchical)
+    Elapsed: 0.000s  Memory: 448.00M
+"input" in: xor.drc:109
+    Polygons (raw): 14400 (flat)  61 (hierarchical)
+    Elapsed: 0.000s  Memory: 448.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.280s  Memory: 455.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 455.00M
+--- Running XOR for layer 32/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 12769 (flat)  59 (hierarchical)
+    Elapsed: 0.000s  Memory: 455.00M
+"input" in: xor.drc:109
+    Polygons (raw): 12769 (flat)  59 (hierarchical)
+    Elapsed: 0.000s  Memory: 455.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.310s  Memory: 465.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 465.00M
+--- Running XOR for layer 33/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 156101 (flat)  1317 (hierarchical)
+    Elapsed: 0.000s  Memory: 465.00M
+"input" in: xor.drc:109
+    Polygons (raw): 156101 (flat)  1317 (hierarchical)
+    Elapsed: 0.000s  Memory: 465.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 1.590s  Memory: 472.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 472.00M
+--- Running XOR for layer 34/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 91973 (flat)  24558 (hierarchical)
+    Elapsed: 0.000s  Memory: 472.00M
+"input" in: xor.drc:109
+    Polygons (raw): 92333 (flat)  560 (hierarchical)
+    Elapsed: 0.000s  Memory: 472.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 2.550s  Memory: 500.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 500.00M
+--- Running XOR for layer 34/10 ---
+"input" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.010s  Memory: 500.00M
+"input" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 500.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.130s  Memory: 500.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 500.00M
+--- Running XOR for layer 35/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 25081 (flat)  25081 (hierarchical)
+    Elapsed: 0.010s  Memory: 500.00M
+"input" in: xor.drc:109
+    Polygons (raw): 25081 (flat)  5 (hierarchical)
+    Elapsed: 0.000s  Memory: 500.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.250s  Memory: 500.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.010s  Memory: 500.00M
+--- Running XOR for layer 36/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 21427 (flat)  21427 (hierarchical)
+    Elapsed: 0.000s  Memory: 500.00M
+"input" in: xor.drc:109
+    Polygons (raw): 88022 (flat)  39751 (hierarchical)
+    Elapsed: 0.000s  Memory: 500.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 1.500s  Memory: 540.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 540.00M
+--- Running XOR for layer 36/10 ---
+"input" in: xor.drc:109
+    Polygons (raw): 22 (flat)  22 (hierarchical)
+    Elapsed: 0.000s  Memory: 540.00M
+"input" in: xor.drc:109
+    Polygons (raw): 22 (flat)  22 (hierarchical)
+    Elapsed: 0.010s  Memory: 540.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 540.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 540.00M
+--- Running XOR for layer 38/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 24635 (flat)  24635 (hierarchical)
+    Elapsed: 0.000s  Memory: 540.00M
+"input" in: xor.drc:109
+    Polygons (raw): 24635 (flat)  4 (hierarchical)
+    Elapsed: 0.000s  Memory: 540.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.240s  Memory: 547.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 546.00M
+--- Running XOR for layer 40/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 5448 (flat)  5448 (hierarchical)
+    Elapsed: 0.000s  Memory: 546.00M
+"input" in: xor.drc:109
+    Polygons (raw): 5448 (flat)  4 (hierarchical)
+    Elapsed: 0.000s  Memory: 546.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.090s  Memory: 546.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 546.00M
+--- Running XOR for layer 41/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 1115 (flat)  1115 (hierarchical)
+    Elapsed: 0.000s  Memory: 546.00M
+"input" in: xor.drc:109
+    Polygons (raw): 1115 (flat)  10 (hierarchical)
+    Elapsed: 0.010s  Memory: 547.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.090s  Memory: 547.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 547.00M
+--- Running XOR for layer 42/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 12283 (flat)  12283 (hierarchical)
+    Elapsed: 0.000s  Memory: 547.00M
+"input" in: xor.drc:109
+    Polygons (raw): 47725 (flat)  19086 (hierarchical)
+    Elapsed: 0.000s  Memory: 547.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.440s  Memory: 556.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+--- Running XOR for layer 42/10 ---
+"input" in: xor.drc:109
+    Polygons (raw): 6 (flat)  6 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"input" in: xor.drc:109
+    Polygons (raw): 6 (flat)  6 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 556.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 556.00M
+--- Running XOR for layer 46/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 2395 (flat)  2395 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"input" in: xor.drc:109
+    Polygons (raw): 8947 (flat)  3252 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.200s  Memory: 556.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+--- Running XOR for layer 46/10 ---
+"input" in: xor.drc:109
+    Polygons (raw): 6 (flat)  6 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"input" in: xor.drc:109
+    Polygons (raw): 6 (flat)  6 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 556.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+--- Running XOR for layer 55/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 12769 (flat)  59 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"input" in: xor.drc:109
+    Polygons (raw): 12769 (flat)  59 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.300s  Memory: 556.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 556.00M
+--- Running XOR for layer 63/63 ---
+"input" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"input" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.080s  Memory: 556.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+--- Running XOR for layer 81/0 ---
+"input" in: xor.drc:109
+    Polygons (raw): 442 (flat)  442 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"input" in: xor.drc:109
+    Polygons (raw): 1548 (flat)  579 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 556.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+--- Running XOR for layer 81/10 ---
+"input" in: xor.drc:109
+    Polygons (raw): 6 (flat)  6 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"input" in: xor.drc:109
+    Polygons (raw): 6 (flat)  6 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+"^" in: xor.drc:109
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 556.00M
+XOR differences: 0
+"output" in: xor.drc:86
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 556.00M
+---
+Total XOR differences: 0
+Writing report database: /home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top/runs/CP100_U75_final/62-klayout-xor/xor.xml ..
+Total elapsed: 11.580s  Memory: 556.00M
+/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top/runs/CP100_U75_final/57-magic-streamout/asic_top.magic.gds
+/home/sarnolds/arquitectura/proyecto2/Proyecto_2_Arqui/flow/asic_top/runs/CP100_U75_final/58-klayout-streamout/asic_top.klayout.gds
+%OL_METRIC_I design__xor_difference__count 0

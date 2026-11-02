@@ -1,8 +1,5 @@
 # 3.5 Floorplan, alimentación y placement
 
-> **BORRADOR**: los valores marcados ⏳ salen del barrido `CP100_U*_final`, que está
-> corriendo. El punto de 40 % ya es la corrida final (`CP100_U40_final`).
-
 Todas las corridas usan el RTL final (memoria ROM, contador como módulo, `boff_q` en el
 LSU), `CLOCK_PERIOD` = 100 ns y el mismo `flow/asic_top/config.json`; solo cambia
 `FP_CORE_UTIL`.
@@ -78,30 +75,49 @@ chip.
 
 | `FP_CORE_UTIL` | Die (µm) | Die (mm²) | Util. final | Uso ruteo global | Viol. DRT iter. 0 | Setup WS ss (ns) | Hold WS peor (ns) | ¿Cierra? | Costo (US$) |
 |---|---|---|---|---|---|---|---|---|---|
-| 40 % | 653,4 × 671,4 | 0,4387 | 48,0 % | ⏳ | ⏳ | 51,40 | 0,14 | sí | 10.090 |
-| 50 % | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
-| 60 % | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
-| 70 % | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
-| 75 % | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
-| 80 % | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| 40 % | 653,4 × 671,4 | 0,4387 | 48,0 % | 23,34 % | 51 | 51,40 | 0,143 | sí | 10.090 |
+| 50 % | 585,9 × 603,8 | 0,3537 | 59,0 % | 26,91 % | 3.146 | 53,37 | 0,120 | sí | 8.136 |
+| 60 % | 536,0 × 553,9 | 0,2969 | 70,2 % | 30,54 % | 56 | 52,89 | 0,138 | sí | 6.829 |
+| 70 % | 497,2 × 515,2 | 0,2562 | 81,6 % | 34,97 % | 57 | 51,88 | 0,120 | sí | 5.892 |
+| **75 %** | **480,8 × 498,8** | **0,2398** | 86,9 % | 39,06 % | 2.742 | 51,25 | 0,124 | **sí** | **5.516** |
+| 80 % | — | — | — | — | — | — | — | no: el flujo no termina | — |
 
-Fuente: `results/floorplan.csv`. Gráfico: `results/floorplan.png` (violaciones del ruteo
-detallado, uso del ruteo global y área del die vs. utilización).
+Fuente: `results/floorplan.csv`. En todas las que cierran: DRC Magic y KLayout 0, LVS 0,
+antena 0, setup y hold con WS ≥ 0 y TNS = 0 en los 9 corners.
 
-**Área mínima que cierra**: ⏳
+![Barrido de utilización](../../results/floorplan.png)
 
-⏳ *Análisis del gráfico: cómo crece la congestión con la utilización y qué limita el
-punto máximo. En el barrido anterior (RTL del 1/11), 75 % y 80 % fallaban al legalizar
-las celdas que se insertan después del placement (`DPL-0036`), en CTS y en el repair
-respectivamente: el límite lo ponía el espacio para las celdas, no el ruteo ni el
-timing. Confirmar con el barrido nuevo.*
+**Área mínima que cierra: `FP_CORE_UTIL` = 75 %, die de 0,2398 mm²** (480,8 × 498,8 µm).
+A 80 % el flujo se detiene en CTS, antes de rutear: `DPL-0034`, 10 instancias que no se
+pueden legalizar (3 del register file), y `DPL-0036 Detailed placement failed`
+(`CP100_U80_final/35-openroad-cts/openroad-cts.log:109` y `:120`).
+
+**Análisis.**
+
+- **Congestión.** El uso de recursos del ruteo global crece de forma monótona con la
+  utilización, de 23 % a 39 %: hay más cables en menos área. Es la métrica de congestión
+  más limpia del barrido.
+- **Violaciones del ruteo detallado.** Las que quedan tras la primera iteración **no**
+  siguen una tendencia (51, 3.146, 56, 57, 2.742): dependen de cómo quedó el placement en
+  cada punto, y el ruteador las lleva a 0 en todas las corridas que terminan. Muestran el
+  trabajo extra del ruteador, no un límite.
+- **Timing.** Casi no cambia: el setup en ss está entre 51 y 53 ns en todos los puntos,
+  porque a 100 ns sobra holgura.
+- **Qué limita.** El **espacio para legalizar celdas**. A 80 % el placement inicial cabe,
+  pero las celdas que se agregan después (buffers del árbol de reloj) ya no encuentran
+  lugar libre en las filas.
+
+En un barrido anterior, con las celdas de retardo `dly*` todavía permitidas, 75 % también
+fallaba en CTS. Lo más probable es que fuera por el tamaño de esas celdas: `repair_design`
+usaba `dlyb_1` como buffer, y ocupa 2,7 veces el área de un `buf_1` (detalle en
+`docs/floorplan.md`).
 
 ## Costo
 
 A US$23.000/mm², escalando linealmente con el área del die:
 
 - Corrida exigida (U = 40 %): 0,4387 mm² → **US$10.090**.
-- Área mínima que cierra: ⏳
+- Área mínima que cierra (U = 75 %): 0,2398 mm² → **US$5.516** (−45 %).
 
 **Limitaciones de la aproximación:**
 
@@ -121,4 +137,4 @@ tiene 0,196 mm² de celdas, unas 12 veces menos. Entre las dos estrategias de 3.
 comparadas con el mismo RTL y la misma configuración (`results/memoria.csv`), la de
 flip-flops da un die de 1,571 mm² (US$36.133) y la ROM uno de 0,4407 mm² (US$10.137): 3,6
 veces más. La
-utilización viene después y solo mueve el die dentro de un factor ⏳.
+utilización viene después y solo mueve el die dentro de un factor ~1,8 (0,439 → 0,240 mm²).

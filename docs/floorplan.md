@@ -4,14 +4,18 @@ Corridas de `flow/asic_top` (estrategia de memoria ROM, `CLOCK_PERIOD` = 100 ns)
 los pines por función de `flow/asic_top/pin_order.cfg`, variando solo `FP_CORE_UTIL`.
 
 ```bash
-scripts/run_sweep.sh -s pines -p "100" -u "40 50 60 70 75 80"
+scripts/run_sweep.sh -s final -p "100" -u "40 50 60 70 75 80"
 python3 scripts/floorplan.py -o results/floorplan.csv -g results/floorplan.png \
-  flow/asic_top/runs/CP100_U*_pines
+  flow/asic_top/runs/CP100_U*_final
 ```
 
-> Números con el RTL al 1/11 (antes del contador como módulo propio y de la
-> optimización de la ruta crítica). Se regeneran con los mismos comandos sobre la
-> corrida final.
+RTL y configuración de la corrida final (`CP100_U40_final` es el punto de 40 %). U40–U70
+salen del commit `0d4c807`; U75 y U80 se lanzaron después del pull de `3de727d`, que solo
+cambia `pochoco_mem_ff.v`, un módulo que la estrategia ROM no instancia (no entra al
+netlist).
+
+El barrido anterior (`CP100_U*_pines`, RTL y config del 1/11 a mediodía, con celdas
+`dly*`) cerraba hasta 70 % y fallaba a 75 %. Se conserva como dato histórico.
 
 ## Terminales del macro
 
@@ -36,46 +40,57 @@ lógica.
 
 ## Barrido de utilización
 
-| `FP_CORE_UTIL` | Die (µm) | Die (mm²) | Util. final | Uso ruteo global | Violaciones DRT iter. 0 | Setup WS ss (ns) | Hold WS ss (ns) | ¿Cierra? | Costo (US$) |
+| `FP_CORE_UTIL` | Die (µm) | Die (mm²) | Util. final | Uso ruteo global | Violaciones DRT iter. 0 | Setup WS ss (ns) | Hold WS peor (ns) | ¿Cierra? | Costo (US$) |
 |---|---|---|---|---|---|---|---|---|---|
-| 40 % | 655,0 × 672,9 | 0,4407 | 51,4 % | 23,26 % | 14 | 37,56 | 0,95 | sí | 10.137 |
-| 50 % | 587,3 × 605,2 | 0,3554 | 63,5 % | 27,22 % | 27 | 36,50 | 0,93 | sí | 8.174 |
-| 60 % | 537,3 × 555,2 | 0,2983 | 75,5 % | 31,81 % | 5 | 39,82 | 0,99 | sí | 6.860 |
-| **70 %** | **498,4 × 516,3** | **0,2573** | 87,6 % | 42,45 % | 130 | 41,28 | 1,00 | **sí** | **5.919** |
-| 75 % | — | — | — | — | — | — | — | no: el flujo no termina | — |
+| 40 % | 653,4 × 671,4 | 0,4387 | 48,0 % | 23,34 % | 51 | 51,40 | 0,143 | sí | 10.090 |
+| 50 % | 585,9 × 603,8 | 0,3537 | 59,0 % | 26,91 % | 3.146 | 53,37 | 0,120 | sí | 8.136 |
+| 60 % | 536,0 × 553,9 | 0,2969 | 70,2 % | 30,54 % | 56 | 52,89 | 0,138 | sí | 6.829 |
+| 70 % | 497,2 × 515,2 | 0,2562 | 81,6 % | 34,97 % | 57 | 51,88 | 0,120 | sí | 5.892 |
+| **75 %** | **480,8 × 498,8** | **0,2398** | 86,9 % | 39,06 % | 2.742 | 51,25 | 0,124 | **sí** | **5.516** |
 | 80 % | — | — | — | — | — | — | — | no: el flujo no termina | — |
 
 Fuente: `results/floorplan.csv`. "Util. final" es la utilización después de buffering y
-CTS (`design__instance__utilization`), mayor que el `FP_CORE_UTIL` pedido porque el
-repair de diseño agrega ~780 buffers después del floorplan. En todas las que cierran:
-Magic DRC 0, LVS 0, antena 0, setup y hold con WS ≥ 0 y TNS = 0 en los 9 corners.
+CTS (`design__instance__utilization`), mayor que el `FP_CORE_UTIL` pedido porque después
+del floorplan el flujo agrega buffers de repair, el árbol de reloj y la corrección de
+hold. En todas las que cierran: DRC Magic 0, DRC KLayout 0, LVS 0, antena 0, setup y hold
+con WS ≥ 0 y TNS = 0 en los 9 corners.
 
 ![Barrido de utilización](../results/floorplan.png)
 
-**Área mínima que cierra: `FP_CORE_UTIL` = 70 %, die de 0,2573 mm².** A 75 % y 80 % el
-flujo se detiene antes de rutear porque no queda espacio para legalizar celdas que el
-flujo agrega después del placement:
+**Área mínima que cierra: `FP_CORE_UTIL` = 75 %, die de 0,2398 mm².** A 80 % el flujo
+se detiene en CTS, antes de rutear: no queda espacio para legalizar las celdas que se
+insertan después del placement.
+`flow/asic_top/runs/CP100_U80_final/35-openroad-cts/openroad-cts.log:109` (`DPL-0034`,
+10 instancias sin lugar, 3 del register file) y `:120` (`DPL-0036 Detailed placement
+failed`).
 
-- 80 %: `flow/asic_top/runs/CP100_U80_pines/32-openroad-repairdesignpostgpl/openroad-repairdesignpostgpl.log:50`
-  (`DPL-0034`, 34 instancias sin lugar, entre ellas los buffers `max_cap*` recién
-  insertados) y `:85` (`DPL-0036 Detailed placement failed`).
-- 75 %: pasa el repair de diseño pero falla igual al legalizar los buffers del árbol de
-  reloj: `flow/asic_top/runs/CP100_U75_pines/35-openroad-cts/openroad-cts.log:109`
-  (12 instancias) y `:122` (`DPL-0036`).
+**Congestión.** El uso de recursos del ruteo global crece de forma monótona con la
+utilización, de 23 % a 39 %: es la métrica de congestión más limpia del barrido. Las
+violaciones tras la primera iteración del ruteo detallado **no** son monótonas (51, 3.146,
+56, 57, 2.742). Dependen de cómo quedó el placement en cada punto, y el ruteador las
+lleva a 0 en todas las corridas que terminan. Solo indican cuánto trabajo extra tuvo el
+ruteador, no un límite.
 
-La congestión crece con la utilización: el uso de recursos del ruteo global sube de
-23 % a 42 % y las violaciones que deja la primera iteración del ruteo detallado saltan a
-130 en 70 % (entre 40 % y 60 % son ruido, 5 a 27). El ruteador las resuelve en todas
-las corridas que terminan (0 al final), pero el margen a 70 % es chico. El timing casi no
-cambia (a 100 ns sobra holgura en todos los puntos); el límite lo pone el espacio para
-las celdas, no el timing ni el ruteo.
+**Qué limita.** El timing casi no cambia (setup ss entre 51 y 53 ns en todos los
+puntos, porque a 100 ns sobra holgura) y el ruteo siempre termina limpio. El límite lo
+pone el **espacio para legalizar celdas**: a 80 % el placement inicial cabe, pero las
+celdas que agrega CTS ya no encuentran lugar.
+
+**Respecto del barrido anterior** (`_pines`): ahora cierra también a 75 %. La
+explicación más probable es la exclusión de las celdas `dly*`. `repair_design` usaba
+`dlyb_1` como buffers de fanout, y una `dlyb_1` mide 8,96 × 3,92 µm, contra
+3,36 × 3,92 µm de un `buf_1` (LEF de la biblioteca), o sea 2,7 veces el área. Sin ellas,
+las celdas que se agregan después del placement ocupan menos y CTS encuentra lugar a 75 %.
+El área de celdas antes del repair es casi igual en los dos barridos (164.629 contra
+163.841 µm², `*-openroad-floorplan/state_out.json`). La diferencia aparece en lo que se
+agrega después: en la corrida de prueba `CP100_U40_sindly`, el área final bajó 7 %.
 
 ## Costo
 
 Con US$23.000/mm² escalando linealmente con el área del die:
 
-- Corrida exigida (U = 40 %): 0,4407 mm² → **US$10.137**.
-- Área mínima que cierra (U = 70 %): 0,2573 mm² → **US$5.919** (−42 %).
+- Corrida exigida (U = 40 %): 0,4387 mm² → **US$10.090**.
+- Área mínima que cierra (U = 75 %): 0,2398 mm² → **US$5.516** (−45 %).
 
 Limitaciones de la aproximación:
 - Es solo el macro: un chip real necesita el anillo de pads, que para un diseño tan
@@ -89,7 +104,7 @@ Limitaciones de la aproximación:
 
 **Decisión que más pesó en el área.** Dimensionar la memoria al uso real del juego. Con
 la RAM de 512 palabras del Proyecto 2 la síntesis ya daba 2,31 mm² solo de celdas
-(`flow/asic_top/runs/01_regfile_ff`, ver `docs/evidencia.md` #3), contra 0,205–0,211 mm²
-de celdas con la ROM (≈ 11 veces menos). La utilización vino después y solo mueve el die
-dentro de un factor ~1,7 (0,44 → 0,26 mm²). Comparación con la estrategia de
+(`flow/asic_top/runs/01_regfile_ff`, ver `docs/evidencia.md` #3), contra 0,196 mm²
+de celdas con la ROM en la corrida final (≈ 12 veces menos). La utilización vino
+después y solo mueve el die dentro de un factor ~1,8 (0,439 → 0,240 mm²). Comparación con la estrategia de
 flip-flops: ver `docs/memoria.md`.
