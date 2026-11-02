@@ -12,7 +12,7 @@
 #   scripts/run_sweep.sh -s rom -p "100" -u "40"
 #   scripts/run_sweep.sh -s rom -p "100 50 40 30" -u "40"
 #   scripts/run_sweep.sh -s rom -p "100" -u "30 40 50 60" -- --to OpenROAD.GlobalRouting
-#   scripts/run_sweep.sh -d flow/asic_top_rom_provisoria -s prov -p "100" -u "40"
+#   scripts/run_sweep.sh -d flow/asic_top_ff -s ff -p "100" -u "40"
 #
 # Un tag que ya existe en runs/ se salta (nunca se sobrescribe una corrida).
 # Si una corrida falla se sigue con la siguiente. Despues de cada corrida se
