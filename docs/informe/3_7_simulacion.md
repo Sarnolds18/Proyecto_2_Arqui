@@ -93,11 +93,14 @@ dos dieron **IGUALES**.
 
 - **Demuestra** que la síntesis conserva la función del diseño completo, incluidos la ROM
   generada por el assembler, el *debounce*, el contador de ciclos y el core.
-- **Demuestra que el reset funciona en silicio.** En el netlist no hay bloques `initial` ni
-  valores iniciales: todos los FF arrancan en `X`. Que el juego funcione igual muestra que
-  el reset externo (3.1) lleva todo el estado a un valor conocido. Si quedara algún FF que
-  dependiera de un valor inicial (como el `initial` del *debounce* del Proyecto 2), sus `X`
-  se propagarían a las salidas y la comparación fallaría.
+- **Da evidencia de que el reset alcanza.** En el netlist no hay bloques `initial` ni
+  valores iniciales: todos los FF arrancan en `X`. Los que tienen reset toman un valor
+  conocido con el reset externo (3.1). Los 319 sin reset (`dffq_1`), entre ellos la RAM de
+  datos que el juego no usa y los registros de salida de la memoria, no llevan `X` a las
+  salidas durante la simulación: los eventos coinciden con los del RTL. Si el juego
+  dependiera de un valor inicial (como el `initial` del *debounce* del Proyecto 2), esas
+  `X` podrían llegar a las salidas y la comparación lo mostraría. Es evidencia a nivel
+  lógico, no una prueba del comportamiento en silicio.
 - **No demuestra** que el diseño cumpla timing: la simulación es sin retardos. Eso lo
   garantiza el análisis estático de 3.4 y 3.6 (setup y hold con WS ≥ 0 y TNS = 0 en todos
   los corners). La simulación post-PnR con SDF, que es opcional, no se hizo.
