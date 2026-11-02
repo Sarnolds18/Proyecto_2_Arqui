@@ -43,12 +43,15 @@ celdas `dly*` excluidas); solo cambia el contenido de la ROM.
 
 ## Resultado
 
-Corrida `flow/asic_top_sim/runs/CP100_U40_sim` (solo síntesis), simulada con Icarus
-(67 min): `compara` da **IGUALES**. El netlist reproduce evento por evento el log RTL:
-el botón incorrecto muestra `EE` y reinicia la ronda, y la ronda correcta mide
-**305.585 ciclos** (display `30`), igual que el RTL.
+**RTL final.** Corrida `flow/asic_top_sim/runs/CP100_U40_sim2` (solo síntesis, con el
+RTL final: memoria ROM, contador como módulo, `boff_q` en el LSU y la misma configuración
+de síntesis que `CP100_U40_final`). Su netlist (5.617 celdas, 163.591 µm², con la ROM de
+`game_sim.s`) simulado con Icarus contra el log RTL: `compara` da **IGUALES**. El netlist
+reproduce evento por evento el log RTL: el botón incorrecto muestra `EE` y reinicia la
+ronda, y la ronda correcta mide **305.585 ciclos** (display `30`), igual que el RTL.
 
-Esa síntesis es anterior a la optimización del LSU de 3.4 (registro `boff_q`) y a los
-cambios de configuración de la corrida final. Con el RTL final, la simulación RTL da
-exactamente los mismos eventos y ciclos (verificado con `rtl` y `compara`). La simulación del netlist
-con el RTL final está pendiente: corrida `CP100_U40_sim2`.
+**Antes.** La corrida `flow/asic_top_sim/runs/CP100_U40_sim` (síntesis anterior a la
+optimización del LSU de 3.4 y a los cambios de configuración de la corrida final) también
+dio **IGUALES** (67 min de simulación). La simulación RTL da exactamente los mismos
+eventos con el RTL de las dos síntesis, así que el cambio de `boff_q` no alteró el
+comportamiento del juego.
