@@ -63,7 +63,8 @@ la tienen.
 constante de `game_rom` como valor de reset. Yosys reduce esas instancias a constantes: no
 queda ninguna ROM en el netlist, y cada bit pasa a ser un FF con reset a 0 o con *set* a 1.
 En una síntesis genérica de comprobación, los FF de tipo *set* son **1.096**, exactamente
-la cantidad de bits en 1 de `game.hex`.
+la cantidad de bits en 1 de `game.hex`.  Que sea el mismo número que los FF de la corrida con ROM
+(tabla de abajo) es coincidencia: son conteos distintos.
 
 **Mismo comportamiento.** Con los mismos estímulos, el juego da exactamente los mismos
 eventos en los mismos ciclos con las dos memorias (`sim/run_fixed_stimuli.sh rtl rom` y

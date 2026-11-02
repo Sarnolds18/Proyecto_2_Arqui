@@ -31,7 +31,7 @@ corridas, Magic DRC = 0, KLayout DRC = 0, LVS limpio y antena = 0.
 **Menor período que cierra en todos los corners: 35 ns (28,6 MHz)**, con margen de
 setup en el resizer; con la configuración por defecto, **50 ns (20 MHz)**. Un punto a
 30 ns con margen se lanzó pero no terminó (falta de espacio en disco), así que el
-mínimo real está en 35 ns o por debajo: *pendiente*. Con el peor hold (0,13-0,14 ns en
+mínimo podría ser algo menor que 35 ns. Con el peor hold (0,13-0,14 ns en
 los corners `ff`) todas cierran.
 
 **Re-optimización.** Con la configuración por defecto, de 100 a 40 ns el circuito es
