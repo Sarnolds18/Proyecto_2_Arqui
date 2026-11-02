@@ -85,7 +85,7 @@ Frecuencia máxima = 1000 / (T − WS de setup reg→reg), peor entre los corner
 corrida, el período mínimo real sale del barrido de 3.4.
 
 **Por qué la FF no cierra.** Setup y hold pasan en todos los corners. Lo que falla es la antena: después del
-ruteo global hay 133 redes que violan
+ruteo global hay 125 redes (132 pines) que violan
 (`40-openroad-checkantennas/reports/antenna_summary.rpt`), el repair las deja en 0
 (`42-openroad-repairantennas/2-openroad-checkantennas`), pero el ruteo detallado vuelve
 a crear una: `net4125` → `fanout4124/I`, Metal2, razón 472,61 / 400

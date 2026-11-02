@@ -99,7 +99,7 @@ entre sí con todo lo demás igual. La corrida final `CP100_U40_final` usa la RO
 final: 196.097 µm² de celdas, 9.651 celdas y 0,4387 mm² de die.
 
 **Por qué la FF no cierra.** Setup y hold pasan en todos los corners; lo que falla es la
-antena. Después del ruteo global hay 133 redes con violación
+antena. Después del ruteo global hay 125 redes (132 pines) con violación
 (`40-openroad-checkantennas/reports/antenna_summary.rpt`). El repair las deja en 0, pero el
 ruteo detallado vuelve a crear una: `net4125` → `fanout4124/I`, Metal2, razón 472,61 / 400
 (`46-openroad-checkantennas-1/reports/antenna_summary.rpt`). Se podría corregir con más
