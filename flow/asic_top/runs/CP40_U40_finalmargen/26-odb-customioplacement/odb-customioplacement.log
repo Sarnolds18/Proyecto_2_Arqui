@@ -1,0 +1,41 @@
+[WARNING ORD-0039] .openroad ignored with -python
+Top-level design name: asic_top
+Block boundaries: 0 0 1306880 1342720
+Horizontal Tracks Origin: 560, Count: 1199, Step: 1120
+Vertical Tracks Origin: 560, Count: 1167, Step: 1120
+Placement details for the N side
+Virtual pin count:  0
+Actual pin count:  14
+Total pin count:  14
+Tracks count:  584
+Tracks per pin:  41
+Used tracks count:  534
+Unused track count:  50
+Starting track index:  25
+Placement details for the E side
+Virtual pin count:  0
+Actual pin count:  4
+Total pin count:  4
+Tracks count:  600
+Tracks per pin:  150
+Used tracks count:  451
+Unused track count:  149
+Starting track index:  74
+Placement details for the W side
+Virtual pin count:  0
+Actual pin count:  2
+Total pin count:  2
+Tracks count:  600
+Tracks per pin:  300
+Used tracks count:  301
+Unused track count:  299
+Starting track index:  149
+Placement details for the S side
+Virtual pin count:  0
+Actual pin count:  8
+Total pin count:  8
+Tracks count:  584
+Tracks per pin:  73
+Used tracks count:  512
+Unused track count:  72
+Starting track index:  36

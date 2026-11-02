@@ -1,16 +1,102 @@
 # Timing (sección 3.4)
 
-## Barrido de `CLOCK_PERIOD` (L4)
+## Barrido de `CLOCK_PERIOD` con la configuración final (L4)
 
-Todas las corridas usan el mismo RTL y configuración que la corrida final
-(estrategia ROM, jerarquía conservada, `FP_CORE_UTIL` = 40 %); solo cambia lo que dice
-la columna "Variante". Métricas en `results/timing.csv`, generado con:
+Configuración de la corrida final (`flow/asic_top/config.json`): RTL con L6, memoria
+ROM, jerarquía conservada, sin celdas de retardo (`EXTRA_EXCLUDED_CELLS =
+gf180mcu_fd_sc_mcu7t5v0__dly*`), DRC de KLayout y pines por función.
+`FP_CORE_UTIL` = 40 %. Métricas en `results/timing.csv`, generado con:
+
+```bash
+scripts/run_sweep.sh -d flow/asic_top -s final -p "60 50 40" -u 40
+scripts/run_sweep.sh -d flow/asic_top -s finalmargen -p "40 35" -u 40 -c "PL_RESIZER_SETUP_SLACK_MARGIN=14"
+python3 scripts/extract_metrics.py -o results/timing.csv flow/asic_top/runs/CP100_U40_final \
+  flow/asic_top/runs/CP60_U40_final flow/asic_top/runs/CP50_U40_final \
+  flow/asic_top/runs/CP40_U40_final flow/asic_top/runs/CP40_U40_finalmargen \
+  flow/asic_top/runs/CP35_U40_finalmargen
+```
+
+Típico = `nom_tt_025C_5v00`, más lento = `max_ss_125C_4v50` (WNS / TNS en ns). En las 6
+corridas, Magic DRC = 0, KLayout DRC = 0, LVS limpio y antena = 0.
+
+| Corrida | T (ns) | Variante | Setup típico | Setup lento | Hold típico | Hold lento | Área celdas (µm²) | Celdas | ¿Cierra? |
+|---|---:|---|---|---|---|---|---:|---:|---|
+| `CP100_U40_final` | 100 | por defecto (**corrida final**) | 73,95 / 0 | 51,40 / 0 | 0,390 / 0 | 0,970 / 0 | 196.097 | 9.651 | sí |
+| `CP60_U40_final` | 60 | por defecto | 34,03 / 0 | 11,40 / 0 | 0,390 / 0 | 0,970 / 0 | 196.097 | 9.651 | sí |
+| `CP50_U40_final` | 50 | por defecto | 24,03 / 0 | 1,40 / 0 | 0,390 / 0 | 0,970 / 0 | 196.097 | 9.651 | sí |
+| `CP40_U40_final` | 40 | por defecto | 14,03 / 0 | **−8,60 / −1.928,45** | 0,390 / 0 | 0,970 / 0 | 196.097 | 9.651 | **no** |
+| `CP40_U40_finalmargen` | 40 | `PL_RESIZER_SETUP_SLACK_MARGIN = 14` | 20,58 / 0 | 3,55 / 0 | 0,390 / 0 | 0,970 / 0 | 197.320 | 9.654 | sí |
+| `CP35_U40_finalmargen` | 35 | `PL_RESIZER_SETUP_SLACK_MARGIN = 14` | 19,60 / 0 | 6,09 / 0 | 0,391 / 0 | 0,971 / 0 | 204.154 | 9.707 | sí |
+
+**Menor período que cierra en todos los corners: 35 ns (28,6 MHz)**, con margen de
+setup en el resizer; con la configuración por defecto, **50 ns (20 MHz)**. Un punto a
+30 ns con margen se lanzó pero no terminó (falta de espacio en disco), así que el
+mínimo real está en 35 ns o por debajo: *pendiente*. Con el peor hold (0,13-0,14 ns en
+los corners `ff`) todas cierran.
+
+**Re-optimización.** Con la configuración por defecto, de 100 a 40 ns el circuito es
+**el mismo** (196.097 µm², 9.651 celdas): el resizer no ve violaciones
+(`RSZ-0098 No setup violations found` en
+`37-openroad-resizertimingpostcts/openroad-resizertimingpostcts.log` de `CP60`, `CP50`
+y `CP40_U40_final`) porque su estimación de parásitos es optimista (ver abajo, mismo
+efecto que en la configuración anterior). A 40 ns eso deja 498 endpoints violando en
+`max_ss`. Con el margen de 14 ns el resizer sí trabaja, y cuanto más corto el período,
+más cambia el circuito:
+
+| | 40 ns con margen | 35 ns con margen |
+|---|---:|---:|
+| Endpoints reparados (`RSZ-0099`, línea 30) | 787 | 898 |
+| Celdas agrandadas (`RSZ-0051`) | 175 (línea 924) | 693 (línea 264) |
+| Buffers insertados (`RSZ-0040`) | 3 (línea 923) | 53 (línea 263) |
+| Intercambio de pines (`RSZ-0043`) | 3 (línea 925) | 42 (línea 265) |
+| Área de celdas vs. corrida final | +0,6 % | +4,1 % |
+| Retardo de datos de la ruta crítica (`max_ss`) | 35,28 ns | 27,91 ns |
+
+### Ruta crítica de la corrida final
+
+`CP100_U40_final/rutas_criticas.rpt`, desglosada con `scripts/desglose_ruta.py`. La peor
+ruta de setup en `max_ss` (slack 51,40 ns):
+
+| Tramo | Desde → hasta | Retardo |
+|---|---|---:|
+| Fetch | flanco en `_5393_` → `a_rdata_o[4]` (instrucción) | 2,01 ns |
+| Decode | `a_rdata_o[4]` → `u_id.operand_b[12]` | 18,76 ns |
+| Ejecución | `operand_b[12]` → ALU → `lsu_addr[31]` | 15,26 ns |
+| Acceso a memoria (MMIO) | `lsu_addr[31]` → selección de periféricos → carga del contador → D de `u_cycle_counter/_281_` | 11,54 ns |
+| **Retardo de datos** | | **47,56 ns** |
+
+- **Inicio:** `_5393_`, bit 4 del registro de instrucción (salida de fetch).
+- **Fin:** `u_pochoco.u_periph.u_cycle_counter/_281_` (`dffrnq_1`), un bit del contador de ciclos.
+- **Etapa:** la etapa ID completa hasta el acceso a memoria. Es un `sw` al contador
+  (offset `0x0C`): la ALU suma base + offset y el **bit 31** de la dirección (el último
+  que calcula el sumador) decide si el acceso va a los periféricos
+  (`pochoco_soc.v`). De ahí sale la señal de carga del contador, que maneja los 32
+  muxes de carga.
+- **Ninguna celda `dly*`** en la ruta (antes eran el 50-64 % del retardo).
+- En el corner típico la peor ruta de setup es de salida (`_5339_` → `seg2_o[6]`), con
+  73,95 ns de slack: las salidas tienen un retardo externo del 20 % del período en el
+  SDC.
+
+Al bajar el período y forzar el resizer, la ruta crítica se mueve: a 40 ns termina en
+la RAM de datos (`u_ram.data_mem[4][1]`, un store: ALU → `lsu_addr[3]` → selección de
+palabra), y a 35 ns en el register file (ALU → `lsu_addr[16]` = `alu_result[16]` →
+`rf_wdata[16]` → `u_rf`).
+
+## Barrido con la configuración anterior (con celdas `dly*`)
+
+Primer barrido, hecho antes de excluir las celdas de retardo y de activar el DRC de
+KLayout. Se conserva porque muestra el efecto de esas celdas y el problema de
+estimación del resizer. Métricas en `results/timing_con_dly.csv`.
+
+Todas las corridas de esta sección usan el mismo RTL (antes de L6) y la misma
+configuración (estrategia ROM, jerarquía conservada, `FP_CORE_UTIL` = 40 %); solo
+cambia lo que dice la columna "Variante". Generado con:
 
 ```bash
 scripts/run_sweep.sh -d flow/asic_top -s jerarquia -p "70 60 50" -u 40
 scripts/run_sweep.sh -d flow/asic_top -s rszss -p "60" -u 40 -c "PNR_CORNERS=nom_tt_025C_5v00,max_ss_125C_4v50,min_ff_n40C_5v50"
 scripts/run_sweep.sh -d flow/asic_top -s margen -p "60" -u 40 -c "PL_RESIZER_SETUP_SLACK_MARGIN=14"
-python3 scripts/extract_metrics.py -o results/timing.csv flow/asic_top/runs/CP100_U40_jerarquia \
+python3 scripts/extract_metrics.py -o results/timing_con_dly.csv flow/asic_top/runs/CP100_U40_jerarquia \
   flow/asic_top/runs/CP70_U40_jerarquia flow/asic_top/runs/CP60_U40_jerarquia \
   flow/asic_top/runs/CP50_U40_jerarquia flow/asic_top/runs/CP60_U40_rszss \
   flow/asic_top/runs/CP60_U40_margen
@@ -28,11 +114,12 @@ las 6 corridas, Magic DRC = 0, LVS = 0 y antena = 0.
 | `CP60_U40_rszss` | 60 | `PNR_CORNERS` con `max_ss` | 26,62 / 0 | **−3,54 / −440,18** | 0,384 / 0 | 0,958 / 0 | 211.325 | 9.631 | **no** |
 | `CP60_U40_margen` | 60 | `PL_RESIZER_SETUP_SLACK_MARGIN = 14` | 29,67 / 0 | 2,48 / 0 | 0,384 / 0 | 0,959 / 0 | 211.218 | 9.632 | **sí** |
 
-**Menor período que cierra en todos los corners: 60 ns** (16,7 MHz), con margen de
-setup en el resizer. Con la configuración por defecto, el menor que cierra es 70 ns.
-Por debajo de 60 ns con margen: *pendiente*.
+Con esta configuración, el menor período que cerraba era 60 ns con margen de setup en
+el resizer, y 70 ns por defecto.
 
 ### Por qué la configuración por defecto no re-optimiza
+
+(Medido con la configuración anterior; con la final pasa lo mismo, ver arriba.)
 
 Con la configuración por defecto, el circuito de 100, 70 y 60 ns es **el mismo**: el
 área y las celdas no cambian, y el slack baja exactamente lo que baja el período.
@@ -74,7 +161,9 @@ violaciones**: el área, el buffering y el placement cambian únicamente cuando 
 herramienta tiene algo que reparar. Con la estimación optimista de este diseño, a 60 ns
 hizo falta un margen explícito para que eso pasara.
 
-## Ruta crítica (L5)
+## Ruta crítica con la configuración anterior (L5)
+
+(Con celdas `dly*`. La ruta de la corrida final está más arriba.)
 
 Corrida analizada: `flow/asic_top/runs/CP100_U40_jerarquia` (T = 100 ns, U = 40 %,
 estrategia de memoria ROM, jerarquía conservada para el register file, la ALU y el
@@ -145,9 +234,13 @@ por tramo.
   líneas 40-43). En el DEF final, los buffers `fanoutNNN` son `dlyb_1`. Una `dlyb_1`
   tarda 2,5 a 3,9 ns en `max_ss`, contra menos de 1 ns de un buffer normal. Esto
   también explica parte de las violaciones de max slew. Es un efecto de la
-  herramienta, no del RTL. *Pendiente verificar*: excluir las `dly*` de los buffers
-  (por ejemplo con `EXTRA_EXCLUDED_CELLS`) sin afectar el repair de hold, que usa
-  `dlyc_1`.
+  herramienta, no del RTL. **Verificado:** `CP100_U40_pines` y `CP100_U40_sindly` tienen
+  el mismo RTL y la misma configuración, salvo `EXTRA_EXCLUDED_CELLS =
+  gf180mcu_fd_sc_mcu7t5v0__dly*` en la segunda. Al excluir las celdas de retardo, el
+  setup en `max_ss` pasa de 37,56 a 54,23 ns (+16,7 ns), el retardo de datos de la ruta
+  crítica de 61,51 ns (64 % en `dly*`) a 44,59 ns, y el área de celdas baja un 7,1 %
+  (210.654 → 195.595 µm²). El hold sigue cerrando (0,137 → 0,134 ns), así que el repair
+  de hold no necesitaba las `dlyc_1`. La corrida final usa esta exclusión.
 - **La ruta es pesimista para los loads.** Un load tarda dos ciclos: la LSU detiene
   el core (`busy_q`) mientras la memoria lee. La instrucción y `addr_i[1:0]` no cambian
   entre el primer y el segundo ciclo, pero el STA analiza el camino
@@ -192,6 +285,10 @@ memorias.
   byte a byte a la del RTL anterior (mismos eventos en los mismos ciclos).
 
 ### Resultado (T = 60 ns, configuración por defecto)
+
+Esta comparación se hizo con la **configuración anterior** (con celdas `dly*`). Las dos
+corridas usan la misma configuración y solo difieren en el RTL de la LSU, así que la
+comparación es válida. La corrida final incluye L6.
 
 Comparación a 60 ns, donde la versión anterior no cierra en `max_ss`. Métricas en
 `results/optimizacion.csv`; violaciones de `55-openroad-stapostpnr/summary.rpt`.

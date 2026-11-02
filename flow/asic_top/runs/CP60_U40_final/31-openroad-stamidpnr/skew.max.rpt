@@ -1,0 +1,15 @@
+
+===========================================================================
+Clock Skew (Setup)
+============================================================================
+Writing metric clock__skew__worst_setup__corner:nom_tt_025C_5v00: 1.695543309301815
+======================= nom_tt_025C_5v00 Corner ===================================
+
+Clock clk_i
+11.745241 source latency _5486_/CLK ^
+-10.299698 target latency u_pochoco.u_core.u_rf/_2559_/CLK ^
+0.250000 clock uncertainty
+0.000000 CRPR
+--------------
+1.695543 setup skew
+
