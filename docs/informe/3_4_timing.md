@@ -26,10 +26,12 @@ limpio y antena = 0.
 | 40 | por defecto | 14,03 / 0 | **−8,60 / −1.928,45** | 0,390 / 0 | 0,970 / 0 | 196.097 | **no** |
 | 40 | margen de setup de 14 ns | 20,58 / 0 | 3,55 / 0 | 0,390 / 0 | 0,970 / 0 | 197.320 | sí |
 | 35 | margen de setup de 14 ns | 19,60 / 0 | 6,09 / 0 | 0,391 / 0 | 0,971 / 0 | 204.154 | sí |
+| 30 | margen de setup de 14 ns | 14,70 / 0 | 1,28 / 0 | 0,390 / 0 | 0,971 / 0 | 203.960 | sí |
 
-**El menor período que cierra en todos los corners es 35 ns (28,6 MHz)**, con margen de
-setup en el resizer; con la configuración por defecto es **50 ns (20 MHz)**. Un punto
-a 30 ns no alcanzó a completarse, así que el mínimo podría ser algo menor.
+**El menor período probado que cierra en todos los corners es 30 ns (33,3 MHz)**, con
+margen de setup en el resizer; con la configuración por defecto es **50 ns (20 MHz)**.
+No se probó nada por debajo de 30 ns, pero el límite parece cercano: de 35 a 30 ns el
+retardo de la ruta crítica casi no baja (27,91 → 27,71 ns).
 
 **Cada `CLOCK_PERIOD` re-optimiza el circuito, pero solo si el resizer de OpenROAD ve
 violaciones.** Con la configuración por defecto, de 100 a 40 ns el circuito es el mismo
@@ -43,13 +45,13 @@ resizer estimaba +9,38 ns, el signoff dio −3,54 ns.
 `PL_RESIZER_SETUP_SLACK_MARGIN = 14` le exige 14 ns de sobra según su estimación, y ahí
 sí trabaja. Cuanto más corto el período, más cambia el circuito:
 
-| | 40 ns con margen | 35 ns con margen |
-|---|---:|---:|
-| Endpoints reparados | 787 | 898 |
-| Celdas agrandadas | 175 | 693 |
-| Buffers insertados | 3 | 53 |
-| Área vs. corrida final | +0,6 % | +4,1 % |
-| Retardo de datos de la ruta crítica (`max_ss`) | 35,28 ns | 27,91 ns |
+| | 40 ns con margen | 35 ns con margen | 30 ns con margen |
+|---|---:|---:|---:|
+| Endpoints reparados | 787 | 898 | 908 |
+| Celdas agrandadas | 175 | 693 | 679 |
+| Buffers insertados | 3 | 53 | 54 |
+| Área vs. corrida final | +0,6 % | +4,1 % | +4,0 % |
+| Retardo de datos de la ruta crítica (`max_ss`) | 35,28 ns | 27,91 ns | 27,71 ns |
 
 Además, LibreLane solo marca como error las violaciones de los corners típicos
 (`TIMING_VIOLATION_CORNERS = ['*tt*']`), así que el flujo termina "completo" aunque el
@@ -136,14 +138,14 @@ El juego mide el tiempo en ciclos con el contador, así que cada constante de ti
 `segundos × f`, con `f = 1 / T`. Se carga con `lui` (20 bits altos) + `addi` (12 bits
 bajos con signo). Si el bit 11 es 1, el `addi` queda negativo y el `lui` sube en 1.
 
-| Constante | T = 100 ns, f = 10 MHz (corrida final) | T = 35 ns, f = 28,57 MHz (mínimo que cierra) |
+| Constante | T = 100 ns, f = 10 MHz (corrida final) | T = 30 ns, f = 33,33 MHz (menor período probado que cierra) |
 |---|---|---|
-| 3 s | 30.000.000 = `0x01C9C380` → `lui 0x1C9C` + `addi 896` | 85.714.286 = `0x051BE56E` → `lui 0x51BE` + `addi 1390` |
-| 2 s | 20.000.000 = `0x01312D00` → `lui 0x1313` + `addi -768` | 57.142.857 = `0x0367EE49` → `lui 0x367F` + `addi -439` |
-| 0,1 s | 1.000.000 = `0x000F4240` → `lui 0xF4` + `addi 576` | 2.857.143 = `0x002B98B7` → `lui 0x2BA` + `addi -1865` |
+| 3 s | 30.000.000 = `0x01C9C380` → `lui 0x1C9C` + `addi 896` | 100.000.000 = `0x05F5E100` → `lui 0x5F5E` + `addi 256` |
+| 2 s | 20.000.000 = `0x01312D00` → `lui 0x1313` + `addi -768` | 66.666.667 = `0x03F940AB` → `lui 0x3F94` + `addi 171` |
+| 0,1 s | 1.000.000 = `0x000F4240` → `lui 0xF4` + `addi 576` | 3.333.333 = `0x0032DCD5` → `lui 0x32E` + `addi -811` |
 
-A 100 ns las constantes son exactas y son las de `sw/game.s`. A 35 ns, `segundos × f` no
-es entero y se redondea: el error es de 0,14-0,29 ciclos (≤ 5 × 10⁻⁸ relativo),
+A 100 ns las constantes son exactas y son las de `sw/game.s`. A 30 ns, la de 3 s es exacta
+y las otras dos no son enteras y se redondean: el error es de 0,33 ciclos (≤ 1 × 10⁻⁷ relativo),
 despreciable frente a la décima de segundo que muestra el juego. Para usar otro período
 se cambian estas tres constantes en `sw/game.s` y se regenera el programa con
 `python3 -B sw/assembler.py sw/game.s sw/game.hex --rom rtl/game_rom.v`.

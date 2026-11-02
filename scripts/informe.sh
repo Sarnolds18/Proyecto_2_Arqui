@@ -2,7 +2,7 @@
 # Arma el informe del Proyecto 3 en PDF a partir de las secciones en Markdown.
 #
 # Uso (desde cualquier carpeta del repo):
-#   scripts/informe.sh [salida.pdf]          # por defecto Informe_proyecto3.pdf
+#   bash scripts/informe.sh [salida.pdf]          # por defecto Informe_proyecto3.pdf
 #
 # Junta docs/informe/metadata.yaml (portada) y docs/informe/3_*.md en orden de
 # nombre, los convierte a Typst con pandoc y compila el PDF con typst. Las
@@ -24,7 +24,7 @@ if ! command -v pandoc >/dev/null || ! command -v typst >/dev/null; then
   if ! command -v nix >/dev/null; then
     . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh 2>/dev/null || true
   fi
-  exec nix shell "$NIXPKGS#pandoc" "$NIXPKGS#typst" -c "$0" "$@"
+  exec nix shell "$NIXPKGS#pandoc" "$NIXPKGS#typst" -c bash "$0" "$@"
 fi
 
 shopt -s nullglob

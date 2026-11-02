@@ -9,14 +9,14 @@ gf180mcu_fd_sc_mcu7t5v0__dly*`), DRC de KLayout y pines por función.
 
 ```bash
 scripts/run_sweep.sh -d flow/asic_top -s final -p "60 50 40" -u 40
-scripts/run_sweep.sh -d flow/asic_top -s finalmargen -p "40 35" -u 40 -c "PL_RESIZER_SETUP_SLACK_MARGIN=14"
+scripts/run_sweep.sh -d flow/asic_top -s finalmargen -p "40 35 30" -u 40 -c "PL_RESIZER_SETUP_SLACK_MARGIN=14"
 python3 scripts/extract_metrics.py -o results/timing.csv flow/asic_top/runs/CP100_U40_final \
   flow/asic_top/runs/CP60_U40_final flow/asic_top/runs/CP50_U40_final \
   flow/asic_top/runs/CP40_U40_final flow/asic_top/runs/CP40_U40_finalmargen \
-  flow/asic_top/runs/CP35_U40_finalmargen
+  flow/asic_top/runs/CP35_U40_finalmargen flow/asic_top/runs/CP30_U40_finalmargen
 ```
 
-Típico = `nom_tt_025C_5v00`, más lento = `max_ss_125C_4v50` (WNS / TNS en ns). En las 6
+Típico = `nom_tt_025C_5v00`, más lento = `max_ss_125C_4v50` (WNS / TNS en ns). En las 7
 corridas, Magic DRC = 0, KLayout DRC = 0, LVS limpio y antena = 0.
 
 | Corrida | T (ns) | Variante | Setup típico | Setup lento | Hold típico | Hold lento | Área celdas (µm²) | Celdas | ¿Cierra? |
@@ -27,11 +27,13 @@ corridas, Magic DRC = 0, KLayout DRC = 0, LVS limpio y antena = 0.
 | `CP40_U40_final` | 40 | por defecto | 14,03 / 0 | **−8,60 / −1.928,45** | 0,390 / 0 | 0,970 / 0 | 196.097 | 9.651 | **no** |
 | `CP40_U40_finalmargen` | 40 | `PL_RESIZER_SETUP_SLACK_MARGIN = 14` | 20,58 / 0 | 3,55 / 0 | 0,390 / 0 | 0,970 / 0 | 197.320 | 9.654 | sí |
 | `CP35_U40_finalmargen` | 35 | `PL_RESIZER_SETUP_SLACK_MARGIN = 14` | 19,60 / 0 | 6,09 / 0 | 0,391 / 0 | 0,971 / 0 | 204.154 | 9.707 | sí |
+| `CP30_U40_finalmargen` | 30 | `PL_RESIZER_SETUP_SLACK_MARGIN = 14` | 14,70 / 0 | 1,28 / 0 | 0,390 / 0 | 0,971 / 0 | 203.960 | 9.707 | sí |
 
-**Menor período que cierra en todos los corners: 35 ns (28,6 MHz)**, con margen de
-setup en el resizer; con la configuración por defecto, **50 ns (20 MHz)**. Un punto a
-30 ns con margen se lanzó pero no terminó (falta de espacio en disco), así que el
-mínimo podría ser algo menor que 35 ns. Con el peor hold (0,13-0,14 ns en
+**Menor período probado que cierra en todos los corners: 30 ns (33,3 MHz)**, con margen
+de setup en el resizer; con la configuración por defecto, **50 ns (20 MHz)**. No se
+probó nada por debajo de 30 ns. El límite parece cercano: de 35 a 30 ns el retardo de
+datos de la ruta crítica casi no baja (27,91 → 27,71 ns), y T − slack da 28,91 y
+28,72 ns. Con el peor hold (0,13-0,14 ns en
 los corners `ff`) todas cierran.
 
 **Re-optimización.** Con la configuración por defecto, de 100 a 40 ns el circuito es
@@ -43,14 +45,19 @@ efecto que en la configuración anterior). A 40 ns eso deja 498 endpoints violan
 `max_ss`. Con el margen de 14 ns el resizer sí trabaja, y cuanto más corto el período,
 más cambia el circuito:
 
-| | 40 ns con margen | 35 ns con margen |
-|---|---:|---:|
-| Endpoints reparados (`RSZ-0099`, línea 30) | 787 | 898 |
-| Celdas agrandadas (`RSZ-0051`) | 175 (línea 924) | 693 (línea 264) |
-| Buffers insertados (`RSZ-0040`) | 3 (línea 923) | 53 (línea 263) |
-| Intercambio de pines (`RSZ-0043`) | 3 (línea 925) | 42 (línea 265) |
-| Área de celdas vs. corrida final | +0,6 % | +4,1 % |
-| Retardo de datos de la ruta crítica (`max_ss`) | 35,28 ns | 27,91 ns |
+| | 40 ns con margen | 35 ns con margen | 30 ns con margen |
+|---|---:|---:|---:|
+| Endpoints reparados (`RSZ-0099`, línea 30) | 787 | 898 | 908 |
+| Celdas agrandadas (`RSZ-0051`) | 175 (línea 924) | 693 (línea 264) | 679 (línea 188) |
+| Buffers insertados (`RSZ-0040`) | 3 (línea 923) | 53 (línea 263) | 54 (línea 187) |
+| Intercambio de pines (`RSZ-0043`) | 3 (línea 925) | 42 (línea 265) | 42 (línea 189) |
+| Área de celdas vs. corrida final | +0,6 % | +4,1 % | +4,0 % |
+| Retardo de datos de la ruta crítica (`max_ss`) | 35,28 ns | 27,91 ns | 27,71 ns |
+
+El mensaje `RSZ-0062 Unable to repair all setup violations` aparece en las tres: se
+refiere a la meta del resizer (slack estimado + 14 ns), no al signoff, donde las tres
+cierran. A 30 ns el repair llega a 1.200 iteraciones (línea 184 de
+`37-openroad-resizertimingpostcts/openroad-resizertimingpostcts.log`).
 
 ### Ruta crítica de la corrida final
 
@@ -79,8 +86,8 @@ ruta de setup en `max_ss` (slack 51,40 ns):
 
 Al bajar el período y forzar el resizer, la ruta crítica se mueve: a 40 ns termina en
 la RAM de datos (`u_ram.data_mem[4][1]`, un store: ALU → `lsu_addr[3]` → selección de
-palabra), y a 35 ns en el register file (ALU → `lsu_addr[16]` = `alu_result[16]` →
-`rf_wdata[16]` → `u_rf`).
+palabra), y a 35 y 30 ns en el register file (ALU → `lsu_addr[16]` = `alu_result[16]` →
+`rf_wdata[16]` → `u_rf`; a 30 ns, de `_5401_` a `u_rf/_2856_`).
 
 ## Barrido con la configuración anterior (con celdas `dly*`)
 
