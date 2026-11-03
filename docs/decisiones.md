@@ -56,4 +56,4 @@ defensa). Fechas de 2026.
 | Decisión | Por qué | Quién / cuándo | Detalle |
 |---|---|---|---|
 | Registro `boff_q` en el LSU | Acorta la ruta crítica alineación → write-back: los endpoints que violan en `max_ss` a 60 ns bajan de 191 a 10, con +2 FF | Lucas, 1/11 | `docs/timing.md` |
-| *Pendiente*: rehacer el barrido de período con el config final (sin `dly*`) | El barrido de Lucas se hizo con las celdas de retardo | — | `docs/timing.md` |
+| Rehacer el barrido de período con la configuración final (sin `dly*`): 100/60/50/40 ns por defecto y 40/35/30 ns con `PL_RESIZER_SETUP_SLACK_MARGIN = 14` | El primer barrido se hizo con las celdas de retardo. Con la configuración final el menor período que cierra es **50 ns** por defecto y **30 ns** con margen (no se probó menos) | Lucas y Santiago, 2/11 | `docs/timing.md`, `results/timing.csv` |
