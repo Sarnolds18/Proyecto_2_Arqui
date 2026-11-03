@@ -10,15 +10,23 @@ This is meant to be forked, not just cloned. You'll be poking around the RTL, so
 
 ## Proyecto 3: de RTL a GDSII
 
-La rama `proyecto3` lleva el Pochoco SoC y el juego de reflejos a un macro digital de
+**Ramas del repositorio:**
+
+| Rama | Contenido |
+|---|---|
+| `main` | **Entrega del Proyecto 3** (igual a `proyecto3`) |
+| `proyecto3` | Desarrollo del Proyecto 3 |
+| `proyecto2` | Entrega del Proyecto 2 (juego de reflejos en la Go Board), también marcada con el tag `p2-entrega` |
+
+El Proyecto 3 lleva el Pochoco SoC y el juego de reflejos a un macro digital de
 celdas estándar con [LibreLane](https://librelane.readthedocs.io/en/stable/) y el PDK
 GF180MCU. El top del macro es `rtl/asic_top.v`: sus puertos son terminales lógicos
 (reloj, reset, LEDs, botones, displays de 7 segmentos y SPI), no pads de I/O.
 
-La versión para la FPGA (Go Board) es la entrega del Proyecto 2, tag **`p2-entrega`**.
-En esta rama el RTL ya no apunta a la iCE40 (el register file de flip-flops no cabe en
-la HX1K), así que las secciones *How to Build*, *Flashing from WSL* y *Power-on reset*
-de más abajo describen esa versión.
+La versión para la FPGA (Go Board) es la del Proyecto 2: rama **`proyecto2`** (tag
+**`p2-entrega`**). En el Proyecto 3 el RTL ya no apunta a la iCE40 (el register file de
+flip-flops no cabe en la HX1K), así que las secciones *How to Build*, *Flashing from
+WSL* y *Power-on reset* de más abajo describen esa versión.
 
 ### Versiones de la corrida final
 
